@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>"Stop to smell the flowers" — Wrangle &amp; Bloom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="photo-detail.css">
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Wrangle <span class="nav__logo-amp">&amp;</span> Bloom</a>
+      <button class="nav__toggle" aria-label="Toggle menu" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav__right" id="navMenu">
+        <ul class="nav__links">
+          <li><a href="index.html#about">About me</a></li>
+          <li><a href="index.html#projects">IRL Projects</a></li>
+          <li><a href="photography.html">Photography</a></li>
+        </ul>
+        <a href="#" class="nav__cta js-contact-trigger">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="product">
+    <div class="container">
+      <a href="photography.html" class="product__back reveal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Photography
+      </a>
+      <div class="product__split">
+        <div class="product__image-col reveal">
+          <div class="product__frame">
+            <img src="bode.png" alt="Stop to smell the flowers - Bode the dachshund in Cirencester" class="product__image">
+          </div>
+        </div>
+        <div class="product__details reveal reveal--d1">
+          <h1 class="product__title">"Stop to smell the flowers"</h1>
+          <p class="product__location">Cirencester, England</p>
+          <p class="product__price">£2.95</p>
+          <p class="product__desc">A charming close-up of Bode the dachshund, nose-deep in the wild grasses of the Cotswolds countryside, savouring every scent nature has to offer.</p>
+          <button class="product__add-btn" type="button">Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section related" id="related">
+    <div class="container">
+      <h2 class="related__heading reveal">Other photos</h2>
+      <div class="related__grid">
+
+        <article class="related-card reveal">
+          <div class="related-card__image-wrapper">
+            <img src="Photos/starting_bang.jpg" alt="Starting off with a bang!" class="related-card__image" loading="lazy">
+          </div>
+          <div class="related-card__body">
+            <h3 class="related-card__title">"Starting off with a bang!"</h3>
+            <p class="related-card__desc">An image of 'pagara' - the 'fireworks' used in the Caribbean.</p>
+            <span class="related-card__price">£2.95</span>
+          </div>
+        </article>
+
+        <article class="related-card reveal reveal--d1">
+          <div class="related-card__image-wrapper">
+            <img src="Photos/freaky.jpg" alt="Let's all get freaky" class="related-card__image" loading="lazy">
+          </div>
+          <div class="related-card__body">
+            <h3 class="related-card__title">"Let's all get freaky"</h3>
+            <p class="related-card__desc">An image of the pollarded linden trees in Frederiksberg Garden, Copenhagen.</p>
+            <span class="related-card__price">£2.95</span>
+          </div>
+        </article>
+
+        <article class="related-card reveal reveal--d2">
+          <div class="related-card__image-wrapper">
+            <img src="Photos/is_it_me.jpg" alt="Is it me you're looking for?" class="related-card__image" loading="lazy">
+          </div>
+          <div class="related-card__body">
+            <h3 class="related-card__title">"Is it me you're looking for?"</h3>
+            <p class="related-card__desc">An image of a mouse that has been drawn on a wall in the Ruin Bar of Budapest.</p>
+            <span class="related-card__price">£2.95</span>
+          </div>
+        </article>
+
+        <article class="related-card reveal">
+          <div class="related-card__image-wrapper">
+            <img src="Photos/pigeon.jpg" alt="Pigeon Diaries #1" class="related-card__image" loading="lazy">
+          </div>
+          <div class="related-card__body">
+            <h3 class="related-card__title">Pigeon Diaries #1</h3>
+            <p class="related-card__desc">An image of a pigeon putting their best foot forward in Venice.</p>
+            <span class="related-card__price">£2.95</span>
+          </div>
+        </article>
+
+        <article class="related-card reveal reveal--d1">
+          <div class="related-card__image-wrapper">
+            <img src="Photos/lines.jpg" alt="Lines on lines" class="related-card__image" loading="lazy">
+          </div>
+          <div class="related-card__body">
+            <h3 class="related-card__title">Lines on lines</h3>
+            <p class="related-card__desc">An image of the bottom of the Liberty Bridge in Budapest.</p>
+            <span class="related-card__price">£2.95</span>
+          </div>
+        </article>
+
+        <article class="related-card reveal reveal--d2">
+          <div class="related-card__image-wrapper">
+            <img src="Photos/family_love.jpg" alt="A family's love" class="related-card__image" loading="lazy">
+          </div>
+          <div class="related-card__body">
+            <h3 class="related-card__title">A family's love</h3>
+            <p class="related-card__desc">An image taken of a family during the Moc Chau Love Market in Vietnam.</p>
+            <span class="related-card__price">£2.95</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__brand">
+          <div class="footer__logo-block">
+            <img src="Logo/logo.png" alt="Wrangle &amp; Bloom Creative Studio" class="footer__logo-img">
+          </div>
+          <div class="footer__socials">
+            <a href="#" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 100 12.324 6.162 6.162 0 100-12.324zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405a1.441 1.441 0 11-2.882 0 1.441 1.441 0 012.882 0z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__col-title">About me</h4>
+          <ul class="footer__col-links">
+            <li><a href="index.html#about">Context</a></li>
+            <li><a href="index.html#about">My Vision</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__col-title">IRL Projects</h4>
+          <ul class="footer__col-links">
+            <li><a href="index.html#projects">What have I done</a></li>
+            <li><a href="index.html#projects">What's in the making</a></li>
+            <li><a href="index.html#projects">Where could you fit in</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__col-title">Photography</h4>
+          <ul class="footer__col-links">
+            <li><a href="photography.html">Portfolio</a></li>
+            <li><a href="#">Terms and Conditions</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div class="contact-overlay" id="contactOverlay">
+    <div class="contact-modal">
+      <button class="contact-modal__close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h2 class="contact-modal__heading">Ready to get started?</h2>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="contact-form__row">
+          <div class="contact-form__group">
+            <label class="contact-form__label" for="contactFirst">First name</label>
+            <input class="contact-form__input" type="text" id="contactFirst" placeholder="Jane">
+          </div>
+          <div class="contact-form__group">
+            <label class="contact-form__label" for="contactLast">Last name</label>
+            <input class="contact-form__input" type="text" id="contactLast" placeholder="Smitherton">
+          </div>
+        </div>
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="contactEmail">Email address</label>
+          <input class="contact-form__input" type="email" id="contactEmail" placeholder="email@janesfakedomain.net" required>
+          <span class="contact-form__error" id="emailError">Please enter a valid email address.</span>
+        </div>
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="contactMessage">Your message</label>
+          <textarea class="contact-form__textarea" id="contactMessage" placeholder="Enter your idea here, I can't wait to see how we can bring it to life!&#10;&#10;Do include as much information as possible and whether you are looking to obtain a quote on the services offered."></textarea>
+        </div>
+        <button type="submit" class="contact-form__submit">Let's collaborate!</button>
+      </form>
+      <div class="contact-form__success" id="contactSuccess">
+        <div class="contact-form__confetti"></div>
+        <div class="contact-form__confetti"></div>
+        <div class="contact-form__confetti"></div>
+        <div class="contact-form__confetti"></div>
+        <div class="contact-form__confetti"></div>
+        <div class="contact-form__confetti"></div>
+        <div class="contact-form__confetti"></div>
+        <div class="contact-form__confetti"></div>
+        <div class="contact-form__success-ring"></div>
+        <div class="contact-form__success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Message sent!</h3>
+        <p>Thanks for reaching out — we'll be in touch soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('nav__right--open');
+      navToggle.classList.toggle('nav__toggle--active', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('nav__right--open');
+        navToggle.classList.remove('nav__toggle--active');
+        navToggle.setAttribute('aria-expanded', false);
+      });
+    });
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 20);
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Contact modal
+    const overlay = document.getElementById('contactOverlay');
+    const modal = overlay.querySelector('.contact-modal');
+    const form = document.getElementById('contactForm');
+    const successMsg = document.getElementById('contactSuccess');
+    const emailInput = document.getElementById('contactEmail');
+    const emailError = document.getElementById('emailError');
+
+    function openContact(e) {
+      e.preventDefault();
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeContact() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.js-contact-trigger').forEach(btn => btn.addEventListener('click', openContact));
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeContact(); });
+    document.querySelector('.contact-modal__close').addEventListener('click', closeContact);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeContact(); });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const emailVal = emailInput.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+      emailInput.classList.toggle('is-invalid', !valid);
+      emailError.classList.toggle('is-visible', !valid);
+      if (!valid) { emailInput.focus(); return; }
+      form.querySelector('.contact-form__submit').classList.add('is-loading');
+      form.classList.add('is-sending');
+      setTimeout(() => {
+        form.style.display = 'none';
+        document.querySelector('.contact-modal__heading').style.display = 'none';
+        successMsg.classList.add('is-visible');
+      }, 450);
+    });
+
+    emailInput.addEventListener('input', () => {
+      emailInput.classList.remove('is-invalid');
+      emailError.classList.remove('is-visible');
+    });
+  </script>
+
+</body>
+</html>
