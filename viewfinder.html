@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Through the Lens — Wrangle &amp; Bloom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Featured photo (Unsplash placeholder) — preload the sharp version so it's ready by the reveal -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="photography.css">
+  <link rel="stylesheet" href="viewfinder.css">
+</head>
+<body class="vf-page">
+
+  <!-- Navigation (overlaid on the viewfinder) -->
+  <nav class="nav nav--hero" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Wrangle <span class="nav__logo-amp">&amp;</span> Bloom</a>
+      <button class="nav__toggle" aria-label="Toggle menu" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav__right" id="navMenu">
+        <ul class="nav__links">
+          <li><a href="index.html#about">About me</a></li>
+          <li><a href="index.html#projects">IRL Projects</a></li>
+          <li><a href="photography.html" class="nav__links--active">Photography</a></li>
+        </ul>
+        <a href="index.html#contact" class="nav__cta nav__cta--ghost">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!--
+    Viewfinder landing
+    ------------------
+    Scroll drives a single timeline (see viewfinder.js):
+      camera → zoom into the eyepiece → focus pulls sharp → shutter fires → frame opens → CTAs.
+    To swap the featured photo, replace the Unsplash photo id in the four
+    `photo-1506905925346-21bda4d32df4` URLs on this page (preload, backdrop, eyepiece, full photo).
+  -->
+  <section class="vf" id="viewfinder" aria-label="Featured photograph, seen through the camera viewfinder">
+    <div class="vf__stage" id="vfStage">
+
+      <!-- The scene the camera is pointed at, thrown out of focus -->
+      <div class="vf__backdrop" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=60"
+          alt=""
+          class="vf__backdrop-img"
+          loading="eager"
+        >
+      </div>
+      <div class="vf__vignette" aria-hidden="true"></div>
+
+      <!-- Camera (back view, DSLR) -->
+      <div class="vf__camera-box" aria-hidden="true">
+        <svg class="vf__camera" id="vfCamera" viewBox="90 80 1020 700" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <defs>
+            <linearGradient id="camBody" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3b3b3e"/>
+              <stop offset="0.06" stop-color="#252527"/>
+              <stop offset="0.55" stop-color="#171718"/>
+              <stop offset="1" stop-color="#0b0b0c"/>
+            </linearGradient>
+            <linearGradient id="camSheen" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#000" stop-opacity="0.55"/>
+              <stop offset="0.08" stop-color="#000" stop-opacity="0"/>
+              <stop offset="0.45" stop-color="#fff" stop-opacity="0.035"/>
+              <stop offset="0.9" stop-color="#000" stop-opacity="0"/>
+              <stop offset="1" stop-color="#000" stop-opacity="0.6"/>
+            </linearGradient>
+            <linearGradient id="camPrism" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#46464a"/>
+              <stop offset="0.12" stop-color="#2a2a2d"/>
+              <stop offset="1" stop-color="#18181a"/>
+            </linearGradient>
+            <linearGradient id="camRubber" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#29292b"/>
+              <stop offset="0.5" stop-color="#151516"/>
+              <stop offset="1" stop-color="#0c0c0d"/>
+            </linearGradient>
+            <linearGradient id="camButton" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3a3a3d"/>
+              <stop offset="0.5" stop-color="#202022"/>
+              <stop offset="1" stop-color="#121213"/>
+            </linearGradient>
+            <radialGradient id="camRing" cx="0.5" cy="0.35" r="0.65">
+              <stop offset="0" stop-color="#3a3a3d"/>
+              <stop offset="0.7" stop-color="#1b1b1d"/>
+              <stop offset="1" stop-color="#0d0d0e"/>
+            </radialGradient>
+            <linearGradient id="camCylinder" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#000" stop-opacity="0.75"/>
+              <stop offset="0.35" stop-color="#fff" stop-opacity="0.12"/>
+              <stop offset="0.5" stop-color="#fff" stop-opacity="0.18"/>
+              <stop offset="0.65" stop-color="#fff" stop-opacity="0.08"/>
+              <stop offset="1" stop-color="#000" stop-opacity="0.8"/>
+            </linearGradient>
+            <linearGradient id="camMetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#9a9a9e"/>
+              <stop offset="0.5" stop-color="#5b5b60"/>
+              <stop offset="1" stop-color="#2d2d30"/>
+            </linearGradient>
+            <radialGradient id="camGlass" cx="0.45" cy="0.4" r="0.75">
+              <stop offset="0" stop-color="#0d1624"/>
+              <stop offset="0.6" stop-color="#05080e"/>
+              <stop offset="1" stop-color="#000"/>
+            </radialGradient>
+            <linearGradient id="camGlare" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
+              <stop offset="0.45" stop-color="#fff" stop-opacity="0.04"/>
+              <stop offset="0.46" stop-color="#fff" stop-opacity="0"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="camLcd" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0e1520"/>
+              <stop offset="1" stop-color="#05080c"/>
+            </linearGradient>
+            <pattern id="camKnurl" patternUnits="userSpaceOnUse" width="6" height="10">
+              <rect width="6" height="10" fill="#1d1d1f"/>
+              <rect width="2.2" height="10" fill="#3c3c40"/>
+            </pattern>
+            <pattern id="camGrain" patternUnits="userSpaceOnUse" width="64" height="64">
+              <image href="camera-grain.png" width="64" height="64"/>
+            </pattern>
+            <clipPath id="camBodyClip">
+              <path d="M160 250 L420 250 C440 250 450 240 455 225 L478 128 C481 116 490 108 503 108 L617 108 C630 108 639 116 642 128 L665 225 C670 240 680 250 700 250 L1030 250 C1065 250 1088 272 1090 305 L1092 660 C1092 700 1065 726 1025 726 L175 726 C135 726 110 700 110 660 L110 300 C110 270 130 250 160 250 Z"/>
+            </clipPath>
+            <clipPath id="camTargetClip">
+              <rect x="527" y="189" width="66" height="44" rx="2"/>
+            </clipPath>
+            <filter id="camSoft" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="0.85"/>
+            </filter>
+            <filter id="camShadow" x="-20%" y="-200%" width="140%" height="500%">
+              <feGaussianBlur stdDeviation="16"/>
+            </filter>
+          </defs>
+
+          <!-- Contact shadow -->
+          <ellipse cx="600" cy="742" rx="470" ry="20" fill="#000" opacity="0.55" filter="url(#camShadow)"/>
+
+          <!-- Strap lugs -->
+          <rect x="96" y="262" width="22" height="30" rx="6" fill="url(#camMetal)"/>
+          <rect x="101" y="270" width="9" height="14" rx="3" fill="#0b0b0c"/>
+          <rect x="1084" y="262" width="22" height="30" rx="6" fill="url(#camMetal)"/>
+          <rect x="1092" y="270" width="9" height="14" rx="3" fill="#0b0b0c"/>
+
+          <!-- Release-mode dial (left shoulder) -->
+          <rect x="205" y="222" width="150" height="32" rx="4" fill="url(#camKnurl)"/>
+          <rect x="205" y="222" width="150" height="32" rx="4" fill="url(#camCylinder)"/>
+          <rect x="216" y="196" width="128" height="28" rx="5" fill="url(#camButton)"/>
+          <rect x="216" y="196" width="128" height="28" rx="5" fill="url(#camCylinder)" opacity="0.7"/>
+          <rect x="226" y="188" width="30" height="10" rx="3" fill="#2a2a2d"/>
+          <rect x="265" y="188" width="30" height="10" rx="3" fill="#2a2a2d"/>
+          <rect x="304" y="188" width="30" height="10" rx="3" fill="#2a2a2d"/>
+
+          <!-- Shutter release + power collar (peeking over the grip) -->
+          <path d="M975 250 L982 232 C984 227 988 224 994 224 L1052 224 C1058 224 1062 227 1064 232 L1071 250 Z" fill="url(#camButton)"/>
+          <path d="M975 250 L982 232 C984 227 988 224 994 224 L1052 224 C1058 224 1062 227 1064 232 L1071 250 Z" fill="url(#camCylinder)" opacity="0.6"/>
+          <rect x="1004" y="214" width="38" height="12" rx="6" fill="url(#camMetal)"/>
+
+          <!-- Hot shoe -->
+          <rect x="516" y="96" width="88" height="14" rx="2" fill="url(#camMetal)"/>
+          <rect x="524" y="100" width="72" height="6" rx="1" fill="#1a1a1c"/>
+
+          <!-- Body -->
+          <path d="M160 250 L420 250 C440 250 450 240 455 225 L478 128 C481 116 490 108 503 108 L617 108 C630 108 639 116 642 128 L665 225 C670 240 680 250 700 250 L1030 250 C1065 250 1088 272 1090 305 L1092 660 C1092 700 1065 726 1025 726 L175 726 C135 726 110 700 110 660 L110 300 C110 270 130 250 160 250 Z" fill="url(#camBody)"/>
+          <g clip-path="url(#camBodyClip)">
+            <!-- Prism housing shading -->
+            <path d="M455 260 L478 128 C481 116 490 108 503 108 L617 108 C630 108 639 116 642 128 L665 260 Z" fill="url(#camPrism)"/>
+            <rect x="90" y="80" width="1020" height="700" fill="url(#camSheen)"/>
+            <rect class="vf__grain" style="--grain: 0.22" x="90" y="80" width="1020" height="700" fill="url(#camGrain)"/>
+            <!-- Soft top light -->
+            <ellipse cx="560" cy="250" rx="520" ry="120" fill="#fff" opacity="0.035"/>
+            <!-- Top-plate bevel -->
+            <path d="M110 262 L1100 262" stroke="#000" stroke-opacity="0.5" stroke-width="2"/>
+            <path d="M110 264 L1100 264" stroke="#fff" stroke-opacity="0.06" stroke-width="1.5"/>
+            <!-- Back-door seam -->
+            <path d="M128 300 L128 660 C128 690 148 708 178 708 L1022 708 C1052 708 1074 690 1074 660 L1074 306" fill="none" stroke="#000" stroke-opacity="0.65" stroke-width="2"/>
+            <path d="M130 300 L130 660 C130 688 150 706 178 706 L1022 706 C1050 706 1072 688 1072 660 L1072 306" fill="none" stroke="#fff" stroke-opacity="0.05" stroke-width="1"/>
+          </g>
+          <!-- Edge highlight -->
+          <path d="M112 300 C112 270 132 252 160 252 L420 252 C440 252 452 240 457 225 L480 128 C483 117 491 110 503 110 L617 110 C629 110 637 117 640 128 L663 225 C668 240 680 252 700 252 L1030 252 C1063 252 1086 272 1088 305" fill="none" stroke="#fff" stroke-opacity="0.22" stroke-width="1.6"/>
+
+          <!-- Nikon-style red accent on the grip edge -->
+          <path d="M1050 255 C1070 261 1084 278 1088 300" fill="none" stroke="#c8102e" stroke-width="5" stroke-linecap="round"/>
+
+          <!-- Thumb rest -->
+          <path d="M975 282 C1035 282 1070 300 1075 330 L1075 520 C1070 545 1040 555 1000 552 C975 548 963 530 963 505 L963 300 C963 290 967 282 975 282 Z" fill="url(#camRubber)"/>
+          <path d="M975 282 C1035 282 1070 300 1075 330 L1075 520 C1070 545 1040 555 1000 552 C975 548 963 530 963 505 L963 300 C963 290 967 282 975 282 Z" class="vf__grain" style="--grain: 0.75" fill="url(#camGrain)"/>
+          <path d="M964 300 C964 290 968 283 976 283 C1030 283 1066 298 1073 326" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1.5"/>
+
+          <!-- Card-slot door + access lamp -->
+          <path d="M1002 572 L1062 572 C1068 572 1072 576 1072 582 L1072 690" fill="none" stroke="#000" stroke-opacity="0.7" stroke-width="2"/>
+          <circle cx="1030" cy="600" r="3.5" fill="#1f3d22"/>
+
+          <!-- Main command dial -->
+          <rect x="880" y="252" width="70" height="20" rx="4" fill="#0a0a0b"/>
+          <rect x="884" y="254" width="62" height="18" rx="3" fill="url(#camKnurl)"/>
+          <rect x="884" y="254" width="62" height="18" rx="3" fill="url(#camCylinder)"/>
+
+          <!-- Eyepiece -->
+          <rect x="482" y="150" width="156" height="122" rx="26" fill="url(#camRubber)"/>
+          <rect x="483" y="151" width="154" height="120" rx="25" fill="none" stroke="#fff" stroke-opacity="0.14" stroke-width="1.5"/>
+          <rect x="500" y="168" width="120" height="86" rx="14" fill="#040405"/>
+          <rect x="500" y="168" width="120" height="86" rx="14" fill="none" stroke="#000" stroke-width="3"/>
+          <rect x="508" y="176" width="104" height="70" rx="9" fill="url(#camGlass)"/>
+          <!-- The view through the finder: grows into the full viewfinder as you scroll in -->
+          <g class="vf__eyepiece-view" clip-path="url(#camTargetClip)">
+            <image
+              href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=480&q=60"
+              x="525" y="187" width="70" height="48"
+              preserveAspectRatio="xMidYMid slice"
+              filter="url(#camSoft)"
+            />
+            <rect class="vf__eyepiece-shade" x="527" y="189" width="66" height="44" rx="2" fill="#000"/>
+          </g>
+          <rect id="vfTarget" x="527" y="189" width="66" height="44" fill="none"/>
+          <path class="vf__eyepiece-glare" d="M510 186 C510 180 514 177 520 177 L600 177 L546 245 L518 245 C512 245 509 241 509 236 Z" fill="url(#camGlare)"/>
+          <!-- Diopter knob -->
+          <circle cx="658" cy="168" r="13" fill="#0a0a0b"/>
+          <circle cx="658" cy="168" r="11" fill="url(#camRing)"/>
+          <circle cx="658" cy="168" r="11" fill="none" stroke="#4a4a4e" stroke-width="2" stroke-dasharray="1.6 1.6"/>
+
+          <!-- Left button column -->
+          <g font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="600" fill="#d9d9dc" text-anchor="middle">
+            <rect x="158" y="314" width="58" height="34" rx="9" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <path d="M183 324 L194 331 L183 338 Z" fill="#d9d9dc"/>
+            <rect x="158" y="376" width="58" height="34" rx="9" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <text x="187" y="397">MENU</text>
+            <rect x="158" y="438" width="58" height="34" rx="9" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <text x="187" y="460" font-size="14">★</text>
+            <rect x="158" y="500" width="58" height="34" rx="9" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <text x="187" y="521">?/⊶</text>
+            <rect x="158" y="562" width="58" height="34" rx="9" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <text x="187" y="584" font-size="15">⊕</text>
+            <rect x="158" y="624" width="58" height="34" rx="9" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <text x="187" y="646" font-size="15">⊖</text>
+          </g>
+          <!-- Speaker -->
+          <g fill="#050505">
+            <circle cx="176" cy="684" r="2.4"/><circle cx="187" cy="684" r="2.4"/><circle cx="198" cy="684" r="2.4"/>
+            <circle cx="181" cy="693" r="2.4"/><circle cx="192" cy="693" r="2.4"/>
+          </g>
+
+          <!-- Rear LCD (info display) -->
+          <rect x="244" y="298" width="534" height="378" rx="16" fill="#060607" stroke="#2b2b2e" stroke-width="2"/>
+          <rect x="262" y="316" width="498" height="342" rx="4" fill="url(#camLcd)"/>
+          <g font-family="Inter, Helvetica Neue, Arial, sans-serif" fill="#f2f2f4">
+            <text x="290" y="376" font-size="46" font-weight="700">P</text>
+            <text x="352" y="374" font-size="36" font-weight="600">1/250</text>
+            <text x="495" y="374" font-size="36" font-weight="600"><tspan font-size="22">F</tspan>8</text>
+            <text x="580" y="352" font-size="14" font-weight="500" fill="#8c9aa8">ISO</text>
+            <text x="580" y="376" font-size="26" font-weight="600">100</text>
+            <text x="672" y="352" font-size="13" font-weight="500" fill="#8c9aa8">ISO AUTO</text>
+            <!-- Exposure meter -->
+            <g stroke="#c8d0d8" stroke-width="2">
+              <path d="M300 420 L560 420"/>
+              <path d="M300 412 L300 428 M332 416 L332 424 M365 416 L365 424 M397 416 L397 424 M430 408 L430 432 M462 416 L462 424 M495 416 L495 424 M527 416 L527 424 M560 412 L560 428"/>
+            </g>
+            <text x="286" y="426" font-size="16" fill="#c8d0d8">+</text>
+            <text x="566" y="426" font-size="16" fill="#c8d0d8">−</text>
+            <path d="M424 438 L430 446 L436 438 Z" fill="#f2f2f4"/>
+            <!-- Setting tiles -->
+            <g font-size="15" font-weight="600" text-anchor="middle">
+              <rect x="288" y="470" width="80" height="44" rx="5" fill="#1a2533"/><text x="328" y="498">AF-S</text>
+              <rect x="378" y="470" width="80" height="44" rx="5" fill="#1a2533"/><text x="418" y="498">[ ● ]</text>
+              <rect x="468" y="470" width="80" height="44" rx="5" fill="#1a2533"/><text x="508" y="498">WB A</text>
+              <rect x="558" y="470" width="80" height="44" rx="5" fill="#1a2533"/><text x="598" y="498">RAW</text>
+              <rect x="648" y="470" width="80" height="44" rx="5" fill="#1a2533"/><text x="688" y="498">FX</text>
+              <rect x="288" y="524" width="80" height="44" rx="5" fill="#1a2533"/><text x="328" y="552">SD</text>
+              <rect x="378" y="524" width="80" height="44" rx="5" fill="#1a2533"/><text x="418" y="552">ADL</text>
+              <rect x="468" y="524" width="80" height="44" rx="5" fill="#1a2533"/><text x="508" y="552">NORM</text>
+              <rect x="558" y="524" width="80" height="44" rx="5" fill="#1a2533"/><text x="598" y="552">sRGB</text>
+              <rect x="648" y="524" width="80" height="44" rx="5" fill="#1a2533"/><text x="688" y="552">S</text>
+            </g>
+            <!-- Battery + frames remaining -->
+            <rect x="290" y="614" width="34" height="16" rx="2" fill="none" stroke="#f2f2f4" stroke-width="2"/>
+            <rect x="324" y="619" width="3" height="6" fill="#f2f2f4"/>
+            <rect x="293" y="617" width="28" height="10" fill="#f2f2f4"/>
+            <text x="728" y="630" font-size="22" font-weight="600" text-anchor="end">[ 1.2k ]</text>
+          </g>
+          <!-- LCD glass reflection -->
+          <path d="M262 316 L760 316 L760 360 C620 400 420 430 262 520 Z" fill="#fff" opacity="0.045"/>
+          <rect x="262" y="316" width="498" height="342" rx="4" fill="none" stroke="#000" stroke-width="3"/>
+
+          <!-- Right-hand controls -->
+          <g font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="10" font-weight="700" fill="#d9d9dc" text-anchor="middle">
+            <rect x="808" y="286" width="56" height="30" rx="9" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <text x="836" y="305">AE-L</text>
+            <circle cx="912" cy="301" r="22" fill="#0a0a0b"/>
+            <circle cx="912" cy="301" r="18" fill="url(#camButton)"/>
+            <text x="912" y="305">AF-ON</text>
+
+            <!-- Sub-selector -->
+            <circle cx="880" cy="370" r="20" fill="#0a0a0b"/>
+            <circle cx="880" cy="370" r="16" fill="url(#camRubber)"/>
+            <circle class="vf__grain" style="--grain: 0.8" cx="880" cy="370" r="16" fill="url(#camGrain)"/>
+
+            <!-- Multi-selector -->
+            <circle cx="880" cy="472" r="54" fill="#070708"/>
+            <circle cx="880" cy="472" r="50" fill="url(#camRing)"/>
+            <circle cx="880" cy="472" r="50" fill="none" stroke="#fff" stroke-opacity="0.1" stroke-width="1.5"/>
+            <path d="M880 432 L886 441 L874 441 Z M880 512 L886 503 L874 503 Z M840 472 L849 466 L849 478 Z M920 472 L911 466 L911 478 Z" fill="#9a9aa0"/>
+            <circle cx="880" cy="472" r="21" fill="#0b0b0c"/>
+            <circle cx="880" cy="472" r="18" fill="url(#camButton)"/>
+            <text x="880" y="476">OK</text>
+
+            <!-- Focus-selector lock -->
+            <circle cx="880" cy="552" r="11" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <rect x="878" y="542" width="4" height="9" rx="1" fill="#9a9aa0"/>
+            <text x="904" y="556" font-size="9">L</text>
+
+            <!-- Live-view selector -->
+            <circle cx="852" cy="626" r="29" fill="#0a0a0b"/>
+            <circle cx="852" cy="626" r="26" fill="url(#camRing)"/>
+            <path d="M826 612 L814 604" stroke="#2b2b2e" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="852" cy="626" r="15" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <text x="852" y="630" fill="#e44a4a">Lv</text>
+
+            <!-- i button -->
+            <circle cx="930" cy="626" r="16" fill="url(#camButton)" stroke="#000" stroke-width="1.5"/>
+            <text x="930" y="631" font-size="14" font-style="italic" font-family="Georgia, serif">i</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Intro copy -->
+      <div class="vf__intro">
+        <p class="vf__eyebrow">Photography by Sara de Jong</p>
+        <h1 class="vf__title">See the world through my lens</h1>
+        <div class="vf__hints">
+          <span class="vf__hint">
+            <span class="vf__hint-mouse" aria-hidden="true"></span>
+            Scroll to look through the viewfinder
+          </span>
+          <a href="#vfCaption" class="vf__skip js-vf-skip">Skip to photo</a>
+        </div>
+      </div>
+
+      <!-- Through the viewfinder -->
+      <div class="vf__finder">
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80"
+          srcset="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80 1200w,
+                  https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80 2400w"
+          sizes="100vw"
+          alt="Mountain peaks rising above a sea of clouds at sunrise"
+          class="vf__photo"
+          id="vfPhoto"
+          loading="eager"
+        >
+
+        <div class="vf__hud" aria-hidden="true">
+          <div class="vf__frame">
+            <div class="vf__af-grid" id="vfAfGrid"></div>
+            <span class="vf__af-active"></span>
+          </div>
+          <div class="vf__readout">
+            <span class="vf__readout-focus">●</span>
+            <span>1/250</span>
+            <span>F8</span>
+            <span class="vf__readout-meter">+ · · · <b>|</b> · · · −</span>
+            <span>ISO 100</span>
+            <span class="vf__readout-count">[<small>r</small> <span id="vfCount">42</span>]</span>
+          </div>
+        </div>
+
+        <div class="vf__shutter" id="vfShutter" aria-hidden="true"></div>
+      </div>
+
+      <!-- The photograph, revealed -->
+      <div class="vf__caption" id="vfCaption">
+        <div class="container vf__caption-inner">
+          <p class="vf__eyebrow">Photograph by Sara de Jong</p>
+          <h2 class="vf__caption-title">“Above the clouds”</h2>
+          <p class="vf__caption-meta">
+            <span>Location, Country</span>
+            <span>Nikon D850</span>
+            <span>24–70mm</span>
+            <span>ƒ/8</span>
+            <span>1/250s</span>
+            <span>ISO 100</span>
+          </p>
+          <div class="vf__actions">
+            <a href="photography.html" class="btn vf__btn vf__btn--primary">View more of my photos</a>
+            <a href="photo-detail.html" class="btn vf__btn vf__btn--glass">Buy this photo</a>
+            <a href="index.html#contact" class="vf__link">Book a shoot →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__brand">
+          <div class="footer__logo-block">
+            <img src="Logo/logo.png" alt="Wrangle &amp; Bloom Creative Studio" class="footer__logo-img">
+          </div>
+          <div class="footer__socials">
+            <a href="#" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 100 12.324 6.162 6.162 0 100-12.324zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405a1.441 1.441 0 11-2.882 0 1.441 1.441 0 012.882 0z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__col-title">About me</h4>
+          <ul class="footer__col-links">
+            <li><a href="index.html#about">Context</a></li>
+            <li><a href="index.html#about">My Vision</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__col-title">IRL Projects</h4>
+          <ul class="footer__col-links">
+            <li><a href="index.html#projects">What have I done</a></li>
+            <li><a href="index.html#projects">What's in the making</a></li>
+            <li><a href="index.html#projects">Where could you fit in</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__col-title">Photography</h4>
+          <ul class="footer__col-links">
+            <li><a href="photography.html">Portfolio</a></li>
+            <li><a href="#">Terms and Conditions</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('nav__right--open');
+      navToggle.classList.toggle('nav__toggle--active', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('nav__right--open');
+        navToggle.classList.remove('nav__toggle--active');
+        navToggle.setAttribute('aria-expanded', false);
+      });
+    });
+  </script>
+  <script src="viewfinder.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+/* =============================================
+   VIEWFINDER LANDING
+   Base styles = the final, revealed state (used without JS and
+   with reduced motion). `.vf--scroll` (added by viewfinder.js)
+   turns it into the scroll-driven camera → viewfinder sequence.
+   ============================================= */
+.vf-page {
+  background: #050505;
+}
+
+.vf-page .footer {
+  background: var(--white);
+}
+
+.vf {
+  --vf-green: #7dff6a;
+  --vf-red: #ff3b30;
+
+  position: relative;
+  background: #050505;
+  color: var(--white);
+}
+
+.vf__stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 520px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Keeps the nav legible over bright photos */
+.vf__stage::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 140px;
+  z-index: 6;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+
+/* ---------- Backdrop: the scene, out of focus ---------- */
+.vf__backdrop {
+  position: absolute;
+  inset: -40px;
+  z-index: 0;
+}
+
+.vf__backdrop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(18px) saturate(1.1) brightness(var(--vf-backdrop-light, 0.85));
+  transform: scale(var(--vf-backdrop-scale, 1.08));
+  will-change: transform;
+}
+
+.vf__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 75% 70% at 50% 45%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* ---------- Camera ---------- */
+.vf__camera-box {
+  position: absolute;
+  inset: 64px 0 132px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.vf__camera {
+  flex: none;
+  /* Big on desktop, deliberately cropped on narrow portrait screens */
+  width: min(max(92vw, 45svh * 1.457), (100svh - 196px) * 1.457);
+  height: auto;
+  overflow: visible;
+  opacity: var(--vf-camera, 1);
+  will-change: transform, opacity;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.45));
+}
+
+.vf__eyepiece-shade {
+  opacity: var(--vf-eyepiece-shade, 0.55);
+}
+
+.vf__grain {
+  opacity: calc(var(--grain, 0.5) * var(--vf-grain, 1));
+}
+
+.vf__eyepiece-glare {
+  opacity: var(--vf-eyepiece-glare, 1);
+}
+
+/* ---------- Intro copy ---------- */
+.vf__intro {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(20px, 4svh, 40px);
+  z-index: 3;
+  padding-inline: var(--container-padding);
+  text-align: center;
+  opacity: var(--vf-intro, 1);
+  transform: translateY(calc((1 - var(--vf-intro, 1)) * 16px));
+}
+
+.vf__eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+}
+
+.vf__title {
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.03em;
+  color: var(--white);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+  margin-bottom: 14px;
+}
+
+.vf__hints {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: var(--fs-sm);
+}
+
+.vf__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.vf__skip {
+  color: rgba(255, 255, 255, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.vf__skip:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.vf__hint-mouse {
+  position: relative;
+  width: 18px;
+  height: 28px;
+  border: 1.5px solid currentColor;
+  border-radius: 10px;
+}
+
+.vf__hint-mouse::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 2px;
+  height: 6px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: currentColor;
+  animation: vfWheel 1.8s var(--ease) infinite;
+}
+
+@keyframes vfWheel {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+/* In the static (final) state only the photo + caption are shown */
+.vf:not(.vf--scroll) .vf__camera-box,
+.vf:not(.vf--scroll) .vf__intro,
+.vf:not(.vf--scroll) .vf__hud {
+  display: none;
+}
+
+/* ---------- Through the viewfinder ---------- */
+.vf__finder {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #000;
+  opacity: var(--vf-finder, 1);
+  pointer-events: none;
+}
+
+.vf__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(var(--vf-focus-blur, 0px)) brightness(var(--vf-photo-light, 1));
+  will-change: filter;
+}
+
+/* HUD is laid over the viewfinder window (geometry set in JS) */
+.vf__hud {
+  position: absolute;
+  inset: 0;
+  opacity: var(--vf-hud, 1);
+}
+
+.vf__frame {
+  position: absolute;
+  left: var(--vf-win-x, 10%);
+  top: var(--vf-win-y, 10%);
+  width: var(--vf-win-w, 80%);
+  height: var(--vf-win-h, 70%);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+    inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+
+.vf__af-grid {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 64%;
+  height: 56%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  place-items: center;
+}
+
+.vf__af-grid span {
+  width: clamp(6px, 1.1vw, 13px);
+  height: clamp(5px, 0.8vw, 10px);
+  border: 1px solid rgba(10, 10, 10, 0.6);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.vf__af-active {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(16px, 2.4vw, 30px);
+  height: clamp(12px, 1.8vw, 22px);
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(10, 10, 10, 0.85);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.vf__readout {
+  position: absolute;
+  left: var(--vf-win-x, 10%);
+  width: var(--vf-win-w, 80%);
+  top: calc(var(--vf-win-y, 10%) + var(--vf-win-h, 70%) + 12px);
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4em 1.6em;
+  font-size: clamp(0.72rem, 1.4vw, 1.05rem);
+  font-weight: var(--fw-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  color: var(--vf-green);
+  text-shadow: 0 0 8px rgba(125, 255, 106, 0.55);
+}
+
+.vf__readout small {
+  font-size: 0.7em;
+}
+
+.vf__readout b {
+  font-weight: var(--fw-bold);
+}
+
+.vf__readout-focus {
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+.vf__readout-meter {
+  white-space: nowrap;
+}
+
+/* Focus confirmed: red AF point flash + in-focus dot */
+.vf.is-focused .vf__af-active {
+  border-color: var(--vf-red);
+  box-shadow: 0 0 10px rgba(255, 59, 48, 0.8), inset 0 0 6px rgba(255, 59, 48, 0.5);
+  animation: vfAfFlash 0.5s steps(2, jump-none) 1;
+}
+
+.vf.is-focused .vf__readout-focus {
+  opacity: 1;
+}
+
+@keyframes vfAfFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* Mirror blackout when the shutter fires */
+.vf__shutter {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vf__shutter.is-firing {
+  animation: vfShutter 0.34s linear 1;
+}
+
+@keyframes vfShutter {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  45% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ---------- Caption + CTAs ---------- */
+.vf__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  padding: clamp(96px, 18svh, 180px) 0 clamp(32px, 7svh, 72px);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.72) 100%);
+  opacity: var(--vf-caption, 1);
+  transform: translateY(calc((1 - var(--vf-caption, 1)) * 24px));
+}
+
+.vf__caption.is-hidden {
+  visibility: hidden;
+}
+
+.vf__caption-title {
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  color: var(--white);
+  margin-bottom: 16px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+
+.vf__caption-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 28px;
+}
+
+.vf__caption-meta span + span::before {
+  content: '·';
+  margin-right: 18px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.vf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 14px;
+}
+
+.vf__btn {
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+}
+
+.vf__btn--primary {
+  background: var(--white);
+  color: var(--black);
+}
+
+.vf__btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.vf__btn--glass {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.vf__btn--glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.85);
+  transform: translateY(-2px);
+}
+
+.vf__link {
+  margin-left: 8px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  padding-bottom: 2px;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.vf__link:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+/* ---------- Scroll-driven mode ---------- */
+.vf--scroll {
+  /* Scroll distance for the whole sequence */
+  height: 600vh;
+}
+
+.vf--scroll .vf__stage {
+  position: sticky;
+  top: 0;
+}
+
+@media (max-width: 640px) {
+  .vf__camera-box {
+    inset: 56px 0 150px;
+  }
+
+  .vf__caption-meta span + span::before {
+    margin-right: 10px;
+  }
+
+  .vf__caption-meta {
+    gap: 4px 10px;
+  }
+
+  .vf__link {
+    margin-left: 0;
+  }
+}
