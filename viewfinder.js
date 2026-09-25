@@ -32,7 +32,7 @@
 
   const SHUTTER_AT = 0.68;
   const FRAMES_LEFT = 42;
-  const AUTOPLAY_MS = 9000; // full sequence, top to reveal
+  const AUTOPLAY_MS = 7000; // full sequence, top to reveal
 
   for (let i = 0; i < 55; i++) afGrid.appendChild(document.createElement('span'));
 
