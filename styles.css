@@ -867,6 +867,31 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Tablet */
 @media (max-width: 900px) {
+  .nav__inner {
+    gap: 1rem;
+  }
+
+  .nav__logo {
+    font-size: var(--fs-md);
+  }
+
+  .nav__right {
+    gap: 0.875rem;
+  }
+
+  .nav__links {
+    gap: 0.875rem;
+  }
+
+  .nav__links a {
+    white-space: nowrap;
+  }
+
+  .nav__cta {
+    padding: 10px 18px;
+    white-space: nowrap;
+  }
+
   .projects__grid {
     grid-template-columns: repeat(2, 1fr);
   }
