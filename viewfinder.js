@@ -8,6 +8,8 @@
      0.68       shutter fires + flash
      0.72–0.86  frame opens to the full photograph
      0.88–0.96  caption + CTAs arrive
+   Pressing the camera's shutter button (or the intro button) plays
+   the sequence by scrolling for the visitor; any input hands back control.
    ============================================= */
 (() => {
   const section = document.getElementById('viewfinder');
@@ -26,9 +28,11 @@
   const caption = document.getElementById('vfCaption');
   const afGrid = document.getElementById('vfAfGrid');
   const nav = document.getElementById('nav');
+  const release = document.getElementById('vfRelease');
 
   const SHUTTER_AT = 0.68;
   const FRAMES_LEFT = 42;
+  const AUTOPLAY_MS = 9000; // full sequence, top to reveal
 
   for (let i = 0; i < 55; i++) afGrid.appendChild(document.createElement('span'));
 
@@ -76,6 +80,11 @@
     stage.style.setProperty('--vf-win-y', `${wy}px`);
     stage.style.setProperty('--vf-win-w', `${ww}px`);
     stage.style.setProperty('--vf-win-h', `${wh}px`);
+
+    // Anchor the "press the shutter" callout to the button's top-centre
+    const r = release.getBoundingClientRect();
+    stage.style.setProperty('--vf-tip-x', `${r.left + r.width / 2 - s.left}px`);
+    stage.style.setProperty('--vf-tip-y', `${r.top + r.height * 0.35 - s.top}px`);
   }
 
   function progress() {
@@ -158,12 +167,76 @@
     requestUpdate();
   });
 
+  // ---------- Auto-play ----------
+  const endScroll = () =>
+    section.getBoundingClientRect().top + window.scrollY + section.offsetHeight - stage.clientHeight;
+
+  // Constant pace with a short ease in and out (trapezoid velocity profile)
+  const EASE = 0.1;
+  const pace = (t) => {
+    const v = 1 / (1 - EASE);
+    if (t < EASE) return (v * t * t) / (2 * EASE);
+    if (t > 1 - EASE) return 1 - (v * (1 - t) * (1 - t)) / (2 * EASE);
+    return v * (t - EASE / 2);
+  };
+
+  let autoFrame = null;
+
+  function stopAutoplay() {
+    if (autoFrame === null) return;
+    cancelAnimationFrame(autoFrame);
+    autoFrame = null;
+    section.classList.remove('is-autoplaying');
+  }
+
+  function startAutoplay() {
+    if (autoFrame !== null) return;
+    const from = window.scrollY;
+    const to = endScroll();
+    if (to - from < 2) return;
+
+    const run = section.offsetHeight - stage.clientHeight;
+    const duration = Math.max(1200, AUTOPLAY_MS * ((to - from) / run));
+    let t0 = null;
+
+    section.classList.add('is-autoplaying', 'is-pressed');
+    setTimeout(() => section.classList.remove('is-pressed'), 180);
+
+    const step = (now) => {
+      if (t0 === null) t0 = now + 250; // let the button press land first
+      const t = clamp01((now - t0) / duration);
+      window.scrollTo({ top: from + (to - from) * pace(t), behavior: 'instant' });
+      if (t < 1) {
+        autoFrame = requestAnimationFrame(step);
+      } else {
+        autoFrame = null;
+        section.classList.remove('is-autoplaying');
+      }
+    };
+    autoFrame = requestAnimationFrame(step);
+  }
+
+  document.querySelectorAll('.js-vf-autoplay').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      startAutoplay();
+    });
+  });
+
+  // Visitor takes over: any deliberate input stops the auto-play
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach((type) => {
+    window.addEventListener(type, (e) => {
+      if (e.target.closest && e.target.closest('.js-vf-autoplay')) return;
+      stopAutoplay();
+    }, { passive: true });
+  });
+
   // "Skip" jumps straight to the revealed photo
   document.querySelectorAll('.js-vf-skip').forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      const top = section.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: top + section.offsetHeight - stage.clientHeight, behavior: 'smooth' });
+      stopAutoplay();
+      window.scrollTo({ top: endScroll(), behavior: 'smooth' });
     });
   });
 })();

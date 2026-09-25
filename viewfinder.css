@@ -95,6 +95,88 @@
   opacity: var(--vf-eyepiece-shade, 0.55);
 }
 
+/* Shutter release: clickable, pulses to invite a press */
+.vf__release {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.vf__release-button {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.12s var(--ease);
+}
+
+.vf__release:hover .vf__release-button {
+  transform: translateY(1px);
+}
+
+.vf.is-pressed .vf__release-button {
+  transform: translateY(4px);
+}
+
+.vf__release-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: vfPulse 2.2s var(--ease) infinite;
+}
+
+.vf.is-autoplaying .vf__release-pulse {
+  animation: none;
+}
+
+@keyframes vfPulse {
+  0% { transform: scale(0.6); opacity: 0; }
+  20% { opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Callout above the shutter button (anchor set in JS) */
+.vf__tip {
+  position: absolute;
+  left: var(--vf-tip-x, 80%);
+  top: var(--vf-tip-y, 20%);
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  transform: translate(calc(-100% + 6px), calc(-100% - 2px));
+  color: var(--white);
+  opacity: var(--vf-intro, 1);
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+
+.vf.is-autoplaying .vf__tip {
+  opacity: 0;
+}
+
+.vf__tip-label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: translateY(-14px);
+  animation: vfTipBob 2.2s ease-in-out infinite;
+}
+
+.vf__tip-arrow {
+  width: 44px;
+  height: 32px;
+  flex: none;
+}
+
+@keyframes vfTipBob {
+  0%, 100% { transform: translateY(-14px); }
+  50% { transform: translateY(-18px); }
+}
+
 .vf__grain {
   opacity: calc(var(--grain, 0.5) * var(--vf-grain, 1));
 }
@@ -150,6 +232,29 @@
   color: rgba(255, 255, 255, 0.75);
 }
 
+.vf__play {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  color: var(--white);
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 0 0 2px;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.vf__play:hover {
+  border-color: var(--white);
+}
+
+.vf__play-icon {
+  width: 18px;
+  height: 18px;
+}
+
 .vf__skip {
   color: rgba(255, 255, 255, 0.55);
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
@@ -191,6 +296,7 @@
 /* In the static (final) state only the photo + caption are shown */
 .vf:not(.vf--scroll) .vf__camera-box,
 .vf:not(.vf--scroll) .vf__intro,
+.vf:not(.vf--scroll) .vf__tip,
 .vf:not(.vf--scroll) .vf__hud {
   display: none;
 }
@@ -477,7 +583,12 @@
 
 @media (max-width: 640px) {
   .vf__camera-box {
-    inset: 56px 0 150px;
+    inset: 56px 0 170px;
+  }
+
+  /* Keep the shutter button on screen so it can be pressed */
+  .vf__camera {
+    width: 104vw;
   }
 
   .vf__link {

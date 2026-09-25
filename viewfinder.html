@@ -162,10 +162,14 @@
           <rect x="265" y="188" width="30" height="10" rx="3" fill="#2a2a2d"/>
           <rect x="304" y="188" width="30" height="10" rx="3" fill="#2a2a2d"/>
 
-          <!-- Shutter release + power collar (peeking over the grip) -->
-          <path d="M975 250 L982 232 C984 227 988 224 994 224 L1052 224 C1058 224 1062 227 1064 232 L1071 250 Z" fill="url(#camButton)"/>
-          <path d="M975 250 L982 232 C984 227 988 224 994 224 L1052 224 C1058 224 1062 227 1064 232 L1071 250 Z" fill="url(#camCylinder)" opacity="0.6"/>
-          <rect x="1004" y="214" width="38" height="12" rx="6" fill="url(#camMetal)"/>
+          <!-- Shutter release + power collar (peeking over the grip) — click to auto-play -->
+          <g class="vf__release js-vf-autoplay" id="vfRelease">
+            <ellipse class="vf__release-pulse" cx="1023" cy="220" rx="30" ry="14" fill="none" stroke="#fff" stroke-width="2.5"/>
+            <path d="M975 250 L982 232 C984 227 988 224 994 224 L1052 224 C1058 224 1062 227 1064 232 L1071 250 Z" fill="url(#camButton)"/>
+            <path d="M975 250 L982 232 C984 227 988 224 994 224 L1052 224 C1058 224 1062 227 1064 232 L1071 250 Z" fill="url(#camCylinder)" opacity="0.6"/>
+            <rect class="vf__release-button" x="1004" y="214" width="38" height="12" rx="6" fill="url(#camMetal)"/>
+            <rect x="945" y="165" width="160" height="97" fill="transparent"/>
+          </g>
 
           <!-- Hot shoe -->
           <rect x="516" y="96" width="88" height="14" rx="2" fill="url(#camMetal)"/>
@@ -333,6 +337,15 @@
         </svg>
       </div>
 
+      <!-- Callout pointing at the camera's shutter button (positioned in JS) -->
+      <div class="vf__tip" aria-hidden="true">
+        <span class="vf__tip-label">Press the shutter</span>
+        <svg class="vf__tip-arrow" viewBox="0 0 60 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6 C26 4 46 14 52 36"/>
+          <path d="M44 31 L52 38 L56 28"/>
+        </svg>
+      </div>
+
       <!-- Intro copy -->
       <div class="vf__intro">
         <p class="vf__eyebrow">Wrangle &amp; Bloom Photography</p>
@@ -342,6 +355,12 @@
             <span class="vf__hint-mouse" aria-hidden="true"></span>
             Scroll to look through the viewfinder
           </span>
+          <button type="button" class="vf__play js-vf-autoplay">
+            <svg class="vf__play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>
+            </svg>
+            or press the shutter to play it for you
+          </button>
           <a href="#vfCaption" class="vf__skip js-vf-skip">Skip to the reveal</a>
         </div>
       </div>
