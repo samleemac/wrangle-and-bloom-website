@@ -5,7 +5,7 @@
      0.03–0.45  camera zooms into the eyepiece
      0.43–0.49  hand-off: camera → viewfinder
      0.50–0.62  focus pulls sharp (AF point confirms)
-     0.68       shutter fires
+     0.68       shutter fires + flash
      0.72–0.86  frame opens to the full photograph
      0.88–0.96  caption + CTAs arrive
    ============================================= */
@@ -21,6 +21,7 @@
   const target = document.getElementById('vfTarget');
   const photo = document.getElementById('vfPhoto');
   const shutter = document.getElementById('vfShutter');
+  const flash = document.getElementById('vfFlash');
   const count = document.getElementById('vfCount');
   const caption = document.getElementById('vfCaption');
   const afGrid = document.getElementById('vfAfGrid');
@@ -107,11 +108,13 @@
     section.classList.toggle('is-focused', p >= 0.62 && p < 0.72);
     st.setProperty('--vf-hud', 1 - smooth(0.7, 0.76, p));
 
-    // Shutter — fires once each time the threshold is crossed going forward
+    // Shutter + flash — fire once each time the threshold is crossed going forward
     if (lastProgress >= 0 && lastProgress < SHUTTER_AT && p >= SHUTTER_AT) {
-      shutter.classList.remove('is-firing');
-      void shutter.offsetWidth; // restart the animation
-      shutter.classList.add('is-firing');
+      [shutter, flash].forEach((el) => {
+        el.classList.remove('is-firing');
+        void el.offsetWidth; // restart the animation
+        el.classList.add('is-firing');
+      });
     }
     count.textContent = p >= SHUTTER_AT ? FRAMES_LEFT - 1 : FRAMES_LEFT;
 

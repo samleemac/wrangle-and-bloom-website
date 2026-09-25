@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Featured photo (Unsplash placeholder) — preload the sharp version so it's ready by the reveal -->
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80">
+  <!-- Featured photo — preload so it's ready by the reveal -->
+  <link rel="preload" as="image" href="Photos/sara_behind_the_lens.jpg">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="photography.css">
   <link rel="stylesheet" href="viewfinder.css">
@@ -41,16 +41,17 @@
     ------------------
     Scroll drives a single timeline (see viewfinder.js):
       camera → zoom into the eyepiece → focus pulls sharp → shutter fires → frame opens → CTAs.
-    To swap the featured photo, replace the Unsplash photo id in the four
-    `photo-1506905925346-21bda4d32df4` URLs on this page (preload, backdrop, eyepiece, full photo).
+    To swap the featured photo, replace `Photos/sara_behind_the_lens.jpg` in the four
+    places it's used on this page (preload, backdrop, eyepiece, full photo). The eyepiece
+    <image> and `.vf__photo { object-position }` are framed for this 3:4 portrait.
   -->
-  <section class="vf" id="viewfinder" aria-label="Featured photograph, seen through the camera viewfinder">
+  <section class="vf" id="viewfinder" aria-label="Portrait of Sara de Jong, seen through the camera viewfinder">
     <div class="vf__stage" id="vfStage">
 
       <!-- The scene the camera is pointed at, thrown out of focus -->
       <div class="vf__backdrop" aria-hidden="true">
         <img
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=60"
+          src="Photos/sara_behind_the_lens.jpg"
           alt=""
           class="vf__backdrop-img"
           loading="eager"
@@ -215,9 +216,9 @@
           <!-- The view through the finder: grows into the full viewfinder as you scroll in -->
           <g class="vf__eyepiece-view" clip-path="url(#camTargetClip)">
             <image
-              href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=480&q=60"
-              x="525" y="187" width="70" height="48"
-              preserveAspectRatio="xMidYMid slice"
+              href="Photos/sara_behind_the_lens.jpg"
+              x="525" y="175" width="70" height="93.33"
+              preserveAspectRatio="none"
               filter="url(#camSoft)"
             />
             <rect class="vf__eyepiece-shade" x="527" y="189" width="66" height="44" rx="2" fill="#000"/>
@@ -334,25 +335,22 @@
 
       <!-- Intro copy -->
       <div class="vf__intro">
-        <p class="vf__eyebrow">Photography by Sara de Jong</p>
-        <h1 class="vf__title">See the world through my lens</h1>
+        <p class="vf__eyebrow">Wrangle &amp; Bloom Photography</p>
+        <h1 class="vf__title">Who's behind the lens?</h1>
         <div class="vf__hints">
           <span class="vf__hint">
             <span class="vf__hint-mouse" aria-hidden="true"></span>
             Scroll to look through the viewfinder
           </span>
-          <a href="#vfCaption" class="vf__skip js-vf-skip">Skip to photo</a>
+          <a href="#vfCaption" class="vf__skip js-vf-skip">Skip to the reveal</a>
         </div>
       </div>
 
       <!-- Through the viewfinder -->
       <div class="vf__finder">
         <img
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80"
-          srcset="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80 1200w,
-                  https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80 2400w"
-          sizes="100vw"
-          alt="Mountain peaks rising above a sea of clouds at sunrise"
+          src="Photos/sara_behind_the_lens.jpg"
+          alt="Sara de Jong sitting on the edge of a fountain in a sunny park, checking a shot on her camera"
           class="vf__photo"
           id="vfPhoto"
           loading="eager"
@@ -379,23 +377,23 @@
       <!-- The photograph, revealed -->
       <div class="vf__caption" id="vfCaption">
         <div class="container vf__caption-inner">
-          <p class="vf__eyebrow">Photograph by Sara de Jong</p>
-          <h2 class="vf__caption-title">“Above the clouds”</h2>
-          <p class="vf__caption-meta">
-            <span>Location, Country</span>
-            <span>Nikon D850</span>
-            <span>24–70mm</span>
-            <span>ƒ/8</span>
-            <span>1/250s</span>
-            <span>ISO 100</span>
+          <p class="vf__eyebrow">The photographer, for once in frame</p>
+          <h2 class="vf__caption-title">Hi, I'm Sara.</h2>
+          <p class="vf__caption-text">
+            I'm usually the one behind the camera. From the terraces of Moc Chau to
+            the streets of Venice, I capture places, animals and people as they really are.
+            Now that you've seen me through the lens, come and see the world through mine.
           </p>
           <div class="vf__actions">
-            <a href="photography.html" class="btn vf__btn vf__btn--primary">View more of my photos</a>
-            <a href="photo-detail.html" class="btn vf__btn vf__btn--glass">Buy this photo</a>
-            <a href="index.html#contact" class="vf__link">Book a shoot →</a>
+            <a href="photography.html" class="btn vf__btn vf__btn--primary">View my photography</a>
+            <a href="index.html#contact" class="btn vf__btn vf__btn--glass">Book a shoot</a>
+            <a href="index.html#about" class="vf__link">More about me →</a>
           </div>
         </div>
       </div>
+
+      <!-- Camera flash, above everything in the stage -->
+      <div class="vf__flash" id="vfFlash" aria-hidden="true"></div>
 
     </div>
   </section>
