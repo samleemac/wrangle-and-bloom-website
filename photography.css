@@ -454,6 +454,16 @@
   line-height: 1.75;
 }
 
+.info-card__link {
+  color: var(--white);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  transition: border-color var(--transition);
+}
+
+.info-card__link:hover {
+  border-color: var(--white);
+}
+
 /* =============================================
    RESPONSIVE
    ============================================= */
