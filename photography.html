@@ -6,7 +6,7 @@
   <title>Photography — Wrangle &amp; Bloom</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <!-- Featured photo — preload so it's ready by the reveal -->
   <link rel="preload" as="image" href="Photos/sara_behind_the_lens.jpg">
   <link rel="stylesheet" href="styles.css">
@@ -415,136 +415,103 @@
     </div>
   </section>
 
-  <!-- Portfolio intro -->
-  <section class="section portfolio-intro" id="portfolio">
-    <div class="container">
-      <p class="section-eyebrow reveal">Portfolio</p>
-      <h2 class="portfolio-intro__title reveal reveal--d1">The world through my lens</h2>
-      <p class="portfolio-intro__sub reveal reveal--d2">Photos from Moc Chau, Rome, Florence, Milan, Venice, Besalú and Cirencester.</p>
+  <!--
+    Portfolio gallery (layout inspired by a sticky "expedition index"):
+    photos stack down the middle, the active one sits inside red viewfinder
+    brackets, an index on the left and the description on the right.
+    Without JS / on small screens / with reduced motion it's a plain list.
+    Each .gl-item carries its own title, meta, text and links (read by viewfinder.js).
+  -->
+  <section class="gl" id="portfolio" aria-labelledby="glTitle">
+    <div class="gl__head">
+      <h2 class="gl__title" id="glTitle">See the world<br>through my lens</h2>
     </div>
-  </section>
 
-  <!-- Location Showcases -->
-  <section class="section showcases" id="showcases">
-    <div class="container">
+    <div class="gl__stage" id="glStage">
+      <div class="gl__sticky">
+      <div class="gl__ruler gl__ruler--left" aria-hidden="true"><span class="gl__ruler-mark"></span></div>
+      <div class="gl__ruler gl__ruler--right" aria-hidden="true"><span class="gl__ruler-mark"></span></div>
 
-      <!-- Vietnam (Text Left / Image Right) -->
-      <div class="showcase reveal">
-        <div class="showcase__content">
-          <span class="showcase__number">01</span>
-          <h2 class="showcase__title">Vietnam</h2>
-          <p class="showcase__desc">My perspective on the beauty of Moc Chau, Vietnam.</p>
-          <div class="showcase__actions">
-            <a href="#" class="btn btn--primary">See more</a>
-            <a href="#" class="btn btn--secondary">Buy whole album</a>
+      <div class="gl__track" id="glTrack">
+
+        <article class="gl-item" id="vietnam">
+          <figure class="gl-item__frame">
+            <img src="vietnam.png" alt="Terraced fields in Vietnam" class="gl-item__img" loading="lazy">
+          </figure>
+          <div class="gl-item__body">
+            <h3 class="gl-item__title">Vietnam</h3>
+            <p class="gl-item__meta">Album</p>
+            <p class="gl-item__text">My perspective on the beauty of Moc Chau, Vietnam.</p>
+            <p class="gl-item__links"><a href="#">See album</a> <a href="#">Buy whole album</a></p>
           </div>
-        </div>
-        <div class="showcase__image-wrapper reveal reveal--d1">
-          <img
-            src="vietnam.png"
-            alt="Terraced fields in Vietnam"
-            class="showcase__image"
-            loading="lazy"
-          >
-        </div>
+        </article>
+
+        <article class="gl-item" id="italy">
+          <figure class="gl-item__frame">
+            <img src="italy.png" alt="Gondolas moored along a canal in Venice" class="gl-item__img" loading="lazy">
+          </figure>
+          <div class="gl-item__body">
+            <h3 class="gl-item__title">Italy</h3>
+            <p class="gl-item__meta">Album</p>
+            <p class="gl-item__text">The architecture of Rome, Florence, Milan and Venice.</p>
+            <p class="gl-item__links"><a href="#">See album</a> <a href="#">Buy whole album</a></p>
+          </div>
+        </article>
+
+        <article class="gl-item" id="bridging-the-gap">
+          <figure class="gl-item__frame">
+            <img src="bridging_the_gap.png" alt="Medieval stone bridge over a green river at Besalú, Spain" class="gl-item__img" loading="lazy">
+          </figure>
+          <div class="gl-item__body">
+            <h3 class="gl-item__title">Bridging the gap</h3>
+            <p class="gl-item__meta">£2.95</p>
+            <p class="gl-item__text">The medieval Besalú Bridge in Spain, its Romanesque arches reflected in the Fluvià river below.</p>
+            <p class="gl-item__links"><a href="bridging-the-gap.html">View photo</a></p>
+          </div>
+        </article>
+
+        <article class="gl-item" id="alternative-shopping-experience">
+          <figure class="gl-item__frame">
+            <img src="alt_shopping_exp.png" alt="Black-and-white shot of a boat loaded with fruit and vegetable crates in Venice" class="gl-item__img gl-item__img--bw" loading="lazy">
+          </figure>
+          <div class="gl-item__body">
+            <h3 class="gl-item__title">Alternative shopping experience</h3>
+            <p class="gl-item__meta">£2.95</p>
+            <p class="gl-item__text">Venice's floating market boats, where locals buy fresh produce delivered to their door by water.</p>
+            <p class="gl-item__links"><a href="alt-shopping-exp.html">View photo</a></p>
+          </div>
+        </article>
+
+        <article class="gl-item" id="stop-to-smell-the-flowers">
+          <figure class="gl-item__frame">
+            <img src="bode.png" alt="Bode the dachshund sniffing a blade of grass in Cirencester" class="gl-item__img" loading="lazy">
+          </figure>
+          <div class="gl-item__body">
+            <h3 class="gl-item__title">Stop to smell the flowers</h3>
+            <p class="gl-item__meta">£2.95</p>
+            <p class="gl-item__text">Bode the dachshund, nose-deep in the wild grasses of the Cotswolds.</p>
+            <p class="gl-item__links"><a href="bode.html">View photo</a></p>
+          </div>
+        </article>
+
+        <article class="gl-item gl-item--cta" id="commission">
+          <figure class="gl-item__frame">
+            <span class="gl-item__crosshair" aria-hidden="true"></span>
+          </figure>
+          <div class="gl-item__body">
+            <h3 class="gl-item__title">Commission a shoot</h3>
+            <p class="gl-item__meta">Custom</p>
+            <p class="gl-item__text">Don't see what you're after? I take custom photography commissions.</p>
+            <p class="gl-item__links"><a href="#" class="js-contact-trigger">Get in touch</a></p>
+          </div>
+        </article>
+
       </div>
 
-      <!-- Italy (Image Left / Text Right) -->
-      <div class="showcase showcase--reverse reveal">
-        <div class="showcase__content">
-          <span class="showcase__number">02</span>
-          <h2 class="showcase__title">Italy</h2>
-          <p class="showcase__desc">The architecture of Rome, Florence, Milan and Venice.</p>
-          <div class="showcase__actions">
-            <a href="#" class="btn btn--primary">See more</a>
-            <a href="#" class="btn btn--secondary">Buy whole album</a>
-          </div>
-        </div>
-        <div class="showcase__image-wrapper reveal reveal--d1">
-          <img
-            src="italy.png"
-            alt="Gondolas moored along a canal in Venice"
-            class="showcase__image"
-            loading="lazy"
-          >
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Individual Photos -->
-  <section class="section shop" id="shop">
-    <div class="container">
-      <p class="section-eyebrow reveal">Prints &amp; downloads</p>
-      <h2 class="shop__heading reveal reveal--d1">Individual Photos</h2>
-      <div class="shop__grid">
-
-        <a href="bridging-the-gap.html" class="shop-card shop-card--tall reveal">
-          <div class="shop-card__image-wrapper">
-            <img
-              src="bridging_the_gap.png"
-              alt="Medieval stone bridge over a green river at Besalú, Spain"
-              class="shop-card__image"
-              loading="lazy"
-            >
-            <div class="shop-card__overlay">
-              <span class="shop-card__overlay-text">View photo</span>
-            </div>
-          </div>
-          <div class="shop-card__body">
-            <div class="shop-card__info">
-              <h3 class="shop-card__title">"Bridging the gap"</h3>
-              <p class="shop-card__meta">Besalú Bridge, Spain</p>
-            </div>
-            <span class="shop-card__price">£2.95</span>
-          </div>
-        </a>
-
-        <div class="shop__right-col">
-          <a href="alt-shopping-exp.html" class="shop-card reveal reveal--d1">
-            <div class="shop-card__image-wrapper">
-              <img
-                src="alt_shopping_exp.png"
-                alt="Black-and-white shot of a boat loaded with fruit and vegetable crates in Venice"
-                class="shop-card__image shop-card__image--bw"
-                loading="lazy"
-              >
-              <div class="shop-card__overlay">
-                <span class="shop-card__overlay-text">View photo</span>
-              </div>
-            </div>
-            <div class="shop-card__body">
-              <div class="shop-card__info">
-                <h3 class="shop-card__title">"Alternative shopping experience"</h3>
-                <p class="shop-card__meta">Venice, Italy</p>
-              </div>
-              <span class="shop-card__price">£2.95</span>
-            </div>
-          </a>
-
-          <a href="bode.html" class="shop-card reveal reveal--d2">
-            <div class="shop-card__image-wrapper">
-              <img
-                src="bode.png"
-                alt="Black and tan dog sniffing a blade of grass in Cirencester"
-                class="shop-card__image"
-                loading="lazy"
-              >
-              <div class="shop-card__overlay">
-                <span class="shop-card__overlay-text">View photo</span>
-              </div>
-            </div>
-            <div class="shop-card__body">
-              <div class="shop-card__info">
-                <h3 class="shop-card__title">"Stop to smell the flowers"</h3>
-                <p class="shop-card__meta">Cirencester, England</p>
-              </div>
-              <span class="shop-card__price">£2.95</span>
-            </div>
-          </a>
-        </div>
-
+      <!-- Sticky-mode index + description (built from the items above in JS) -->
+      <ol class="gl__index" id="glIndex"></ol>
+      <div class="gl__panel" id="glPanel" aria-live="polite"></div>
+      <span class="gl__brackets" aria-hidden="true"></span>
       </div>
     </div>
   </section>
@@ -775,6 +742,7 @@
     });
   </script>
   <script src="viewfinder.js"></script>
+  <script src="gallery.js"></script>
 
 </body>
 </html>
