@@ -6,10 +6,11 @@
   <title>Wrangle &amp; Bloom — Creative Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
 </head>
-<body>
+<body class="home">
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
@@ -27,259 +28,205 @@
           <li><a href="#projects">IRL Projects</a></li>
           <li><a href="photography.html">Photography</a></li>
         </ul>
-        <a href="#contact" class="nav__cta js-contact-trigger">Get in touch</a>
+        <a href="mailto:info@equinefreedomplicity.com" class="nav__cta">Get in touch</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="hero" id="hero">
-    <div class="hero__content">
-      <div class="hero__logo-block reveal">
-        <img src="Logo/logo.png" alt="Wrangle &amp; Bloom Creative Studio" class="hero__logo-img">
-      </div>
+  <main>
 
-      <p class="hero__tagline reveal reveal--d1">Where the ideas can flow and I make them a reality.</p>
-      <a href="#contact" class="hero__cta reveal reveal--d2">Contact me</a>
-    </div>
-
-    <div class="hero__image-wrapper reveal reveal--d3">
-      <img
-        src="hero.jpg"
-        alt="Serene lake with forest reflection"
-        class="hero__image"
-        loading="eager"
-      >
-    </div>
-  </header>
-
-  <!-- IRL Projects -->
-  <section class="section projects" id="projects">
-    <div class="container">
-      <h2 class="projects__heading reveal">IRL Projects</h2>
-      <div class="projects__grid">
-
-        <article class="project-card reveal">
-          <div class="project-card__image-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=600&q=80"
-              alt="Person with horse"
-              class="project-card__image"
-              loading="lazy"
-            >
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Riding School in Vietnam</h3>
-            <p class="project-card__desc">Set up the first horse riding school in Hanoi, Vietnam.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal reveal--d1">
-          <div class="project-card__image-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=600&q=80"
-              alt="Foal in a field"
-              class="project-card__image"
-              loading="lazy"
-            >
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Sports Horse Breeding ITA x UK</h3>
-            <p class="project-card__desc">A sports horse breeding business based across Italy and the UK.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal reveal--d2">
-          <div class="project-card__image-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80"
-              alt="Coffee and dessert"
-              class="project-card__image"
-              loading="lazy"
-            >
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Can you guess what's next?</h3>
-            <p class="project-card__desc">Something different... a <em>community</em> x <em>passion</em> project.</p>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Photography -->
-  <section class="section photography" id="photography">
-    <div class="container">
-      <div class="photography__split">
-
-        <div class="photography__content reveal">
-          <h2 class="photography__heading">Photography</h2>
-
-          <div class="photography__categories">
-            <div class="photography__cat">
-              <h3 class="photography__cat-title">Vietnam</h3>
-              <p class="photography__cat-desc">My perspective on the beauty of Moc Chau, Vietnam.</p>
-            </div>
-            <div class="photography__cat">
-              <h3 class="photography__cat-title">Italy</h3>
-              <p class="photography__cat-desc">The architecture of various Italian cities — Rome, Florence, Milan, Venice.</p>
-            </div>
-            <div class="photography__cat">
-              <h3 class="photography__cat-title">Animals</h3>
-              <p class="photography__cat-desc">The curiosity of another being and their magnificence.</p>
-            </div>
-          </div>
-
-          <div class="photography__actions">
-            <a href="photography.html" class="btn btn--primary">See more</a>
-            <a href="#contact" class="btn btn--secondary">Book me</a>
-          </div>
+    <!-- Hero -->
+    <header class="home-hero" id="hero">
+      <div class="home-hero__text">
+        <p class="home-label reveal">Wrangle &amp; Bloom &middot; Galicia, Spain</p>
+        <h1 class="home-hero__title reveal reveal--d1">Where the ideas can <em>flow</em> and I make them a reality.</h1>
+        <p class="home-hero__sub reveal reveal--d2">Equine coaching, photography and hands-on projects by Sara de Jong.</p>
+        <div class="home-hero__actions reveal reveal--d3">
+          <a href="#plans" class="home-btn home-btn--solid">Explore coaching plans</a>
+          <a href="mailto:info@equinefreedomplicity.com" class="home-link">Email me</a>
         </div>
+      </div>
+      <figure class="home-hero__media reveal reveal--d2">
+        <img src="Photos/sara_behind_the_lens.jpg" alt="Sara de Jong sitting on the edge of a fountain, checking a shot on her camera" class="home-arch" loading="eager">
+      </figure>
+    </header>
 
-        <div class="photography__image-wrapper reveal reveal--d1">
-          <img
-            src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80"
-            alt="Cow in a mountain field landscape"
-            class="photography__image"
-            loading="lazy"
-          >
-        </div>
-
+    <!-- Session types ribbon -->
+    <div class="home-ribbon" aria-label="Session types">
+      <div class="home-ribbon__track">
+        <span>Elite Sports Coaching</span><span>Confidence Improvement</span><span>Anxiety Management</span><span>Corporate Team Building</span><span>Resilience Training</span>
+        <span aria-hidden="true">Elite Sports Coaching</span><span aria-hidden="true">Confidence Improvement</span><span aria-hidden="true">Anxiety Management</span><span aria-hidden="true">Corporate Team Building</span><span aria-hidden="true">Resilience Training</span>
       </div>
     </div>
-  </section>
 
-  <!-- What do I bring to the table? -->
-  <section class="section features" id="about">
-    <div class="container">
-      <h2 class="features__heading reveal">What do I bring to the table?</h2>
-      <div class="features__grid">
-
-        <article class="feature-card reveal">
-          <div class="feature-card__image-wrapper">
-            <img
-              src="sara1.png"
-              alt="Sara de Jong"
-              class="feature-card__image"
-              loading="lazy"
-            >
-          </div>
-          <h3 class="feature-card__title">Who's that girl?</h3>
-          <p class="feature-card__desc">
-            Hi, I'm Sara — the crazy ideas wrangler behind Wrangle &amp; Bloom.
-            I've not only traveled around the world, but also lived in many
-            different cultures. My unique perspective and ability to bring calm
-            to the chaos is why I'm your go-to for your vision.
+    <!-- About -->
+    <section class="home-section home-about" id="about">
+      <div class="home-container home-about__grid">
+        <figure class="home-about__media reveal">
+          <img src="sara1.png" alt="Sara de Jong eating a pastry on a city street" class="home-about__img" loading="lazy">
+        </figure>
+        <div class="home-about__text">
+          <p class="home-label reveal">Who's that girl?</p>
+          <h2 class="home-heading reveal reveal--d1">Hi, I'm Sara, the crazy ideas wrangler behind Wrangle &amp; Bloom.</h2>
+          <p class="reveal reveal--d2">
+            I hold an MSc in Psychology and Neuroscience of Mental Health and a BSc (Hons) in
+            Equine Science, and I've spent over 20 years with horses. I've not only travelled
+            around the world but lived in many different cultures, and I bring calm to the chaos.
           </p>
-        </article>
-
-        <article class="feature-card reveal reveal--d1">
-          <div class="feature-card__image-wrapper">
-            <img
-              src="sara2.png"
-              alt="Sara de Jong working"
-              class="feature-card__image feature-card__image--bw"
-              loading="lazy"
-            >
-          </div>
-          <h3 class="feature-card__title">Outside or office?</h3>
-          <p class="feature-card__desc">
-            I'm a very hands-on person and don't mind getting them dirty in the
-            process. Whether that is out setting up a business in the flesh, or
-            organising a team in an office setting, on (current) home-turf or a
-            remote island abroad. Everywhere is a possibility!
+          <p class="reveal reveal--d2">
+            I'm a very hands-on person and don't mind getting them dirty in the process, whether
+            that's setting up a business in the flesh or organising a team in an office, on
+            (current) home turf or a remote island abroad. Everywhere is a possibility!
           </p>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="section testimonials" id="testimonials">
-    <div class="container">
-      <h2 class="testimonials__heading reveal">Don't take my word for it...</h2>
-      <div class="testimonials__grid">
-
-        <blockquote class="testimonial-card reveal">
-          <div class="testimonial-card__body">
-            <span class="testimonial-card__icon" aria-hidden="true">"</span>
-            <p class="testimonial-card__quote">
-              Sara is brilliant, watching her train staff to take over from her
-              once the riding school had been set up was a breath of fresh air.
-            </p>
-          </div>
-          <footer class="testimonial-card__footer">
-            <img
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80"
-              alt="Faye Ranch"
-              class="testimonial-card__avatar"
-            >
-            <div>
-              <span class="testimonial-card__name">Faye Ranch</span>
-              <span class="testimonial-card__role">Hoof Care Professional</span>
-            </div>
-          </footer>
-        </blockquote>
-
-        <blockquote class="testimonial-card reveal reveal--d1">
-          <div class="testimonial-card__body">
-            <span class="testimonial-card__icon" aria-hidden="true">"</span>
-            <p class="testimonial-card__quote">
-              A fantastic bit of feedback
-            </p>
-          </div>
-          <footer class="testimonial-card__footer">
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"
-              alt="Reviewer"
-              class="testimonial-card__avatar"
-            >
-            <div>
-              <span class="testimonial-card__name">Name</span>
-              <span class="testimonial-card__role">Description</span>
-            </div>
-          </footer>
-        </blockquote>
-
-        <blockquote class="testimonial-card reveal reveal--d2">
-          <div class="testimonial-card__body">
-            <span class="testimonial-card__icon" aria-hidden="true">"</span>
-            <p class="testimonial-card__quote">
-              A genuinely glowing review
-            </p>
-          </div>
-          <footer class="testimonial-card__footer">
-            <img
-              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&q=80"
-              alt="Reviewer"
-              class="testimonial-card__avatar"
-            >
-            <div>
-              <span class="testimonial-card__name">Name</span>
-              <span class="testimonial-card__role">Description</span>
-            </div>
-          </footer>
-        </blockquote>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Closing CTA -->
-  <section class="section closing-cta" id="contact">
-    <div class="container">
-      <div class="closing-cta__inner reveal">
-        <h2 class="closing-cta__heading">Has inspiration hit?</h2>
-        <div class="closing-cta__actions">
-          <a href="#" class="btn btn--pill-primary js-contact-trigger">Yes! Get in touch</a>
-          <a href="#projects" class="btn btn--pill-secondary">No? Let me inspire you</a>
         </div>
       </div>
-      <hr class="closing-cta__divider">
-    </div>
-  </section>
+    </section>
+
+    <!-- What I do -->
+    <section class="home-section home-services">
+      <div class="home-container">
+        <p class="home-label reveal">What I do</p>
+        <div class="home-services__grid">
+          <a href="equine.html" class="home-service reveal">
+            <span class="home-service__num">01</span>
+            <h3 class="home-service__title">Equine coaching</h3>
+            <p>Non-ridden sessions with horses to build confidence, manage anxiety and improve your mental wellbeing.</p>
+            <span class="home-link">Equine Freedomplicity</span>
+          </a>
+          <a href="photography.html" class="home-service reveal reveal--d1">
+            <span class="home-service__num">02</span>
+            <h3 class="home-service__title">Photography</h3>
+            <p>Moc Chau in Vietnam, the architecture of Italian cities, and animals. Prints, downloads and commissions.</p>
+            <span class="home-link">See my photography</span>
+          </a>
+          <a href="#projects" class="home-service reveal reveal--d2">
+            <span class="home-service__num">03</span>
+            <h3 class="home-service__title">IRL projects</h3>
+            <p>A riding school in Hanoi, a sports horse breeding business across Italy and the UK, and something new in the making.</p>
+            <span class="home-link">See the projects</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coaching plans -->
+    <section class="home-section home-plans" id="plans">
+      <div class="home-container">
+        <div class="home-plans__head">
+          <div>
+            <p class="home-label reveal">Equine Freedomplicity</p>
+            <h2 class="home-heading reveal reveal--d1">Coaching plans</h2>
+          </div>
+          <p class="home-plans__intro reveal reveal--d2">
+            Sessions are non-ridden and suit anyone, from people who have never been around
+            horses to elite riders at the top of their sport. Ridden sessions can be organised on request.
+          </p>
+        </div>
+
+        <div class="home-plans__grid">
+          <article class="plan reveal">
+            <a href="mailto:info@equinefreedomplicity.com?subject=Enquiry%3A%20Taster%20session" class="plan__media">
+              <img src="sara2.png" alt="Sara face to face with a horse, in black and white" class="plan__img plan__img--taster" loading="lazy">
+            </a>
+            <h3 class="plan__name">Taster session</h3>
+            <p class="plan__desc">Meet the horses and see if coaching is right for you.</p>
+            <p class="plan__price">Enquire for pricing</p>
+            <a href="mailto:info@equinefreedomplicity.com?subject=Enquiry%3A%20Taster%20session" class="home-btn home-btn--outline plan__cta">Enquire</a>
+          </article>
+
+          <article class="plan reveal reveal--d1">
+            <a href="mailto:info@equinefreedomplicity.com?subject=Enquiry%3A%20Self-Confidence%20Booster" class="plan__media">
+              <img src="photography_head.jpg" alt="Sara leading a horse along a sunny street" class="plan__img" loading="lazy">
+            </a>
+            <h3 class="plan__name">Self-Confidence Booster</h3>
+            <p class="plan__levels"><span>Regular</span><span>Advanced</span></p>
+            <p class="plan__price">Enquire for pricing</p>
+            <a href="mailto:info@equinefreedomplicity.com?subject=Enquiry%3A%20Self-Confidence%20Booster" class="home-btn home-btn--outline plan__cta">Enquire</a>
+          </article>
+
+          <article class="plan reveal reveal--d2">
+            <a href="mailto:info@equinefreedomplicity.com?subject=Enquiry%3A%20Anxiety%20Dwindling" class="plan__media">
+              <img src="hero.jpg" alt="Still lake reflecting a pine forest" class="plan__img" loading="lazy">
+            </a>
+            <h3 class="plan__name">Anxiety Dwindling</h3>
+            <p class="plan__levels"><span>Regular</span><span>Advanced</span></p>
+            <p class="plan__price">Enquire for pricing</p>
+            <a href="mailto:info@equinefreedomplicity.com?subject=Enquiry%3A%20Anxiety%20Dwindling" class="home-btn home-btn--outline plan__cta">Enquire</a>
+          </article>
+
+          <article class="plan plan--custom reveal reveal--d3">
+            <a href="mailto:info@equinefreedomplicity.com?subject=Enquiry%3A%20Tailored%20programme" class="plan__media">
+              <img src="equine/logo-mark.jpg" alt="Line drawing of a horse and a person" class="plan__img plan__img--mark" loading="lazy">
+            </a>
+            <h3 class="plan__name">Tailored programme</h3>
+            <p class="plan__desc">Built around your goals, from elite sports coaching and resilience training to corporate team building.</p>
+            <p class="plan__price">Enquire for pricing</p>
+            <a href="mailto:info@equinefreedomplicity.com?subject=Enquiry%3A%20Tailored%20programme" class="home-btn home-btn--outline plan__cta">Enquire</a>
+          </article>
+        </div>
+
+        <p class="home-plans__note reveal">
+          Programmes are based on the latest scientific research, tailored to each person and adapted on the day where needed.
+          <a href="equine.html" class="home-link">More about Equine Freedomplicity</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- IRL Projects -->
+    <section class="home-section home-projects" id="projects">
+      <div class="home-container">
+        <p class="home-label reveal">IRL projects</p>
+        <h2 class="home-heading reveal reveal--d1">What I've built, and what's next</h2>
+        <div class="home-projects__grid">
+          <article class="home-project reveal">
+            <img src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80" alt="Person with horse" class="home-project__img home-arch" loading="lazy">
+            <h3 class="home-project__title">Riding School in Vietnam</h3>
+            <p>Set up the first horse riding school in Hanoi, Vietnam.</p>
+          </article>
+          <article class="home-project reveal reveal--d1">
+            <img src="https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=800&q=80" alt="Foal in a field" class="home-project__img home-arch" loading="lazy">
+            <h3 class="home-project__title">Sports Horse Breeding ITA x UK</h3>
+            <p>A sports horse breeding business based across Italy and the UK.</p>
+          </article>
+          <article class="home-project reveal reveal--d2">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80" alt="Coffee and dessert" class="home-project__img home-arch" loading="lazy">
+            <h3 class="home-project__title">Can you guess what's next?</h3>
+            <p>Something different... a <em>community</em> x <em>passion</em> project.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photography -->
+    <section class="home-photo" id="photography">
+      <img src="vietnam.png" alt="Terraced fields in Moc Chau, Vietnam" class="home-photo__img">
+      <div class="home-photo__card reveal">
+        <p class="home-label">Photography</p>
+        <h2 class="home-heading">See the world through my lens</h2>
+        <p>Vietnam, Italy and the curiosity of animals. Prints and downloads available.</p>
+        <a href="photography.html" class="home-btn home-btn--solid">View the portfolio</a>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="home-section home-quote">
+      <div class="home-container">
+        <blockquote class="reveal">
+          <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
+          <footer>Faye Ranch &middot; Hoof Care Professional</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="home-section home-contact" id="contact">
+      <div class="home-container">
+        <p class="home-label reveal">Has inspiration hit?</p>
+        <a href="mailto:info@equinefreedomplicity.com" class="home-contact__email reveal reveal--d1">info@equinefreedomplicity.com</a>
+      </div>
+    </section>
+
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -335,53 +282,6 @@
     </div>
   </footer>
 
-  <!-- Contact Modal -->
-  <div class="contact-overlay" id="contactOverlay">
-    <div class="contact-modal">
-      <button class="contact-modal__close" aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-      <h2 class="contact-modal__heading">Ready to get started?</h2>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="contact-form__row">
-          <div class="contact-form__group">
-            <label class="contact-form__label" for="contactFirst">First name</label>
-            <input class="contact-form__input" type="text" id="contactFirst" placeholder="Jane">
-          </div>
-          <div class="contact-form__group">
-            <label class="contact-form__label" for="contactLast">Last name</label>
-            <input class="contact-form__input" type="text" id="contactLast" placeholder="Smitherton">
-          </div>
-        </div>
-        <div class="contact-form__group">
-          <label class="contact-form__label" for="contactEmail">Email address</label>
-          <input class="contact-form__input" type="email" id="contactEmail" placeholder="email@janesfakedomain.net" required>
-          <span class="contact-form__error" id="emailError">Please enter a valid email address.</span>
-        </div>
-        <div class="contact-form__group">
-          <label class="contact-form__label" for="contactMessage">Your message</label>
-          <textarea class="contact-form__textarea" id="contactMessage" placeholder="Enter your idea here, I can't wait to see how we can bring it to life!&#10;&#10;Do include as much information as possible and whether you are looking to obtain a quote on the services offered."></textarea>
-        </div>
-        <button type="submit" class="contact-form__submit">Let's collaborate!</button>
-      </form>
-      <div class="contact-form__success" id="contactSuccess">
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__success-ring"></div>
-        <div class="contact-form__success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h3>Message sent!</h3>
-        <p>Thanks for reaching out — we'll be in touch soon.</p>
-      </div>
-    </div>
-  </div>
 
   <script>
     const navToggle = document.getElementById('navToggle');
@@ -418,49 +318,6 @@
 
     reveals.forEach(el => revealObserver.observe(el));
 
-    // Contact modal
-    const overlay = document.getElementById('contactOverlay');
-    const modal = overlay.querySelector('.contact-modal');
-    const form = document.getElementById('contactForm');
-    const successMsg = document.getElementById('contactSuccess');
-    const emailInput = document.getElementById('contactEmail');
-    const emailError = document.getElementById('emailError');
-
-    function openContact(e) {
-      e.preventDefault();
-      overlay.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeContact() {
-      overlay.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('.js-contact-trigger').forEach(btn => btn.addEventListener('click', openContact));
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeContact(); });
-    document.querySelector('.contact-modal__close').addEventListener('click', closeContact);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeContact(); });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailVal = emailInput.value.trim();
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
-      emailInput.classList.toggle('is-invalid', !valid);
-      emailError.classList.toggle('is-visible', !valid);
-      if (!valid) { emailInput.focus(); return; }
-      form.querySelector('.contact-form__submit').classList.add('is-loading');
-      form.classList.add('is-sending');
-      setTimeout(() => {
-        form.style.display = 'none';
-        document.querySelector('.contact-modal__heading').style.display = 'none';
-        successMsg.classList.add('is-visible');
-      }, 450);
-    });
-
-    emailInput.addEventListener('input', () => {
-      emailInput.classList.remove('is-invalid');
-      emailError.classList.remove('is-visible');
-    });
   </script>
 
 </body>

@@ -1,0 +1,557 @@
+/* =============================================
+   HOME — minimal editorial studio layout
+   Cream paper, serif display type, small spaced
+   labels, arch-framed photography. Accent green
+   is shared with the Equine Freedomplicity page.
+   ============================================= */
+.home {
+  --h-paper: #f4efe7;
+  --h-sand: #e9e0d3;
+  --h-ink: #2a2521;
+  --h-muted: #74695e;
+  --h-line: rgba(42, 37, 33, 0.16);
+  --h-green: #334f40;
+  --h-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+
+  background: var(--h-paper);
+  color: var(--h-muted);
+}
+
+.home h1,
+.home h2,
+.home h3 {
+  color: var(--h-ink);
+}
+
+/* Nav sits on the cream paper */
+.home .nav {
+  background: rgba(244, 239, 231, 0.85);
+}
+
+.home .nav--scrolled {
+  background: rgba(244, 239, 231, 0.96);
+  box-shadow: 0 1px 0 var(--h-line);
+}
+
+.home .nav__logo-amp {
+  color: var(--h-green);
+}
+
+.home .nav__cta {
+  background: var(--h-ink);
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 640px) {
+  .home .nav__right {
+    background: var(--h-paper);
+  }
+}
+
+/* ---------- Shared pieces ---------- */
+.home-container {
+  width: min(100% - 2 * var(--container-padding), var(--container-max));
+  margin-inline: auto;
+}
+
+.home-section {
+  padding-block: var(--section-padding);
+}
+
+.home-label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--h-muted);
+  margin-bottom: 18px;
+}
+
+.home-heading {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 30px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.home-btn--solid {
+  background: var(--h-ink);
+  color: var(--h-paper);
+}
+
+.home-btn--solid:hover {
+  background: var(--h-green);
+}
+
+.home-btn--outline {
+  border: 1px solid var(--h-ink);
+  color: var(--h-ink);
+}
+
+.home-btn--outline:hover {
+  background: var(--h-ink);
+  color: var(--h-paper);
+}
+
+.home-link {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--h-ink);
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+  transition: color var(--transition);
+}
+
+.home-link:hover {
+  color: var(--h-green);
+}
+
+/* Soft arch crop used for feature photos */
+.home-arch {
+  border-radius: 999px 999px 0 0;
+}
+
+/* ---------- Hero ---------- */
+.home-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+  width: min(100% - 2 * var(--container-padding), var(--container-max));
+  margin-inline: auto;
+  padding: calc(72px + clamp(48px, 8vw, 96px)) 0 clamp(56px, 8vw, 96px);
+}
+
+.home-hero__title {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 6.2vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin-bottom: 28px;
+}
+
+.home-hero__title em {
+  color: var(--h-green);
+}
+
+.home-hero__sub {
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  max-width: 32em;
+  margin-bottom: 40px;
+}
+
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 32px;
+}
+
+.home-hero__media {
+  margin: 0;
+}
+
+.home-hero__media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 35% 30%;
+}
+
+/* ---------- Session ribbon ---------- */
+.home-ribbon {
+  overflow: hidden;
+  border-block: 1px solid var(--h-line);
+  padding: 22px 0;
+}
+
+.home-ribbon__track {
+  display: flex;
+  width: max-content;
+  animation: homeRibbon 40s linear infinite;
+}
+
+.home-ribbon__track span {
+  font-family: var(--h-serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  color: var(--h-ink);
+  white-space: nowrap;
+  padding-right: 56px;
+}
+
+.home-ribbon__track span::after {
+  content: '\2022';
+  font-style: normal;
+  color: var(--h-green);
+  margin-left: 56px;
+}
+
+@keyframes homeRibbon {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-ribbon__track {
+    animation: none;
+  }
+}
+
+/* ---------- About ---------- */
+.home-about__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(40px, 7vw, 112px);
+  align-items: center;
+}
+
+.home-about__media {
+  margin: 0;
+}
+
+.home-about__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 21% center;
+}
+
+.home-about__text p:not(.home-label) {
+  font-size: var(--fs-md);
+  line-height: 1.75;
+  margin-bottom: 18px;
+  max-width: 34em;
+}
+
+/* ---------- Services ---------- */
+.home-services {
+  background: var(--h-sand);
+}
+
+.home-services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--h-line);
+}
+
+.home-service {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 36px clamp(20px, 3vw, 40px) 8px 0;
+  color: inherit;
+}
+
+.home-service + .home-service {
+  padding-left: clamp(20px, 3vw, 40px);
+  border-left: 1px solid var(--h-line);
+}
+
+.home-service__num {
+  font-family: var(--h-serif);
+  font-size: var(--fs-lg);
+  color: var(--h-green);
+}
+
+.home-service__title {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  line-height: 1.1;
+}
+
+.home-service p {
+  line-height: 1.7;
+  flex: 1;
+}
+
+.home-service .home-link {
+  align-self: flex-start;
+}
+
+.home-service:hover .home-link {
+  color: var(--h-green);
+}
+
+/* ---------- Coaching plans (shop grid) ---------- */
+.home-plans__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px clamp(32px, 6vw, 96px);
+  align-items: end;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.home-plans__intro {
+  line-height: 1.75;
+  max-width: 34em;
+  margin-bottom: 24px;
+}
+
+.home-plans__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+}
+
+.plan__media {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 22px;
+  background: var(--h-sand);
+}
+
+.plan__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+
+/* Keep both Sara and the horse in the taster crop */
+.plan__img--taster {
+  object-position: 18% center;
+}
+
+.plan__img--mark {
+  object-fit: contain;
+  padding: 22%;
+  mix-blend-mode: multiply;
+}
+
+.plan:hover .plan__img {
+  transform: scale(1.04);
+}
+
+.plan__name {
+  font-family: var(--h-serif);
+  font-weight: 500;
+  font-size: var(--fs-xl);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.plan__desc {
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.plan__levels {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.plan__levels span {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--h-line);
+  border-radius: var(--radius-pill);
+}
+
+.plan__price {
+  font-style: italic;
+  font-family: var(--h-serif);
+  font-size: var(--fs-md);
+  color: var(--h-ink);
+  margin-top: auto;
+  margin-bottom: 16px;
+}
+
+.plan__cta {
+  align-self: flex-start;
+}
+
+.home-plans__note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px 24px;
+  margin-top: clamp(40px, 6vw, 64px);
+  padding-top: 28px;
+  border-top: 1px solid var(--h-line);
+  font-size: var(--fs-sm);
+}
+
+/* ---------- IRL projects ---------- */
+.home-projects {
+  border-top: 1px solid var(--h-line);
+}
+
+.home-projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+.home-project__img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  margin-bottom: 22px;
+}
+
+.home-project__title {
+  font-family: var(--h-serif);
+  font-weight: 500;
+  font-size: var(--fs-xl);
+  margin-bottom: 6px;
+}
+
+.home-project p {
+  line-height: 1.65;
+}
+
+/* ---------- Photography band ---------- */
+.home-photo {
+  position: relative;
+  min-height: clamp(460px, 70vh, 720px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 48px var(--container-padding);
+}
+
+.home-photo__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-photo__card {
+  position: relative;
+  width: min(460px, 100%);
+  margin-right: max(0px, calc((100vw - var(--container-max)) / 2));
+  padding: clamp(32px, 4vw, 48px);
+  background: var(--h-paper);
+}
+
+.home-photo__card p:not(.home-label) {
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* ---------- Testimonial ---------- */
+.home-quote blockquote {
+  max-width: 900px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.home-quote blockquote p {
+  font-family: var(--h-serif);
+  font-style: italic;
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  line-height: 1.25;
+  color: var(--h-ink);
+  margin-bottom: 28px;
+}
+
+.home-quote blockquote footer {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ---------- Contact ---------- */
+.home-contact {
+  text-align: center;
+  background: var(--h-sand);
+}
+
+.home-contact__email {
+  display: inline-block;
+  font-family: var(--h-serif);
+  font-size: clamp(1.9rem, 5.5vw, 4.25rem);
+  line-height: 1.1;
+  color: var(--h-ink);
+  border-bottom: 1px solid var(--h-line);
+  overflow-wrap: anywhere;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.home-contact__email:hover {
+  color: var(--h-green);
+  border-color: var(--h-green);
+}
+
+/* Footer keeps the cream paper */
+.home .footer {
+  background: var(--h-paper);
+  border-top: 1px solid var(--h-line);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .home-plans__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .home-hero,
+  .home-about__grid,
+  .home-plans__head {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero__media {
+    max-width: 420px;
+  }
+
+  .home-services__grid,
+  .home-projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-service,
+  .home-service + .home-service {
+    padding: 28px 0;
+    border-left: none;
+    border-bottom: 1px solid var(--h-line);
+  }
+
+  .home-photo {
+    justify-content: center;
+  }
+
+  .home-photo__card {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-plans__grid {
+    grid-template-columns: 1fr;
+  }
+}

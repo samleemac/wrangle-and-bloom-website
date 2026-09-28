@@ -29,7 +29,7 @@
           <li><a href="index.html#projects">IRL Projects</a></li>
           <li><a href="photography.html">Photography</a></li>
         </ul>
-        <a href="#" class="nav__cta js-contact-trigger">Get in touch</a>
+        <a href="mailto:info@equinefreedomplicity.com" class="nav__cta">Get in touch</a>
       </div>
     </div>
   </nav>
@@ -117,30 +117,15 @@
       <div class="efp-container">
         <div class="reveal">
           <h2 class="efp-heading">Get in contact!</h2>
-          <p>If you would like to book a taster session or perhaps discuss what we could do for you, please do get in touch through the following methods below:</p>
+          <p>If you would like to book a taster session or perhaps discuss what we could do for you, please email me:</p>
         </div>
 
-        <div class="efp-blurbs efp-blurbs--two efp-contact__methods">
+        <div class="efp-blurbs efp-contact__methods">
           <div class="efp-blurb reveal">
-            <svg class="efp-blurb__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <h4 class="efp-blurb__title"><a href="tel:07765632244">07765632244</a></h4>
-          </div>
-          <div class="efp-blurb reveal reveal--d1">
             <svg class="efp-blurb__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/></svg>
             <h4 class="efp-blurb__title"><a href="mailto:info@equinefreedomplicity.com">info@equinefreedomplicity.com</a></h4>
           </div>
         </div>
-
-        <form class="efp-form reveal" id="efpForm" novalidate>
-          <input type="text" id="efpName" placeholder="Name" required>
-          <input type="email" id="efpEmail" placeholder="Email Address" required>
-          <textarea class="efp-form__field--full" id="efpMessage" placeholder="Message" required></textarea>
-          <div class="efp-form__footer">
-            <label class="efp-form__captcha" for="efpCaptcha">14 + 2 = <input type="text" id="efpCaptcha" inputmode="numeric" required></label>
-            <button type="submit" class="efp-form__submit">Submit</button>
-          </div>
-          <p class="efp-form__status" id="efpStatus" role="status"></p>
-        </form>
 
         <div class="efp-socials reveal">
           <a href="#" class="efp-socials__facebook" aria-label="Follow on Facebook">
@@ -208,53 +193,6 @@
     </div>
   </footer>
 
-  <!-- Contact Modal -->
-  <div class="contact-overlay" id="contactOverlay">
-    <div class="contact-modal">
-      <button class="contact-modal__close" aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-      <h2 class="contact-modal__heading">Ready to get started?</h2>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="contact-form__row">
-          <div class="contact-form__group">
-            <label class="contact-form__label" for="contactFirst">First name</label>
-            <input class="contact-form__input" type="text" id="contactFirst" placeholder="Jane">
-          </div>
-          <div class="contact-form__group">
-            <label class="contact-form__label" for="contactLast">Last name</label>
-            <input class="contact-form__input" type="text" id="contactLast" placeholder="Smitherton">
-          </div>
-        </div>
-        <div class="contact-form__group">
-          <label class="contact-form__label" for="contactEmail">Email address</label>
-          <input class="contact-form__input" type="email" id="contactEmail" placeholder="email@janesfakedomain.net" required>
-          <span class="contact-form__error" id="emailError">Please enter a valid email address.</span>
-        </div>
-        <div class="contact-form__group">
-          <label class="contact-form__label" for="contactMessage">Your message</label>
-          <textarea class="contact-form__textarea" id="contactMessage" placeholder="Enter your idea here, I can't wait to see how we can bring it to life!&#10;&#10;Do include as much information as possible and whether you are looking to obtain a quote on the services offered."></textarea>
-        </div>
-        <button type="submit" class="contact-form__submit">Let's collaborate!</button>
-      </form>
-      <div class="contact-form__success" id="contactSuccess">
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__success-ring"></div>
-        <div class="contact-form__success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h3>Message sent!</h3>
-        <p>Thanks for reaching out — we'll be in touch soon.</p>
-      </div>
-    </div>
-  </div>
 
   <script>
     const navToggle = document.getElementById('navToggle');
@@ -291,74 +229,7 @@
 
     reveals.forEach(el => revealObserver.observe(el));
 
-    // Equine Freedomplicity contact form
-    const efpForm = document.getElementById('efpForm');
-    const efpStatus = document.getElementById('efpStatus');
 
-    efpForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('efpName').value.trim();
-      const email = document.getElementById('efpEmail').value.trim();
-      const message = document.getElementById('efpMessage').value.trim();
-      const captcha = document.getElementById('efpCaptcha').value.trim();
-
-      if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        efpStatus.textContent = 'Please fill in all fields with a valid email address.';
-        return;
-      }
-      if (captcha !== '16') {
-        efpStatus.textContent = 'Please check the sum and try again.';
-        return;
-      }
-
-      const body = `${message}\n\n${name}\n${email}`;
-      window.location.href = `mailto:info@equinefreedomplicity.com?subject=${encodeURIComponent('Enquiry from ' + name)}&body=${encodeURIComponent(body)}`;
-      efpStatus.textContent = 'Thanks for your message!';
-      efpForm.reset();
-    });
-
-    // Contact modal
-    const overlay = document.getElementById('contactOverlay');
-    const form = document.getElementById('contactForm');
-    const successMsg = document.getElementById('contactSuccess');
-    const emailInput = document.getElementById('contactEmail');
-    const emailError = document.getElementById('emailError');
-
-    function openContact(e) {
-      e.preventDefault();
-      overlay.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeContact() {
-      overlay.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('.js-contact-trigger').forEach(btn => btn.addEventListener('click', openContact));
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeContact(); });
-    document.querySelector('.contact-modal__close').addEventListener('click', closeContact);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeContact(); });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailVal = emailInput.value.trim();
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
-      emailInput.classList.toggle('is-invalid', !valid);
-      emailError.classList.toggle('is-visible', !valid);
-      if (!valid) { emailInput.focus(); return; }
-      form.querySelector('.contact-form__submit').classList.add('is-loading');
-      form.classList.add('is-sending');
-      setTimeout(() => {
-        form.style.display = 'none';
-        document.querySelector('.contact-modal__heading').style.display = 'none';
-        successMsg.classList.add('is-visible');
-      }, 450);
-    });
-
-    emailInput.addEventListener('input', () => {
-      emailInput.classList.remove('is-invalid');
-      emailError.classList.remove('is-visible');
-    });
   </script>
 
 </body>
