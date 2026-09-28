@@ -25,7 +25,7 @@
           <li><a href="index.html#projects">IRL Projects</a></li>
           <li><a href="photography.html">Photography</a></li>
         </ul>
-        <a href="#" class="nav__cta js-contact-trigger">Get in touch</a>
+        <a href="mailto:info@equinefreedomplicity.com" class="nav__cta">Get in touch</a>
       </div>
     </div>
   </nav>
@@ -181,53 +181,6 @@
     </div>
   </footer>
 
-  <!-- Contact Modal -->
-  <div class="contact-overlay" id="contactOverlay">
-    <div class="contact-modal">
-      <button class="contact-modal__close" aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-      <h2 class="contact-modal__heading">Ready to get started?</h2>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="contact-form__row">
-          <div class="contact-form__group">
-            <label class="contact-form__label" for="contactFirst">First name</label>
-            <input class="contact-form__input" type="text" id="contactFirst" placeholder="Jane">
-          </div>
-          <div class="contact-form__group">
-            <label class="contact-form__label" for="contactLast">Last name</label>
-            <input class="contact-form__input" type="text" id="contactLast" placeholder="Smitherton">
-          </div>
-        </div>
-        <div class="contact-form__group">
-          <label class="contact-form__label" for="contactEmail">Email address</label>
-          <input class="contact-form__input" type="email" id="contactEmail" placeholder="email@janesfakedomain.net" required>
-          <span class="contact-form__error" id="emailError">Please enter a valid email address.</span>
-        </div>
-        <div class="contact-form__group">
-          <label class="contact-form__label" for="contactMessage">Your message</label>
-          <textarea class="contact-form__textarea" id="contactMessage" placeholder="Enter your idea here, I can't wait to see how we can bring it to life!&#10;&#10;Do include as much information as possible and whether you are looking to obtain a quote on the services offered."></textarea>
-        </div>
-        <button type="submit" class="contact-form__submit">Let's collaborate!</button>
-      </form>
-      <div class="contact-form__success" id="contactSuccess">
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__confetti"></div>
-        <div class="contact-form__success-ring"></div>
-        <div class="contact-form__success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h3>Message sent!</h3>
-        <p>Thanks for reaching out — we'll be in touch soon.</p>
-      </div>
-    </div>
-  </div>
 
   <script>
     const navToggle = document.getElementById('navToggle');
@@ -264,49 +217,6 @@
 
     reveals.forEach(el => revealObserver.observe(el));
 
-    // Contact modal
-    const overlay = document.getElementById('contactOverlay');
-    const modal = overlay.querySelector('.contact-modal');
-    const form = document.getElementById('contactForm');
-    const successMsg = document.getElementById('contactSuccess');
-    const emailInput = document.getElementById('contactEmail');
-    const emailError = document.getElementById('emailError');
-
-    function openContact(e) {
-      e.preventDefault();
-      overlay.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeContact() {
-      overlay.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('.js-contact-trigger').forEach(btn => btn.addEventListener('click', openContact));
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeContact(); });
-    document.querySelector('.contact-modal__close').addEventListener('click', closeContact);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeContact(); });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailVal = emailInput.value.trim();
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
-      emailInput.classList.toggle('is-invalid', !valid);
-      emailError.classList.toggle('is-visible', !valid);
-      if (!valid) { emailInput.focus(); return; }
-      form.querySelector('.contact-form__submit').classList.add('is-loading');
-      form.classList.add('is-sending');
-      setTimeout(() => {
-        form.style.display = 'none';
-        document.querySelector('.contact-modal__heading').style.display = 'none';
-        successMsg.classList.add('is-visible');
-      }, 450);
-    });
-
-    emailInput.addEventListener('input', () => {
-      emailInput.classList.remove('is-invalid');
-      emailError.classList.remove('is-visible');
-    });
   </script>
 
 </body>
