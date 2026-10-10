@@ -51,52 +51,92 @@
 }
 
 .story__lead {
-  margin-bottom: clamp(28px, 4vw, 40px);
+  margin-bottom: 0;
 }
 
-.story__figure {
-  margin: 0 0 clamp(28px, 4vw, 40px);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.1);
+.story__open {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+  margin-bottom: clamp(36px, 5vw, 56px);
 }
 
-.story__figure img {
-  display: block;
-  width: 100%;
-  max-height: 720px;
-  object-fit: cover;
-  object-position: center;
+.story__open .story__header {
+  margin-bottom: 20px;
 }
 
 .story__body {
   display: flex;
   flex-direction: column;
   gap: 1.25em;
-  margin-bottom: clamp(28px, 4vw, 40px);
+  margin-bottom: clamp(32px, 5vw, 48px);
 }
 
-.story__gallery {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: clamp(16px, 2vw, 24px);
-  margin-bottom: clamp(28px, 4vw, 40px);
-}
-
-.story__gallery .story__figure {
+/* Photos stay near their real size. These files are small,
+   so a full-width crop only makes them soft. */
+.story__photo {
   margin: 0;
-  height: 100%;
 }
 
-.story__gallery img {
-  height: 100%;
-  min-height: 280px;
-  max-height: 520px;
-  object-position: center;
+.story__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-@media (max-width: 767px) {
-  .story__gallery {
+.story__photo--arch {
+  width: 280px;
+  max-width: 100%;
+  justify-self: end;
+}
+
+.story__photo--arch img {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 28%;
+  border-radius: 999px 999px 0 0;
+}
+
+.story__photos {
+  display: grid;
+  grid-template-columns: minmax(0, 460px) 200px;
+  gap: clamp(20px, 3vw, 36px);
+  align-items: start;
+  justify-content: start;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.story__photo--wide {
+  max-width: 460px;
+}
+
+.story__photo--aside {
+  width: 200px;
+  margin-top: 64px;
+}
+
+.story__photo--aside img {
+  object-position: center 18%;
+}
+
+@media (max-width: 800px) {
+  .story__open,
+  .story__photos {
     grid-template-columns: 1fr;
+  }
+
+  .story__photo--arch,
+  .story__photo--aside,
+  .story__photo--wide {
+    width: min(100%, 320px);
+    max-width: 320px;
+    margin-top: 0;
+    justify-self: start;
+  }
+
+  .story__photo--wide {
+    width: min(100%, 460px);
+    max-width: 460px;
   }
 }

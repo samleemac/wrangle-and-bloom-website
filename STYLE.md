@@ -9,6 +9,7 @@ The live look is the editorial homepage. Do not replace it with the older black-
 - Small uppercase labels, tracked about `0.2em`
 - Pill buttons: solid ink, or a text link with an underline
 - Feature photos in a soft arch (`border-radius: 999px 999px 0 0`)
+- Project stories: place photos in the text, not as full-width blocks. Keep a photo no wider than its file can stay sharp
 - Cream navigation and footer on every editorial page
 - Styles live in `home.css`, applied with `class="home"` on `body`
 - Menu: Equine Freedomplicity, About me, IRL Projects, Photography. Get in touch emails `wrangleandbloom@gmail.com`
