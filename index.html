@@ -22,8 +22,7 @@
       </button>
       <div class="nav__right" id="navMenu">
         <ul class="nav__links">
-          <li><a href="equine.html">Equine Coaching</a></li>
-          <li><a href="#about">About me</a></li>
+          <li><a href="equine.html">Equine Freedomplicity</a></li>
           <li><a href="#projects">IRL Projects</a></li>
           <li><a href="photography.html">Photography</a></li>
         </ul>
@@ -39,8 +38,11 @@
         <img src="Logo/logo.png" alt="Wrangle &amp; Bloom Creative Studio" class="hero__logo-img">
       </div>
 
-      <p class="hero__tagline reveal reveal--d1">Where the ideas can flow and I make them a reality.</p>
-      <a href="#contact" class="hero__cta reveal reveal--d2">Contact me</a>
+      <p class="hero__tagline reveal reveal--d1">Equine coaching, photography, and hands-on projects by Sara de Jong</p>
+      <div class="hero__actions reveal reveal--d2">
+        <a href="about.html" class="hero__cta">Get to know me</a>
+        <a href="#contact" class="hero__cta hero__cta--ghost js-contact-trigger">Email me</a>
+      </div>
     </div>
 
     <div class="hero__image-wrapper reveal reveal--d3">
@@ -53,69 +55,27 @@
     </div>
   </header>
 
-  <!-- IRL Projects -->
-  <section class="section projects" id="projects">
+  <!-- What I do -->
+  <section class="section what" id="what">
     <div class="container">
-      <h2 class="projects__heading reveal">IRL Projects</h2>
-      <div class="projects__grid">
+      <h2 class="what__heading reveal">What I do</h2>
 
-        <a href="vietnam-riding-school.html" class="project-card reveal">
-          <div class="project-card__image-wrapper">
-            <img
-              src="projects/vietnam-interview.png"
-              alt="Sara de Jong being interviewed beside a horse at the riding school in Hanoi"
-              class="project-card__image"
-              loading="lazy"
-            >
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Riding School in Vietnam</h3>
-            <p class="project-card__desc">Set up the first horse riding school in Hanoi, Vietnam.</p>
-            <span class="project-card__more">Read the story</span>
-          </div>
-        </a>
+      <article class="what__item reveal">
+        <p class="what__num">01</p>
+        <div class="what__body">
+          <h3 class="what__title">Equine Coaching</h3>
+          <p class="what__desc">Sessions can be ridden or non-ridden and are tailored to suit anyone. From people who have never been around horses to elite riders at the top of their sport. I can come to you and we can use your horse or if non-ridden you can come to me.</p>
+          <a href="equine.html#efp-programs" class="btn btn--primary">See the programmes</a>
+        </div>
+      </article>
 
-        <article class="project-card reveal reveal--d1">
-          <div class="project-card__image-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=600&q=80"
-              alt="Foal in a field"
-              class="project-card__image"
-              loading="lazy"
-            >
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Sports Horse Breeding ITA x UK</h3>
-            <p class="project-card__desc">A sports horse breeding business based across Italy and the UK.</p>
-          </div>
-        </article>
+      <article class="what__item reveal" id="photography">
+        <p class="what__num">02</p>
+        <div class="what__body">
+          <div class="photography__split">
 
-        <article class="project-card reveal reveal--d2">
-          <div class="project-card__image-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80"
-              alt="Coffee and dessert"
-              class="project-card__image"
-              loading="lazy"
-            >
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Can you guess what's next?</h3>
-            <p class="project-card__desc">Something different... a <em>community</em> x <em>passion</em> project.</p>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Photography -->
-  <section class="section photography" id="photography">
-    <div class="container">
-      <div class="photography__split">
-
-        <div class="photography__content reveal">
-          <h2 class="photography__heading">Photography</h2>
+        <div class="photography__content">
+          <h3 class="what__title">Photography</h3>
 
           <div class="photography__categories">
             <div class="photography__cat">
@@ -147,35 +107,76 @@
           >
         </div>
 
-      </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="what__item reveal" id="projects">
+        <p class="what__num">03</p>
+        <div class="what__body">
+          <h3 class="what__title">IRL Projects</h3>
+          <div class="projects__grid">
+
+            <a href="vietnam-riding-school.html" class="project-card reveal">
+              <div class="project-card__image-wrapper">
+                <img
+                  src="projects/vietnam-interview.png"
+                  alt="Sara de Jong being interviewed beside a horse at the riding school in Hanoi"
+                  class="project-card__image"
+                  loading="lazy"
+                >
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">Riding School in Vietnam</h3>
+                <p class="project-card__desc">Set up the first horse riding school in Hanoi, Vietnam.</p>
+                <span class="project-card__more">Read the story</span>
+              </div>
+            </a>
+
+            <article class="project-card reveal reveal--d1">
+              <div class="project-card__image-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=600&q=80"
+                  alt="Foal in a field"
+                  class="project-card__image"
+                  loading="lazy"
+                >
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">Sports Horse Breeding ITA x UK</h3>
+                <p class="project-card__desc">A sports horse breeding business based across Italy and the UK.</p>
+              </div>
+            </article>
+
+            <article class="project-card reveal reveal--d2">
+              <div class="project-card__image-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80"
+                  alt="Coffee and dessert"
+                  class="project-card__image"
+                  loading="lazy"
+                >
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">Can you guess what's next?</h3>
+                <p class="project-card__desc">Something different... a <em>community</em> x <em>passion</em> project.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <!-- What do I bring to the table? -->
-  <section class="section features" id="about">
+  <section class="section features">
     <div class="container">
       <h2 class="features__heading reveal">What do I bring to the table?</h2>
       <div class="features__grid">
 
         <article class="feature-card reveal">
-          <div class="feature-card__image-wrapper">
-            <img
-              src="sara1.png"
-              alt="Sara de Jong"
-              class="feature-card__image"
-              loading="lazy"
-            >
-          </div>
-          <h3 class="feature-card__title">Who's that girl?</h3>
-          <p class="feature-card__desc">
-            Hi, I'm Sara — the crazy ideas wrangler behind Wrangle &amp; Bloom.
-            I've not only traveled around the world, but also lived in many
-            different cultures. My unique perspective and ability to bring calm
-            to the chaos is why I'm your go-to for your vision.
-          </p>
-        </article>
-
-        <article class="feature-card reveal reveal--d1">
           <div class="feature-card__image-wrapper">
             <img
               src="sara2.png"
@@ -310,8 +311,8 @@
         <div class="footer__col">
           <h4 class="footer__col-title">About me</h4>
           <ul class="footer__col-links">
-            <li><a href="#about">Context</a></li>
-            <li><a href="#about">My Vision</a></li>
+            <li><a href="about.html">Context</a></li>
+            <li><a href="about.html">My Vision</a></li>
           </ul>
         </div>
 
