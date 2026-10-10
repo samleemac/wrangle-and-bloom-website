@@ -412,62 +412,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* =============================================
-   WHAT I DO
-   ============================================= */
-.what__heading {
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: var(--fw-bold);
-  margin-bottom: clamp(8px, 2vw, 16px);
-}
-
-.what__item {
-  display: grid;
-  grid-template-columns: 4.5rem 1fr;
-  gap: clamp(12px, 2vw, 24px);
-  padding: clamp(36px, 5vw, 56px) 0;
-  border-top: 1px solid var(--gray-border);
-}
-
-.what__item:last-child {
-  border-bottom: 1px solid var(--gray-border);
-}
-
-.what__num {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: var(--fw-bold);
-  letter-spacing: -0.03em;
-  color: var(--green);
-  line-height: 1.1;
-}
-
-.what__title {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  margin-bottom: 16px;
-}
-
-.what__desc {
-  max-width: 680px;
-  color: var(--body-color);
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
-
-.what__body .photography__split {
-  align-items: start;
-}
-
-.what__body .projects__grid {
-  margin-top: 8px;
-}
-
-@media (max-width: 700px) {
-  .what__item {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-}
-
-/* =============================================
    IRL PROJECTS
    ============================================= */
 .projects {
