@@ -1,0 +1,14 @@
+---
+description: Pull the latest remote before editing this site, and identify the real design before changing it.
+alwaysApply: true
+---
+
+# Check the latest version first
+
+Before any edit in this repo:
+
+1. Run `git fetch origin` and `git status`.
+2. If the branch tracks `origin` and is behind, run `git pull --ff-only`.
+3. Read the current `home.css` and `index.html` on that commit before changing layout.
+
+Do not redesign from memory or from an older local file. If a preview or deployment URL is the reference, find the commit it was built from (`git log`, `gh`) before editing. Never replace the editorial homepage with an earlier layout.

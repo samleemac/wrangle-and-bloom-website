@@ -560,3 +560,282 @@ a.home-project {
     grid-template-columns: 1fr;
   }
 }
+
+/* =============================================
+   Shared editorial pages
+   About, Equine Freedomplicity, project stories,
+   and print pages. Photography stays separate.
+   ============================================= */
+
+.home h4 {
+  color: var(--h-ink);
+}
+
+.home .footer__col-title {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--h-ink);
+}
+
+.home .footer__col-links a,
+.home .footer__socials a {
+  color: var(--h-muted);
+}
+
+.home .footer__col-links a:hover,
+.home .footer__socials a:hover {
+  color: var(--h-green);
+}
+
+/* About */
+.home .about-page__photo {
+  border-radius: 999px 999px 0 0;
+  box-shadow: none;
+}
+
+.home .about-page__title {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+}
+
+.home .about-page__copy p {
+  color: var(--h-muted);
+}
+
+/* Project stories */
+.home .story__back,
+.home .product__back {
+  color: var(--h-ink);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: transparent;
+}
+
+.home .story__back:hover,
+.home .product__back:hover {
+  color: var(--h-green);
+  background: transparent;
+}
+
+.home .story__meta {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.2em;
+  color: var(--h-muted);
+}
+
+.home .story__title {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+}
+
+.home .story__lead,
+.home .story__body p {
+  color: var(--h-muted);
+}
+
+.home .story__figure {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Equine Freedomplicity — same paper, type, and buttons */
+.home .efp {
+  font-family: var(--ff);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--h-muted);
+}
+
+.home .efp a {
+  color: var(--h-ink);
+}
+
+.home .efp h1,
+.home .efp h2,
+.home .efp .efp-heading {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  color: var(--h-ink);
+  letter-spacing: -0.015em;
+}
+
+.home .efp-container {
+  width: min(100% - 2 * var(--container-padding), var(--container-max));
+}
+
+.home .efp-hero {
+  padding: calc(72px + clamp(48px, 8vw, 96px)) 0 clamp(8px, 2vw, 24px);
+  background: none;
+  color: var(--h-ink);
+}
+
+.home .efp-hero__eyebrow {
+  font-family: var(--ff);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.2em;
+  color: var(--h-muted);
+}
+
+.home .efp-hero__title,
+.home .efp-heading {
+  font-size: clamp(2.75rem, 6vw, 5rem);
+  line-height: 1.02;
+  color: var(--h-ink);
+}
+
+.home .efp-heading {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  margin-bottom: 24px;
+}
+
+.home .efp-fullwidth img {
+  width: min(100% - 2 * var(--container-padding), 720px);
+  margin-inline: auto;
+  aspect-ratio: 4 / 5;
+  max-height: none;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 999px 999px 0 0;
+}
+
+.home .efp-blurb__title {
+  font-family: var(--h-serif);
+  font-weight: 500;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  color: var(--h-ink);
+}
+
+.home .efp-blurb__icon,
+.home .efp-dark .efp-blurb__icon {
+  color: var(--h-green);
+  opacity: 1;
+}
+
+.home .efp-dark,
+.home .efp-contact {
+  background: var(--h-sand);
+  color: var(--h-muted);
+}
+
+.home .efp-dark .efp-heading {
+  color: var(--h-ink);
+}
+
+.home .efp-programs::before {
+  display: none;
+}
+
+.home .efp-form input,
+.home .efp-form textarea {
+  font-family: var(--ff);
+  color: var(--h-ink);
+  background: var(--h-paper);
+  border: 1px solid var(--h-line);
+}
+
+.home .efp-form input::placeholder,
+.home .efp-form textarea::placeholder {
+  color: var(--h-muted);
+}
+
+.home .efp-form input:focus,
+.home .efp-form textarea:focus {
+  background: var(--h-paper);
+  border-color: var(--h-ink);
+}
+
+.home .efp-form__submit {
+  font-family: var(--ff);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--h-paper);
+  background: var(--h-ink);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px 30px;
+}
+
+.home .efp-form__submit:hover {
+  background: var(--h-green);
+  border-color: transparent;
+}
+
+.home .efp-socials a,
+.home .efp-socials__facebook,
+.home .efp-socials__instagram {
+  color: var(--h-paper);
+  background: var(--h-ink);
+  border-radius: var(--radius-pill);
+}
+
+.home .efp-socials a:hover {
+  background: var(--h-green);
+  opacity: 1;
+}
+
+/* Print pages */
+.home .product__title,
+.home .related__heading,
+.home .related-card__title,
+.home .product__price,
+.home .related-card__price {
+  font-family: var(--h-serif);
+  font-weight: 500;
+  color: var(--h-ink);
+}
+
+.home .product__location,
+.home .product__desc,
+.home .related-card__desc {
+  color: var(--h-muted);
+}
+
+.home .product__frame {
+  border-radius: 999px 999px 0 0;
+  box-shadow: none;
+}
+
+.home .product__frame:hover,
+.home .related-card,
+.home .related-card:hover {
+  box-shadow: none;
+  transform: none;
+  background: transparent;
+}
+
+.home .product__add-btn {
+  width: auto;
+  max-width: none;
+  padding: 14px 30px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: var(--h-ink);
+  color: var(--h-paper);
+}
+
+.home .product__add-btn:hover {
+  background: var(--h-green);
+  box-shadow: none;
+  transform: none;
+}
+
+.home .related {
+  background: transparent;
+  border-top: 1px solid var(--h-line);
+}
