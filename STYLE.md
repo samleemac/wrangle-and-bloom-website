@@ -11,7 +11,7 @@ The live look is the editorial homepage. Do not replace it with the older black-
 - Feature photos in a soft arch (`border-radius: 999px 999px 0 0`)
 - Cream navigation and footer on every editorial page
 - Styles live in `home.css`, applied with `class="home"` on `body`
-- Menu: Equine Freedomplicity, About me, IRL Projects, Photography. Get in touch emails `info@equinefreedomplicity.com`
+- Menu: Equine Freedomplicity, About me, IRL Projects, Photography. Get in touch emails `wrangleandbloom@gmail.com`
 
 ## What stays separate
 

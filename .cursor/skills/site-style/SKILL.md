@@ -10,3 +10,5 @@ Before editing, fetch and pull the latest `origin/main`. Read `STYLE.md`, `home.
 The style is the cream editorial homepage: paper `#f4efe7`, ink `#2a2521`, muted `#74695e`, green `#334f40`, Cormorant Garamond headings, Inter body, arch photos, tracked labels, ink pill buttons. Apply it with `body.home` and `home.css` on every page except `photography.html`.
 
 Leave the photography camera viewfinder alone. Keep existing copy. Do not restore the older card homepage.
+
+Every contact address and every form that opens an email uses `wrangleandbloom@gmail.com`.
