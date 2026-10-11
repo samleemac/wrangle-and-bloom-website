@@ -42,39 +42,41 @@
   letter-spacing: -0.02em;
 }
 
-.story__lead,
-.story__body p {
-  max-width: 760px;
-  font-size: clamp(1rem, 1.4vw, 1.125rem);
-  line-height: 1.75;
+/* One reading column. Photos step into the side margins
+   so the paragraphs stay a continuous piece of writing. */
+.story__journey {
+  width: min(72rem, 100%);
+  margin-inline: auto;
+}
+
+.story__column {
+  width: min(40rem, 100%);
+  margin-inline: auto;
+}
+
+.story__column::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.story__journey .story__header {
+  max-width: none;
+  margin-bottom: 1.35rem;
+}
+
+.story__journey p {
+  max-width: none;
+  margin: 0 0 1.15em;
+  font-size: 1.0625rem;
+  line-height: 1.8;
   color: var(--body-color);
 }
 
-.story__lead {
-  margin-bottom: 0;
+.story__journey .story__lead {
+  margin-bottom: 1.15em;
 }
 
-.story__open {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: clamp(28px, 4vw, 64px);
-  align-items: start;
-  margin-bottom: clamp(36px, 5vw, 56px);
-}
-
-.story__open .story__header {
-  margin-bottom: 20px;
-}
-
-.story__body {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25em;
-  margin-bottom: clamp(32px, 5vw, 48px);
-}
-
-/* Photos stay near their real size. These files are small,
-   so a full-width crop only makes them soft. */
 .story__photo {
   margin: 0;
 }
@@ -85,58 +87,106 @@
   height: auto;
 }
 
-.story__photo--arch {
-  width: 280px;
-  max-width: 100%;
-  justify-self: end;
+/* These files are small phone photos. Keep them near the
+   size where a retina screen still looks sharp. */
+.story__photo--interview {
+  float: right;
+  clear: right;
+  width: 168px;
+  margin: 0.15rem 0 0.8rem 1.25rem;
+  shape-margin: 16px;
+}
+
+.story__photo--arena {
+  float: left;
+  clear: left;
+  width: min(200px, 48%);
+  margin: 0.45em 1.25rem 0.65rem 0;
+  shape-margin: 18px;
+}
+
+.story__photo--stable {
+  float: right;
+  clear: right;
+  width: 136px;
+  margin: 2.1em 0 0.75rem 1.15rem;
+  shape-margin: 14px;
 }
 
 .story__photo--arch img {
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  object-position: center 28%;
   border-radius: 999px 999px 0 0;
 }
 
-.story__photos {
-  display: grid;
-  grid-template-columns: minmax(0, 460px) 200px;
-  gap: clamp(20px, 3vw, 36px);
-  align-items: start;
-  justify-content: start;
-  margin-bottom: clamp(36px, 5vw, 56px);
+.story__photo--interview img {
+  object-position: 48% 30%;
 }
 
-.story__photo--wide {
-  max-width: 460px;
+.story__photo--stable img {
+  object-position: center 42%;
 }
 
-.story__photo--aside {
-  width: 200px;
-  margin-top: 64px;
+.story__photo--arch {
+  shape-outside: polygon(
+    0% 42%,
+    14% 16%,
+    50% 0%,
+    86% 16%,
+    100% 42%,
+    100% 100%,
+    0% 100%
+  );
 }
 
-.story__photo--aside img {
-  object-position: center 18%;
+.story__photo--arena img {
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  object-position: center 40%;
+  border-radius: 1.6rem 1.6rem 0 0;
 }
 
-@media (max-width: 800px) {
-  .story__open,
-  .story__photos {
-    grid-template-columns: 1fr;
+.story__photo--arena {
+  shape-outside: inset(0 round 0);
+}
+
+@media (min-width: 1040px) {
+  .story__photo--interview {
+    width: 188px;
+    margin: 0.1rem -7.5rem 1rem 1.15rem;
   }
 
-  .story__photo--arch,
-  .story__photo--aside,
-  .story__photo--wide {
-    width: min(100%, 320px);
-    max-width: 320px;
-    margin-top: 0;
-    justify-self: start;
+  .story__photo--arena {
+    width: 248px;
+    margin: 0.15em 1.65rem 0.45rem -9.25rem;
   }
 
-  .story__photo--wide {
-    width: min(100%, 460px);
-    max-width: 460px;
+  .story__photo--stable {
+    width: 158px;
+    margin: 2.15em -5.5rem 0.8rem 1.05rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .story__photo--interview,
+  .story__photo--arena,
+  .story__photo--stable {
+    float: none;
+    clear: none;
+    shape-outside: none;
+    display: block;
+    margin: 0.35em auto 1.15em;
+  }
+
+  .story__photo--interview {
+    width: 156px;
+  }
+
+  .story__photo--arena {
+    width: min(100%, 268px);
+  }
+
+  .story__photo--stable {
+    width: 132px;
   }
 }

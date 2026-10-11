@@ -640,8 +640,20 @@ a.home-project {
 }
 
 .home .story__lead,
-.home .story__body p {
+.home .story__body p,
+.home .story__journey p {
   color: var(--h-muted);
+}
+
+.home .story__journey .story__title {
+  font-size: clamp(2.6rem, 5vw, 3.75rem);
+}
+
+.home .story__journey .story__lead {
+  font-family: var(--h-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.7rem);
+  line-height: 1.4;
+  color: var(--h-ink);
 }
 
 .home .story__figure {
