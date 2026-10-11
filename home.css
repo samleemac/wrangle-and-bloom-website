@@ -743,12 +743,13 @@ a.home-project {
 }
 
 .home .efp-fullwidth img {
-  width: min(100% - 2 * var(--container-padding), 720px);
+  display: block;
+  width: min(100% - 2 * var(--container-padding), 960px);
   margin-inline: auto;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 2;
   max-height: none;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center;
   border-radius: 999px 999px 0 0;
 }
 
