@@ -53,8 +53,8 @@
     <!-- Session types ribbon -->
     <div class="home-ribbon" aria-label="Session types">
       <div class="home-ribbon__track">
-        <span>Elite Sports Coaching</span><span>Confidence Improvement</span><span>Anxiety Management</span><span>Corporate Team Building</span><span>Resilience Training</span>
-        <span aria-hidden="true">Elite Sports Coaching</span><span aria-hidden="true">Confidence Improvement</span><span aria-hidden="true">Anxiety Management</span><span aria-hidden="true">Corporate Team Building</span><span aria-hidden="true">Resilience Training</span>
+        <span>Elite Sports Coaching</span><span>Confidence Improvement</span><span>Anxiety Management</span><span>Corporate Team Building</span><span>Resilience Training</span><span>Education Development</span><span>Project Management</span><span>Photography</span>
+        <span aria-hidden="true">Elite Sports Coaching</span><span aria-hidden="true">Confidence Improvement</span><span aria-hidden="true">Anxiety Management</span><span aria-hidden="true">Corporate Team Building</span><span aria-hidden="true">Resilience Training</span><span aria-hidden="true">Education Development</span><span aria-hidden="true">Project Management</span><span aria-hidden="true">Photography</span>
       </div>
     </div>
 
@@ -185,12 +185,30 @@
     </section>
 
     <!-- Testimonial -->
-    <section class="home-section home-quote">
+    <section class="home-section home-quote" aria-label="Testimonials">
       <div class="home-container">
-        <blockquote class="reveal">
-          <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
-          <footer>Faye Ranch &middot; Hoof Care Professional</footer>
-        </blockquote>
+        <div class="home-quote__panel reveal">
+          <svg class="home-quote__avatar" viewBox="0 0 64 64" width="72" height="72" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="32" cy="24" r="7" fill="currentColor"/>
+            <path fill="currentColor" d="M16 52c1.2-10 6.8-15 16-15s14.8 5 16 15H16z"/>
+          </svg>
+          <div class="home-quote__slides" aria-live="polite">
+            <blockquote class="home-quote__slide">
+              <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
+              <footer>Faye Ranch &middot; Hoof Care Professional</footer>
+            </blockquote>
+            <blockquote class="home-quote__slide" hidden>
+              <p>Pending</p>
+              <footer>Pending</footer>
+            </blockquote>
+            <blockquote class="home-quote__slide" hidden>
+              <p>Pending</p>
+              <footer>Pending</footer>
+            </blockquote>
+          </div>
+          <button type="button" class="home-btn home-btn--outline home-quote__next">See another</button>
+        </div>
       </div>
     </section>
 
@@ -294,6 +312,18 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
     reveals.forEach(el => revealObserver.observe(el));
+
+    const quoteSlides = document.querySelectorAll('.home-quote__slide');
+    const quoteNext = document.querySelector('.home-quote__next');
+    let quoteIndex = 0;
+
+    if (quoteNext && quoteSlides.length) {
+      quoteNext.addEventListener('click', () => {
+        quoteSlides[quoteIndex].hidden = true;
+        quoteIndex = (quoteIndex + 1) % quoteSlides.length;
+        quoteSlides[quoteIndex].hidden = false;
+      });
+    }
 
   </script>
 

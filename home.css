@@ -187,7 +187,7 @@
 .home-ribbon__track {
   display: flex;
   width: max-content;
-  animation: homeRibbon 40s linear infinite;
+  animation: homeRibbon 56s linear infinite;
 }
 
 .home-ribbon__track span {
@@ -467,6 +467,24 @@ a.home-project {
 }
 
 /* ---------- Testimonial ---------- */
+.home-quote__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-quote__avatar {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 28px;
+  color: var(--h-muted);
+}
+
+.home-quote__slides {
+  width: 100%;
+}
+
 .home-quote blockquote {
   max-width: 900px;
   margin-inline: auto;
@@ -486,6 +504,10 @@ a.home-project {
   font-size: var(--fs-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+.home-quote__next {
+  margin-top: 36px;
 }
 
 /* ---------- Contact ---------- */
