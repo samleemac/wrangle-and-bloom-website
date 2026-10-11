@@ -140,6 +140,14 @@
   padding: calc(72px + clamp(48px, 8vw, 96px)) 0 clamp(56px, 8vw, 96px);
 }
 
+.home-hero__kicker {
+  font-family: var(--h-serif);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--h-ink);
+  margin-bottom: 14px;
+}
+
 .home-hero__title {
   font-family: var(--h-serif);
   font-weight: 400;
@@ -151,10 +159,6 @@
 
 .home-hero__title em {
   color: var(--h-green);
-}
-
-.home-hero__name {
-  white-space: nowrap;
 }
 
 .home-hero__sub {
