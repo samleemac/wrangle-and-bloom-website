@@ -153,6 +153,10 @@
   color: var(--h-green);
 }
 
+.home-hero__name {
+  white-space: nowrap;
+}
+
 .home-hero__sub {
   font-size: clamp(1rem, 1.3vw, 1.125rem);
   max-width: 32em;
@@ -598,13 +602,21 @@ a.home-project {
 .home .about-page__title {
   font-family: var(--h-serif);
   font-weight: 400;
-  font-size: clamp(2.75rem, 5vw, 4.5rem);
+  font-size: clamp(2.25rem, 4.2vw, 3.5rem);
   letter-spacing: -0.015em;
-  line-height: 1.02;
+  line-height: 1.08;
 }
 
 .home .about-page__copy p {
   color: var(--h-muted);
+}
+
+.about-page__cv {
+  margin-top: 28px;
+}
+
+.home-about__cv {
+  margin-top: 6px;
 }
 
 /* Project stories */
