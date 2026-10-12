@@ -87,30 +87,30 @@
   height: auto;
 }
 
-/* These files are small phone photos. Keep them near the
-   size where a retina screen still looks sharp. */
+/* Phone photos, large enough to read the place. Widths stay
+   inside what each file can show sharply. */
 .story__photo--interview {
   float: right;
   clear: right;
-  width: 168px;
-  margin: 0.15rem 0 0.8rem 1.25rem;
-  shape-margin: 16px;
+  width: min(300px, 48%);
+  margin: 0.15rem 0 0.8rem 1.5rem;
+  shape-margin: 18px;
 }
 
 .story__photo--arena {
-  float: left;
-  clear: left;
-  width: min(200px, 48%);
-  margin: 0.45em 1.25rem 0.65rem 0;
-  shape-margin: 18px;
+  float: none;
+  clear: both;
+  width: 100%;
+  margin: 0.35rem 0 1.35rem;
+  shape-outside: none;
 }
 
 .story__photo--stable {
   float: right;
   clear: right;
-  width: 136px;
-  margin: 2.1em 0 0.75rem 1.15rem;
-  shape-margin: 14px;
+  width: min(260px, 46%);
+  margin: 0.2em 0 0.75rem 1.35rem;
+  shape-margin: 16px;
 }
 
 .story__photo--arch img {
@@ -140,30 +140,26 @@
 }
 
 .story__photo--arena img {
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
-  object-position: center 40%;
-  border-radius: 1.6rem 1.6rem 0 0;
-}
-
-.story__photo--arena {
-  shape-outside: inset(0 round 0);
+  object-position: center 42%;
+  border-radius: 999px 999px 0 0;
 }
 
 @media (min-width: 1040px) {
   .story__photo--interview {
-    width: 188px;
-    margin: 0.1rem -7.5rem 1rem 1.15rem;
+    width: 340px;
+    margin: 0.1rem -5.5rem 1rem 1.5rem;
   }
 
   .story__photo--arena {
-    width: 248px;
-    margin: 0.15em 1.65rem 0.45rem -9.25rem;
+    width: calc(100% + 8rem);
+    margin: 0.4rem 0 1.5rem -4rem;
   }
 
   .story__photo--stable {
-    width: 158px;
-    margin: 2.15em -5.5rem 0.8rem 1.05rem;
+    width: 300px;
+    margin: 0.35em -4.5rem 0.8rem 1.35rem;
   }
 }
 
@@ -179,14 +175,15 @@
   }
 
   .story__photo--interview {
-    width: 156px;
+    width: min(100%, 300px);
   }
 
   .story__photo--arena {
-    width: min(100%, 268px);
+    width: 100%;
+    margin-left: 0;
   }
 
   .story__photo--stable {
-    width: 132px;
+    width: min(100%, 260px);
   }
 }

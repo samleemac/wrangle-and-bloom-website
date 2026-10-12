@@ -691,25 +691,33 @@ a.home-project {
   box-shadow: none;
 }
 
-/* Equine Freedomplicity — same paper, type, and buttons */
+/* Equine Freedomplicity — brand type and colour from the style guide.
+   Calligraffitti titles, Poppins body, green #364E42, gold #E6AF2E, grey #BBBBBB.
+   The site nav and footer stay on the cream editorial system. */
 .home .efp {
-  font-family: var(--ff);
-  font-size: var(--fs-base);
+  --efp-green: #364E42;
+  --efp-gold: #E6AF2E;
+  --efp-gray: #BBBBBB;
+  --efp-script: 'Calligraffitti', cursive;
+  --efp-body: 'Poppins', Helvetica, Arial, sans-serif;
+  font-family: var(--efp-body);
+  font-size: 1.0625rem;
   line-height: 1.7;
-  color: var(--h-muted);
+  color: var(--efp-green);
 }
 
 .home .efp a {
-  color: var(--h-ink);
+  color: var(--efp-green);
 }
 
 .home .efp h1,
 .home .efp h2,
 .home .efp .efp-heading {
-  font-family: var(--h-serif);
+  font-family: var(--efp-script);
   font-weight: 400;
-  color: var(--h-ink);
-  letter-spacing: -0.015em;
+  color: var(--efp-green);
+  letter-spacing: 0;
+  line-height: 1.15;
 }
 
 .home .efp-container {
@@ -719,27 +727,28 @@ a.home-project {
 .home .efp-hero {
   padding: calc(72px + clamp(48px, 8vw, 96px)) 0 clamp(8px, 2vw, 24px);
   background: none;
-  color: var(--h-ink);
+  color: var(--efp-green);
 }
 
 .home .efp-hero__eyebrow {
-  font-family: var(--ff);
+  font-family: var(--efp-body);
   font-size: var(--fs-xs);
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.2em;
-  color: var(--h-muted);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--efp-green);
 }
 
-.home .efp-hero__title,
-.home .efp-heading {
-  font-size: clamp(2.75rem, 6vw, 5rem);
-  line-height: 1.02;
-  color: var(--h-ink);
+.home .efp-hero__title {
+  font-size: clamp(3.25rem, 7vw, 5.75rem);
+  line-height: 1.05;
+  color: var(--efp-green);
 }
 
 .home .efp-heading {
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-size: clamp(2.75rem, 5.5vw, 4.25rem);
+  line-height: 1.15;
   margin-bottom: 24px;
+  color: var(--efp-green);
 }
 
 .home .efp-fullwidth img {
@@ -754,26 +763,36 @@ a.home-project {
 }
 
 .home .efp-blurb__title {
-  font-family: var(--h-serif);
-  font-weight: 500;
-  font-size: clamp(1.35rem, 2vw, 1.75rem);
-  color: var(--h-ink);
+  font-family: var(--efp-body);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  color: var(--efp-green);
+}
+
+.home .efp-blurb__text {
+  color: inherit;
 }
 
 .home .efp-blurb__icon,
 .home .efp-dark .efp-blurb__icon {
-  color: var(--h-green);
+  color: var(--efp-gold);
   opacity: 1;
 }
 
 .home .efp-dark,
 .home .efp-contact {
-  background: var(--h-sand);
-  color: var(--h-muted);
+  background: var(--efp-green);
+  color: #f7f4ee;
 }
 
-.home .efp-dark .efp-heading {
-  color: var(--h-ink);
+.home .efp-contact {
+  border-top: 1px solid rgba(230, 175, 46, 0.55);
+}
+
+.home .efp-dark .efp-heading,
+.home .efp-dark .efp-blurb__title,
+.home .efp-dark a {
+  color: #fff;
 }
 
 .home .efp-programs::before {
@@ -782,51 +801,51 @@ a.home-project {
 
 .home .efp-form input,
 .home .efp-form textarea {
-  font-family: var(--ff);
-  color: var(--h-ink);
-  background: var(--h-paper);
-  border: 1px solid var(--h-line);
+  font-family: var(--efp-body);
+  color: var(--efp-green);
+  background: #fff;
+  border: 1px solid var(--efp-gray);
 }
 
 .home .efp-form input::placeholder,
 .home .efp-form textarea::placeholder {
-  color: var(--h-muted);
+  color: rgba(54, 78, 66, 0.55);
 }
 
 .home .efp-form input:focus,
 .home .efp-form textarea:focus {
-  background: var(--h-paper);
-  border-color: var(--h-ink);
+  background: #fff;
+  border-color: var(--efp-gold);
 }
 
 .home .efp-form__submit {
-  font-family: var(--ff);
-  font-size: var(--fs-xs);
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--h-paper);
-  background: var(--h-ink);
+  font-family: var(--efp-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--efp-green);
+  background: var(--efp-gold);
   border: none;
-  border-radius: var(--radius-pill);
-  padding: 14px 30px;
+  border-radius: 3px;
+  padding: 12px 28px;
 }
 
 .home .efp-form__submit:hover {
-  background: var(--h-green);
+  background: #fff;
   border-color: transparent;
 }
 
 .home .efp-socials a,
 .home .efp-socials__facebook,
 .home .efp-socials__instagram {
-  color: var(--h-paper);
-  background: var(--h-ink);
-  border-radius: var(--radius-pill);
+  color: var(--efp-green);
+  background: var(--efp-gold);
+  border-radius: 3px;
 }
 
 .home .efp-socials a:hover {
-  background: var(--h-green);
+  background: #fff;
   opacity: 1;
 }
 
