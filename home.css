@@ -744,6 +744,12 @@ a.home-project {
   color: var(--efp-green);
 }
 
+.home .efp-hero__title img {
+  display: block;
+  width: min(100%, 640px);
+  height: auto;
+}
+
 .home .efp-heading {
   font-size: clamp(2.75rem, 5.5vw, 4.25rem);
   line-height: 1.15;
