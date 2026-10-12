@@ -532,6 +532,18 @@ a.home-project {
   border-color: var(--h-green);
 }
 
+.home-contact__phone {
+  display: block;
+  margin-top: 22px;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.14em;
+  color: var(--h-ink);
+}
+
+.home-contact__phone:hover {
+  color: var(--h-green);
+}
+
 /* Footer keeps the cream paper */
 .home .footer {
   background: var(--h-paper);
