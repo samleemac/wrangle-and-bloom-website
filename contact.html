@@ -35,91 +35,151 @@
   </nav>
 
   <main class="contact-page">
-    <div class="contact-page__inner">
-      <header class="contact-page__intro reveal" id="enquiryIntro">
-        <p class="home-label">Get in touch</p>
-        <h1 class="contact-page__title">Tell me what you're looking for.</h1>
-        <p>A few quick questions so I can get back to you in the way that suits you best. I'll reply within 2 working days.</p>
-      </header>
+    <div class="contact-board">
+      <aside class="contact-side">
+        <a href="index.html"><img class="contact-side__logo" src="Logo/logo.png" alt="Wrangle &amp; Bloom"></a>
 
-      <form class="enquiry reveal reveal--d1" id="enquiryForm" novalidate>
-        <fieldset class="enquiry__group" id="servicesGroup">
-          <legend class="enquiry__label">What services are you interested in booking?</legend>
-          <label class="enquiry__choice"><input type="checkbox" name="services" value="Equine Freedomplicity coaching" id="serviceEquine"> Equine Freedomplicity coaching</label>
-          <label class="enquiry__choice"><input type="checkbox" name="services" value="Photography" id="servicePhotography"> Photography</label>
-          <label class="enquiry__choice"><input type="checkbox" name="services" value="A Wrangle &amp; Bloom project" id="serviceProject"> A Wrangle &amp; Bloom project</label>
-          <label class="enquiry__choice"><input type="checkbox" name="services" value="Other" id="serviceOther"> Other</label>
-          <p class="enquiry__error" id="servicesError">Please choose at least one option.</p>
-        </fieldset>
+        <section>
+          <h2 class="contact-side__title">Chat with me</h2>
+          <p class="contact-side__text">Email me and I'll reply within 2 working days.</p>
+          <a class="contact-side__link" href="mailto:wrangleandbloom@gmail.com">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg>
+            wrangleandbloom@gmail.com
+          </a>
+        </section>
 
-        <div class="enquiry__group" id="otherGroup" hidden>
-          <label class="enquiry__label" for="otherService">What else can I help with?</label>
-          <input class="enquiry__input" type="text" id="otherService" name="other_service">
+        <section>
+          <h2 class="contact-side__title">Call me</h2>
+          <p class="contact-side__text">The best number to reach me on.</p>
+          <a class="contact-side__link" href="tel:+34711273322">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 006 6l1.5-2 4 1.5v3A2 2 0 0118.5 19 15.5 15.5 0 015 5.5a2 2 0 011.5-2z"/></svg>
+            +34 711 273 322
+          </a>
+        </section>
+
+        <section>
+          <h2 class="contact-side__title">Visit me</h2>
+          <p class="contact-side__text">Equine Freedomplicity is based here.</p>
+          <p class="contact-side__link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            Xermade, Galicia, Spain
+          </p>
+        </section>
+
+        <div class="contact-side__socials">
+          <a href="#" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.1 8.5H13V7.1c0-.6.4-.7.7-.7H15V4h-2.2C10.4 4 10 5.6 10 7v1.5H8.5V11H10v9h3v-9h2l.1-2.5z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 9H4v11h2.5V9zM5.2 4A1.6 1.6 0 103.6 5.6 1.6 1.6 0 005.2 4zM20 13.5c0-2.6-1.4-4.3-3.8-4.3a3.3 3.3 0 00-2.9 1.6h-.1V9H11v11h2.5v-5.9c0-1.6.3-3.1 2.2-3.1s1.9 1.7 1.9 3.2V20H20z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.4A4.6 4.6 0 1016.6 12 4.6 4.6 0 0012 7.4zm0 7.6A3 3 0 1115 12a3 3 0 01-3 3zm5.8-8.9a1.1 1.1 0 11-1.1-1.1 1.1 1.1 0 011.1 1.1zM12 4.8c1.5 0 1.7 0 2.3.1a4 4 0 012.6 1 3.7 3.7 0 011 2.6c0 .6.1.8.1 2.3s0 1.7-.1 2.3a4 4 0 01-1 2.6 3.7 3.7 0 01-2.6 1c-.6 0-.8.1-2.3.1s-1.7 0-2.3-.1a4 4 0 01-2.6-1 3.7 3.7 0 01-1-2.6c0-.6-.1-.8-.1-2.3s0-1.7.1-2.3a4 4 0 011-2.6 3.7 3.7 0 012.6-1c.6 0 .8-.1 2.3-.1zm0-1.5c-1.5 0-1.7 0-2.4.1a5.4 5.4 0 00-3.6 1.4 5.2 5.2 0 00-1.4 3.6c-.1.7-.1.9-.1 2.4s0 1.7.1 2.4a5.4 5.4 0 001.4 3.6 5.2 5.2 0 003.6 1.4c.7.1.9.1 2.4.1s1.7 0 2.4-.1a5.4 5.4 0 003.6-1.4 5.2 5.2 0 001.4-3.6c.1-.7.1-.9.1-2.4s0-1.7-.1-2.4a5.4 5.4 0 00-1.4-3.6 5.2 5.2 0 00-3.6-1.4c-.7-.1-.9-.1-2.4-.1z"/></svg>
+          </a>
         </div>
+      </aside>
 
-        <fieldset class="enquiry__group" id="equineGroup" hidden>
-          <legend class="enquiry__label">Which session would you like?</legend>
-          <label class="enquiry__choice"><input type="radio" name="equine_session" value="Half-price taster session (€25)" id="sessionTaster"> Half-price taster session (€25)</label>
-          <label class="enquiry__choice"><input type="radio" name="equine_session" value="One-off session (from €55)" id="sessionOneOff"> One-off session (from €55)</label>
-          <label class="enquiry__choice"><input type="radio" name="equine_session" value="A 10-session programme" id="sessionProgramme"> A 10-session programme</label>
-          <label class="enquiry__choice"><input type="radio" name="equine_session" value="Not sure yet" id="sessionUnsure"> Not sure yet</label>
-        </fieldset>
+      <div class="contact-stage">
+        <form id="enquiryForm" novalidate>
+          <div class="contact-mark" aria-hidden="true"></div>
+          <p class="home-label contact-step__count" id="stepCount">Step 1 of 5</p>
 
-        <div class="enquiry__group">
-          <label class="enquiry__label" for="enquiryName">Your name</label>
-          <input class="enquiry__input" type="text" id="enquiryName" name="name" autocomplete="name" required>
-          <p class="enquiry__error" id="nameError">Please tell me your name.</p>
-        </div>
+          <fieldset class="contact-step" data-step="service">
+            <legend class="contact-step__title">What are you interested in?</legend>
+            <p class="contact-step__hint">Choose one, and I'll come back to you about that.</p>
+            <p class="contact-step__value" data-placeholder="Choose one"></p>
+            <label class="contact-option"><input type="radio" name="service" value="Equine Freedomplicity coaching" id="serviceEquine"> Equine Freedomplicity coaching</label>
+            <label class="contact-option"><input type="radio" name="service" value="Photography" id="servicePhotography"> Photography</label>
+            <label class="contact-option"><input type="radio" name="service" value="A Wrangle &amp; Bloom project" id="serviceProject"> A Wrangle &amp; Bloom project</label>
+            <label class="contact-option"><input type="radio" name="service" value="Other" id="serviceOther"> Other</label>
+            <p class="enquiry__error">Please choose one.</p>
+          </fieldset>
 
-        <fieldset class="enquiry__group" id="methodGroup">
-          <legend class="enquiry__label">What's the best way to contact you?</legend>
-          <label class="enquiry__choice"><input type="radio" name="contact_method" value="Email"> Email</label>
-          <label class="enquiry__choice"><input type="radio" name="contact_method" value="Phone call"> Phone call</label>
-          <label class="enquiry__choice"><input type="radio" name="contact_method" value="WhatsApp"> WhatsApp</label>
-          <p class="enquiry__error" id="methodError">Please choose how you'd like me to reply.</p>
-        </fieldset>
+          <fieldset class="contact-step" data-step="session" hidden>
+            <legend class="contact-step__title">Which session would you like?</legend>
+            <p class="contact-step__hint">The taster is half price, so you can see if it feels right.</p>
+            <p class="contact-step__value" data-placeholder="Choose one"></p>
+            <label class="contact-option"><input type="radio" name="equine_session" value="Half-price taster session (€25)" id="sessionTaster"> Half-price taster session (€25)</label>
+            <label class="contact-option"><input type="radio" name="equine_session" value="One-off session (from €55)" id="sessionOneOff"> One-off session (from €55)</label>
+            <label class="contact-option"><input type="radio" name="equine_session" value="A 10-session programme" id="sessionProgramme"> A 10-session programme</label>
+            <label class="contact-option"><input type="radio" name="equine_session" value="Not sure yet" id="sessionUnsure"> Not sure yet</label>
+            <p class="enquiry__error">Please choose a session.</p>
+          </fieldset>
 
-        <div class="enquiry__group" id="emailGroup" hidden>
-          <label class="enquiry__label" for="enquiryEmail">Your email address</label>
-          <input class="enquiry__input" type="email" id="enquiryEmail" name="email" autocomplete="email">
-          <p class="enquiry__error" id="emailError">Please enter a valid email address.</p>
-        </div>
+          <fieldset class="contact-step" data-step="other" hidden>
+            <legend class="contact-step__title">What else can I help with?</legend>
+            <p class="contact-step__hint">A short note is enough.</p>
+            <input class="contact-step__field" type="text" id="otherService" name="other_service" autocomplete="off">
+            <p class="enquiry__error">Please tell me what you have in mind.</p>
+          </fieldset>
 
-        <div class="enquiry__group" id="phoneGroup" hidden>
-          <label class="enquiry__label" for="enquiryPhone">Your phone number</label>
-          <input class="enquiry__input" type="tel" id="enquiryPhone" name="phone" autocomplete="tel">
-          <p class="enquiry__hint">Please include your country code, for example +34 or +44.</p>
-          <p class="enquiry__error" id="phoneError">Please enter your phone number.</p>
-        </div>
+          <fieldset class="contact-step" data-step="name" hidden>
+            <legend class="contact-step__title">What's your name?</legend>
+            <p class="contact-step__hint">So I know who I'm replying to.</p>
+            <input class="contact-step__field" type="text" id="enquiryName" name="name" autocomplete="name">
+            <p class="enquiry__error">Please tell me your name.</p>
+          </fieldset>
 
-        <div class="enquiry__group" id="timeGroup" hidden>
-          <label class="enquiry__label" for="enquiryTime">When is a good time to call? <span class="enquiry__optional">(optional)</span></label>
-          <select class="enquiry__input" id="enquiryTime" name="best_time">
-            <option value="">Any time</option>
-            <option>Morning</option>
-            <option>Afternoon</option>
-            <option>Evening</option>
-          </select>
-        </div>
+          <fieldset class="contact-step" data-step="method" hidden>
+            <legend class="contact-step__title">How should I get back to you?</legend>
+            <p class="contact-step__hint">Pick the way that suits you best.</p>
+            <p class="contact-step__value" data-placeholder="Choose one"></p>
+            <label class="contact-option"><input type="radio" name="contact_method" value="Email"> Email</label>
+            <label class="contact-option"><input type="radio" name="contact_method" value="Phone call"> Phone call</label>
+            <label class="contact-option"><input type="radio" name="contact_method" value="WhatsApp"> WhatsApp</label>
+            <p class="enquiry__error">Please choose how you'd like me to reply.</p>
+          </fieldset>
 
-        <div class="enquiry__group">
-          <label class="enquiry__label" for="enquiryMessage">Anything else you'd like me to know? <span class="enquiry__optional">(optional)</span></label>
-          <textarea class="enquiry__input enquiry__textarea" id="enquiryMessage" name="message" rows="5"></textarea>
-        </div>
+          <fieldset class="contact-step" data-step="email" hidden>
+            <legend class="contact-step__title">What's your email address?</legend>
+            <p class="contact-step__hint">I'll reply within 2 working days.</p>
+            <input class="contact-step__field" type="email" id="enquiryEmail" name="email" autocomplete="email" inputmode="email">
+            <p class="enquiry__error">Please enter a valid email address.</p>
+          </fieldset>
 
-        <input type="text" name="_honey" class="enquiry__honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <fieldset class="contact-step" data-step="phone" hidden>
+            <legend class="contact-step__title" id="phoneLegend">What's your phone number?</legend>
+            <p class="contact-step__hint">Include your country code, for example +34 or +44.</p>
+            <input class="contact-step__field" type="tel" id="enquiryPhone" name="phone" autocomplete="tel">
+            <p class="enquiry__error">Please enter your phone number.</p>
+          </fieldset>
 
-        <button type="submit" class="home-btn home-btn--solid enquiry__submit" id="enquirySubmit">Send message</button>
-        <p class="enquiry__note">I'll reply within 2 working days. Prefer not to use the form? Email <a href="mailto:wrangleandbloom@gmail.com">wrangleandbloom@gmail.com</a> or call <a href="tel:+34711273322">+34 711 273 322</a>.</p>
-        <p class="enquiry__error enquiry__error--send" id="sendError" role="alert">Sorry, your message didn't send. Please try again, or email <a href="mailto:wrangleandbloom@gmail.com">wrangleandbloom@gmail.com</a> or call <a href="tel:+34711273322">+34 711 273 322</a>.</p>
-      </form>
+          <fieldset class="contact-step" data-step="time" hidden>
+            <legend class="contact-step__title">When is a good time to call?</legend>
+            <p class="contact-step__hint">Any time is fine if you don't mind.</p>
+            <p class="contact-step__value" data-placeholder="Choose one"></p>
+            <label class="contact-option"><input type="radio" name="best_time" value="Any time" checked> Any time</label>
+            <label class="contact-option"><input type="radio" name="best_time" value="Morning"> Morning</label>
+            <label class="contact-option"><input type="radio" name="best_time" value="Afternoon"> Afternoon</label>
+            <label class="contact-option"><input type="radio" name="best_time" value="Evening"> Evening</label>
+          </fieldset>
 
-      <section class="enquiry-done" id="enquiryDone" tabindex="-1" hidden>
-        <p class="home-label">Message received</p>
-        <h2 class="contact-page__title" id="enquiryDoneTitle">Thank you.</h2>
-        <p>Your message has been received. Sara will respond within 2 working days.</p>
-        <a href="index.html" class="home-link">Back to the homepage</a>
-      </section>
+          <fieldset class="contact-step" data-step="message" hidden>
+            <legend class="contact-step__title">Anything else you'd like me to know?</legend>
+            <p class="contact-step__hint">Optional. Share as much or as little as you like.</p>
+            <textarea class="contact-step__field contact-step__field--note" id="enquiryMessage" name="message" rows="5"></textarea>
+            <p class="enquiry__error enquiry__error--send" id="sendError" role="alert">Sorry, your message didn't send. Please try again, or email <a href="mailto:wrangleandbloom@gmail.com">wrangleandbloom@gmail.com</a>.</p>
+          </fieldset>
+
+          <input type="text" name="_honey" class="enquiry__honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="contact-step__nav">
+            <button type="button" class="home-btn home-btn--outline contact-step__back" id="stepBack" hidden>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+              Go back
+            </button>
+            <button type="submit" class="home-btn home-btn--solid" id="stepNext">Next step</button>
+          </div>
+        </form>
+
+        <section class="enquiry-done" id="enquiryDone" tabindex="-1" hidden>
+          <div class="contact-mark" aria-hidden="true"></div>
+          <p class="home-label">Message received</p>
+          <h2 class="enquiry-done__title" id="enquiryDoneTitle">Thank you.</h2>
+          <p>Your message has been received. Sara will respond within 2 working days.</p>
+          <a href="index.html" class="home-link">Back to the homepage</a>
+        </section>
+      </div>
     </div>
   </main>
 
@@ -215,108 +275,122 @@
 
     // Enquiry form. FormSubmit forwards each enquiry to wrangleandbloom@gmail.com.
     const ENQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/wrangleandbloom@gmail.com';
-
     const form = document.getElementById('enquiryForm');
-    const serviceEquine = document.getElementById('serviceEquine');
-    const serviceOther = document.getElementById('serviceOther');
-    const groups = {
-      equine: document.getElementById('equineGroup'),
-      other: document.getElementById('otherGroup'),
-      email: document.getElementById('emailGroup'),
-      phone: document.getElementById('phoneGroup'),
-      time: document.getElementById('timeGroup'),
-    };
+    const nextBtn = document.getElementById('stepNext');
+    const backBtn = document.getElementById('stepBack');
     const nameInput = document.getElementById('enquiryName');
     const emailInput = document.getElementById('enquiryEmail');
     const phoneInput = document.getElementById('enquiryPhone');
-    const submitBtn = document.getElementById('enquirySubmit');
     const sendError = document.getElementById('sendError');
     const done = document.getElementById('enquiryDone');
+    const stepIds = ['service', 'session', 'other', 'name', 'method', 'email', 'phone', 'time', 'message'];
+    let stepIndex = 0;
 
-    function showError(id, show) {
-      document.getElementById(id).classList.toggle('is-visible', show);
+    function checked(name) {
+      return form.querySelector(`input[name="${name}"]:checked`);
     }
 
-    function selectedMethod() {
-      const checked = form.querySelector('input[name="contact_method"]:checked');
-      return checked ? checked.value : '';
+    function valueOf(name) {
+      const input = checked(name);
+      return input ? input.value : '';
     }
 
-    function updateConditionalFields() {
-      groups.equine.hidden = !serviceEquine.checked;
-      groups.other.hidden = !serviceOther.checked;
-      const method = selectedMethod();
-      groups.email.hidden = method !== 'Email';
-      groups.phone.hidden = method !== 'Phone call' && method !== 'WhatsApp';
-      groups.time.hidden = method !== 'Phone call';
-    }
-
-    form.addEventListener('change', updateConditionalFields);
-
-    const preselect = {
-      equine: { service: serviceEquine },
-      taster: { service: serviceEquine, session: 'sessionTaster' },
-      session: { service: serviceEquine, session: 'sessionOneOff' },
-      programme: { service: serviceEquine, session: 'sessionProgramme' },
-      photography: { service: document.getElementById('servicePhotography') },
-      project: { service: document.getElementById('serviceProject') },
-    }[new URLSearchParams(location.search).get('service')];
-
-    if (preselect) {
-      preselect.service.checked = true;
-      if (preselect.session) document.getElementById(preselect.session).checked = true;
-    }
-    updateConditionalFields();
-
-    function validate() {
-      const services = form.querySelectorAll('input[name="services"]:checked');
-      const method = selectedMethod();
-      const checks = [
-        ['servicesError', services.length === 0, serviceEquine],
-        ['nameError', !nameInput.value.trim(), nameInput],
-        ['methodError', !method, form.querySelector('input[name="contact_method"]')],
-        ['emailError', method === 'Email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim()), emailInput],
-        ['phoneError', (method === 'Phone call' || method === 'WhatsApp') && phoneInput.value.replace(/\D/g, '').length < 6, phoneInput],
-      ];
-      let firstInvalid = null;
-      checks.forEach(([id, invalid, field]) => {
-        showError(id, invalid);
-        if (invalid && !firstInvalid) firstInvalid = field;
+    function visibleSteps() {
+      const service = valueOf('service');
+      const method = valueOf('contact_method');
+      return stepIds.filter((id) => {
+        if (id === 'session') return service === 'Equine Freedomplicity coaching';
+        if (id === 'other') return service === 'Other';
+        if (id === 'email') return method === 'Email';
+        if (id === 'phone') return method === 'Phone call' || method === 'WhatsApp';
+        if (id === 'time') return method === 'Phone call';
+        return true;
       });
-      if (firstInvalid) firstInvalid.focus();
-      return !firstInvalid;
     }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      sendError.classList.remove('is-visible');
-      if (!validate()) return;
+    function stepElement(id) {
+      return form.querySelector(`.contact-step[data-step="${id}"]`);
+    }
 
+    function show(index, moveFocus) {
+      const steps = visibleSteps();
+      stepIndex = Math.max(0, Math.min(index, steps.length - 1));
+      const current = steps[stepIndex];
+      stepIds.forEach((id) => {
+        stepElement(id).hidden = id !== current;
+      });
+      document.getElementById('stepCount').textContent = `Step ${stepIndex + 1} of ${steps.length}`;
+      backBtn.hidden = stepIndex === 0;
+      const last = stepIndex === steps.length - 1;
+      nextBtn.textContent = last ? 'Send message' : 'Next step';
+      const legend = document.getElementById('phoneLegend');
+      if (legend) legend.textContent = valueOf('contact_method') === 'WhatsApp' ? "What's your WhatsApp number?" : "What's your phone number?";
+      const value = stepElement(current).querySelector('.contact-step__value');
+      if (value) {
+        const choice = stepElement(current).querySelector('input:checked');
+        value.textContent = choice ? choice.closest('label').innerText.trim() : '';
+      }
+      if (moveFocus) {
+        const field = stepElement(current).querySelector('input, textarea');
+        if (field) field.focus();
+      }
+    }
+
+    function invalid(id) {
+      if (id === 'service') return !valueOf('service');
+      if (id === 'session') return !valueOf('equine_session');
+      if (id === 'other') return !document.getElementById('otherService').value.trim();
+      if (id === 'name') return !nameInput.value.trim();
+      if (id === 'method') return !valueOf('contact_method');
+      if (id === 'email') return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+      if (id === 'phone') return phoneInput.value.replace(/\D/g, '').length < 6;
+      return false;
+    }
+
+    function goNext() {
+      const id = visibleSteps()[stepIndex];
+      const error = stepElement(id).querySelector('.enquiry__error');
+      const failed = invalid(id);
+      if (error) error.classList.toggle('is-visible', failed);
+      if (failed) {
+        const field = stepElement(id).querySelector('input, textarea');
+        if (field) field.focus();
+        return;
+      }
+      if (stepIndex === visibleSteps().length - 1) {
+        send();
+        return;
+      }
+      show(stepIndex + 1, true);
+    }
+
+    async function send() {
+      sendError.classList.remove('is-visible');
       const data = new FormData(form);
-      const method = selectedMethod();
+      const method = valueOf('contact_method');
       const name = nameInput.value.trim();
+      const service = valueOf('service');
       const payload = {
         _subject: `Website enquiry from ${name}`,
         _template: 'table',
         _honey: data.get('_honey') || '',
-        Services: data.getAll('services').join(', '),
+        Service: service,
         Name: name,
         'Best way to contact': method,
       };
-      if (serviceEquine.checked && data.get('equine_session')) payload['Equine session'] = data.get('equine_session');
-      if (serviceOther.checked && data.get('other_service')) payload['Other'] = data.get('other_service');
+      if (service === 'Equine Freedomplicity coaching' && data.get('equine_session')) payload['Equine session'] = data.get('equine_session');
+      if (service === 'Other' && data.get('other_service')) payload.Other = data.get('other_service').trim();
       if (method === 'Email') {
         payload.Email = emailInput.value.trim();
         payload._replyto = payload.Email;
       } else {
         payload.Phone = phoneInput.value.trim();
-        if (method === 'Phone call') payload['Best time to call'] = data.get('best_time') || 'Any time';
+        if (method === 'Phone call') payload['Best time to call'] = valueOf('best_time') || 'Any time';
       }
-      if (data.get('message')) payload.Message = data.get('message');
+      if (data.get('message') && data.get('message').trim()) payload.Message = data.get('message').trim();
 
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
-
+      nextBtn.disabled = true;
+      nextBtn.textContent = 'Sending…';
       try {
         const response = await fetch(ENQUIRY_ENDPOINT, {
           method: 'POST',
@@ -325,18 +399,42 @@
         });
         const result = await response.json().catch(() => ({}));
         if (!response.ok || String(result.success) !== 'true') throw new Error(result.message || 'Send failed');
-
         form.hidden = true;
-        document.getElementById('enquiryIntro').hidden = true;
         document.getElementById('enquiryDoneTitle').textContent = `Thank you, ${name}.`;
         done.hidden = false;
         done.focus();
       } catch (err) {
         sendError.classList.add('is-visible');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send message';
+        nextBtn.disabled = false;
+        nextBtn.textContent = 'Send message';
       }
+    }
+
+    const preselect = {
+      equine: { service: 'serviceEquine' },
+      taster: { service: 'serviceEquine', session: 'sessionTaster' },
+      session: { service: 'serviceEquine', session: 'sessionOneOff' },
+      programme: { service: 'serviceEquine', session: 'sessionProgramme' },
+      photography: { service: 'servicePhotography' },
+      project: { service: 'serviceProject' },
+    }[new URLSearchParams(location.search).get('service')];
+
+    if (preselect) {
+      document.getElementById(preselect.service).checked = true;
+      if (preselect.session) document.getElementById(preselect.session).checked = true;
+    }
+
+    form.addEventListener('change', () => {
+      const error = stepElement(visibleSteps()[stepIndex]).querySelector('.enquiry__error');
+      if (error) error.classList.remove('is-visible');
+      show(stepIndex, false);
     });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      goNext();
+    });
+    backBtn.addEventListener('click', () => show(stepIndex - 1, true));
+    show(0, false);
   </script>
 
 </body>
