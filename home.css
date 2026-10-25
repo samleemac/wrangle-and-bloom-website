@@ -511,8 +511,35 @@ a.home-project {
   text-transform: uppercase;
 }
 
-.home-quote__next {
+.home-quote__nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
   margin-top: 36px;
+}
+
+.home-quote__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--h-ink);
+  border-radius: 50%;
+  color: var(--h-ink);
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.home-quote__arrow:hover {
+  background: var(--h-ink);
+  color: var(--h-paper);
+}
+
+.home-quote__arrow:focus-visible {
+  outline: 2px solid var(--h-green);
+  outline-offset: 3px;
 }
 
 /* ---------- Contact ---------- */
