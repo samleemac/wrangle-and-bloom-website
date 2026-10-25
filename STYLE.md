@@ -12,7 +12,8 @@ The live look is the editorial homepage. Do not replace it with the older black-
 - Project stories read as one piece. Paragraphs follow straight on, and each photo sits in the writing at the moment it belongs, sized so the file stays sharp
 - Cream navigation and footer on every editorial page
 - Styles live in `home.css`, applied with `class="home"` on `body`
-- Menu: About me, Equine Freedomplicity, IRL Projects, Photography. Get in touch emails `wrangleandbloom@gmail.com`
+- Nav name: Sara MacKinley-de Jong
+- Menu: About me, Equine Freedomplicity, Wrangle & Bloom, Photography. Get in touch opens `contact.html`, which sends enquiries to `wrangleandbloom@gmail.com`
 
 ## What stays separate
 
