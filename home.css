@@ -500,6 +500,11 @@ a.home-project {
   margin-bottom: 28px;
 }
 
+.home-quote blockquote.home-quote__slide--long p {
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  line-height: 1.45;
+}
+
 .home-quote blockquote footer {
   font-size: var(--fs-xs);
   letter-spacing: 0.2em;
