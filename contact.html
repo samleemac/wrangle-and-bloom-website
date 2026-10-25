@@ -97,13 +97,20 @@
 
           <fieldset class="contact-step" data-step="session" hidden>
             <legend class="contact-step__title">Which session would you like?</legend>
-            <p class="contact-step__hint">The taster is half price, so you can see if it feels right.</p>
+            <p class="contact-step__hint">The half-price taster is for new clients only. If I travel to you, up to 35km is included, 35km to 80km is an extra €10, and 81km or more we can discuss.</p>
             <p class="contact-step__value" data-placeholder="Choose one"></p>
-            <label class="contact-option"><input type="radio" name="equine_session" value="Half-price taster session (€25)" id="sessionTaster"> Half-price taster session (€25)</label>
+            <label class="contact-option"><input type="radio" name="equine_session" value="Half-price taster session (€25, new clients only)" id="sessionTaster"> Half-price taster session (€25, new clients only)</label>
             <label class="contact-option"><input type="radio" name="equine_session" value="One-off session (from €55)" id="sessionOneOff"> One-off session (from €55)</label>
             <label class="contact-option"><input type="radio" name="equine_session" value="A 10-session programme" id="sessionProgramme"> A 10-session programme</label>
             <label class="contact-option"><input type="radio" name="equine_session" value="Not sure yet" id="sessionUnsure"> Not sure yet</label>
             <p class="enquiry__error">Please choose a session.</p>
+          </fieldset>
+
+          <fieldset class="contact-step" data-step="project" hidden>
+            <legend class="contact-step__title">Describe your project briefly</legend>
+            <p class="contact-step__hint">A few lines on what you have in mind, and where it might lead.</p>
+            <textarea class="contact-step__field contact-step__field--note" id="projectBrief" name="project_brief" rows="4"></textarea>
+            <p class="enquiry__error">Please describe your project briefly.</p>
           </fieldset>
 
           <fieldset class="contact-step" data-step="other" hidden>
@@ -146,12 +153,12 @@
 
           <fieldset class="contact-step" data-step="time" hidden>
             <legend class="contact-step__title">When is a good time to call?</legend>
-            <p class="contact-step__hint">Any time is fine if you don't mind.</p>
+            <p class="contact-step__hint">I can call between 9am and 7pm.</p>
             <p class="contact-step__value" data-placeholder="Choose one"></p>
-            <label class="contact-option"><input type="radio" name="best_time" value="Any time" checked> Any time</label>
-            <label class="contact-option"><input type="radio" name="best_time" value="Morning"> Morning</label>
-            <label class="contact-option"><input type="radio" name="best_time" value="Afternoon"> Afternoon</label>
-            <label class="contact-option"><input type="radio" name="best_time" value="Evening"> Evening</label>
+            <label class="contact-option"><input type="radio" name="best_time" value="Anytime (9am-7pm)" checked> Anytime (9am-7pm)</label>
+            <label class="contact-option"><input type="radio" name="best_time" value="Morning (9am-12pm)"> Morning (9am-12pm)</label>
+            <label class="contact-option"><input type="radio" name="best_time" value="Afternoon (12-5pm)"> Afternoon (12-5pm)</label>
+            <label class="contact-option"><input type="radio" name="best_time" value="Evening (5-7pm)"> Evening (5-7pm)</label>
           </fieldset>
 
           <fieldset class="contact-step" data-step="message" hidden>
@@ -283,7 +290,7 @@
     const phoneInput = document.getElementById('enquiryPhone');
     const sendError = document.getElementById('sendError');
     const done = document.getElementById('enquiryDone');
-    const stepIds = ['service', 'session', 'other', 'name', 'method', 'email', 'phone', 'time', 'message'];
+    const stepIds = ['service', 'session', 'project', 'other', 'name', 'method', 'email', 'phone', 'time', 'message'];
     let stepIndex = 0;
 
     function checked(name) {
@@ -300,6 +307,7 @@
       const method = valueOf('contact_method');
       return stepIds.filter((id) => {
         if (id === 'session') return service === 'Equine Freedomplicity coaching';
+        if (id === 'project') return service === 'A Wrangle & Bloom project';
         if (id === 'other') return service === 'Other';
         if (id === 'email') return method === 'Email';
         if (id === 'phone') return method === 'Phone call' || method === 'WhatsApp';
@@ -339,6 +347,7 @@
     function invalid(id) {
       if (id === 'service') return !valueOf('service');
       if (id === 'session') return !valueOf('equine_session');
+      if (id === 'project') return !document.getElementById('projectBrief').value.trim();
       if (id === 'other') return !document.getElementById('otherService').value.trim();
       if (id === 'name') return !nameInput.value.trim();
       if (id === 'method') return !valueOf('contact_method');
@@ -379,13 +388,14 @@
         'Best way to contact': method,
       };
       if (service === 'Equine Freedomplicity coaching' && data.get('equine_session')) payload['Equine session'] = data.get('equine_session');
+      if (service === 'A Wrangle & Bloom project' && data.get('project_brief')) payload.Project = data.get('project_brief').trim();
       if (service === 'Other' && data.get('other_service')) payload.Other = data.get('other_service').trim();
       if (method === 'Email') {
         payload.Email = emailInput.value.trim();
         payload._replyto = payload.Email;
       } else {
         payload.Phone = phoneInput.value.trim();
-        if (method === 'Phone call') payload['Best time to call'] = valueOf('best_time') || 'Any time';
+        if (method === 'Phone call') payload['Best time to call'] = valueOf('best_time') || 'Anytime (9am-7pm)';
       }
       if (data.get('message') && data.get('message').trim()) payload.Message = data.get('message').trim();
 

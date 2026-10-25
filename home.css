@@ -1231,6 +1231,12 @@ a.home-project {
   margin-top: 0.75em;
 }
 
+.efp-prices__travel {
+  max-width: 720px;
+  margin-top: 28px;
+  line-height: 1.7;
+}
+
 .efp-price__saving {
   font-weight: 600;
   color: var(--efp-green);
