@@ -434,6 +434,14 @@
       if (preselect.session) document.getElementById(preselect.session).checked = true;
     }
 
+    // Pages can pass context (for example the Equine starting-point answers) as ?note=.
+    // It lands in the optional message, where the visitor can read and edit it.
+    const presetNote = new URLSearchParams(location.search).get('note');
+    const messageField = document.getElementById('enquiryMessage');
+    if (presetNote && messageField && !messageField.value) {
+      messageField.value = presetNote.slice(0, 1000) + '\n\n';
+    }
+
     form.addEventListener('change', () => {
       const error = stepElement(visibleSteps()[stepIndex]).querySelector('.enquiry__error');
       if (error) error.classList.remove('is-visible');

@@ -44,6 +44,10 @@
         <h1 class="efp-hero__title reveal reveal--d1">
           <img src="equine/primary-logo.png" alt="Equine Freedomplicity">
         </h1>
+        <div class="efp-hero__start reveal reveal--d2">
+          <a href="#efp-match" class="efp-hero__cta">Find your starting point</a>
+          <span>Three quick questions, then a half-price taster from €25.</span>
+        </div>
       </div>
     </section>
 
@@ -90,6 +94,68 @@
           <div class="efp-blurb reveal reveal--d1">
             <svg class="efp-blurb__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7.5 12.5 10.5 15.5 16.5 9"/></svg>
             <h4 class="efp-blurb__title">Resilience Training</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Starting-point matcher: three questions, a recommended programme, then the taster -->
+    <section class="efp-section efp-match" id="efp-match" aria-labelledby="efpMatchTitle">
+      <div class="efp-container">
+        <div class="efp-match__panel reveal">
+          <div class="efp-match__intro">
+            <h2 class="efp-heading" id="efpMatchTitle">Where do I start?</h2>
+            <p>Answer three quick questions and I'll point you to the session or programme that fits, with nothing to commit to.</p>
+            <div class="efp-match__progress" aria-hidden="true"><span id="efpMatchBar"></span></div>
+            <p class="efp-match__count" id="efpMatchCount">Question 1 of 3</p>
+          </div>
+
+          <div class="efp-match__body" id="efpMatch">
+            <fieldset class="efp-match__step" data-q="goal">
+              <legend>What would you most like to change?</legend>
+              <div class="efp-match__options">
+                <button type="button" data-v="confidence">Feel more confident</button>
+                <button type="button" data-v="anxiety">Feel less anxious</button>
+                <button type="button" data-v="elite">Perform at my best in competition</button>
+                <button type="button" data-v="team">Bring my team closer together</button>
+                <button type="button" data-v="other">Something else</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="efp-match__step" data-q="experience" hidden>
+              <legend>How much time have you spent around horses?</legend>
+              <div class="efp-match__options">
+                <button type="button" data-v="nervous">None, and they make me nervous</button>
+                <button type="button" data-v="some">A little</button>
+                <button type="button" data-v="rider">I ride regularly</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="efp-match__step" data-q="place" hidden>
+              <legend>Where would you like to work?</legend>
+              <div class="efp-match__options">
+                <button type="button" data-v="own">With my own horse, at my yard</button>
+                <button type="button" data-v="hers">With one of your horses, in Xermade</button>
+                <button type="button" data-v="unsure">Not sure yet</button>
+              </div>
+            </fieldset>
+
+            <div class="efp-match__result" id="efpMatchResult" hidden tabindex="-1">
+              <p class="efp-match__label">Your starting point</p>
+              <h3 class="efp-match__pick" id="efpMatchPick"></h3>
+              <p class="efp-match__pick-text" id="efpMatchPickText"></p>
+              <ul class="efp-match__notes">
+                <li id="efpMatchExperience"></li>
+                <li id="efpMatchPlace"></li>
+              </ul>
+              <div class="efp-match__actions">
+                <a href="contact.html?service=taster" class="efp-match__cta" id="efpMatchCta">Book your half-price taster, €25</a>
+                <a href="#efp-prices" class="efp-match__link">See all prices</a>
+              </div>
+              <p class="efp-match__small">Your answers go with your message, so we can start from where you are.</p>
+            </div>
+
+            <button type="button" class="efp-match__back" id="efpMatchBack" hidden>Back</button>
           </div>
         </div>
       </div>
@@ -320,6 +386,95 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
     reveals.forEach(el => revealObserver.observe(el));
+
+    // Starting-point matcher. Each answer moves to the next question; the
+    // result recommends a programme and carries the answers into the enquiry.
+    (() => {
+      const root = document.getElementById('efpMatch');
+      if (!root) return;
+      const steps = [...root.querySelectorAll('.efp-match__step')];
+      const result = document.getElementById('efpMatchResult');
+      const back = document.getElementById('efpMatchBack');
+      const bar = document.getElementById('efpMatchBar');
+      const count = document.getElementById('efpMatchCount');
+      const answers = {};
+      let index = 0;
+
+      const picks = {
+        confidence: ['Self-Confidence Booster Programme', 'Ten sessions, tailored to you (and the horse!) and adapted on the day.'],
+        anxiety: ['Anxiety Dwindling Programme', 'Ten sessions, tailored to you (and the horse!) and adapted on the day.'],
+        elite: ['Elite sports coaching', 'A tailored programme built around you, your horse and your competition goals.'],
+        team: ['Corporate team building', 'A tailored session or programme for your team, built around what you want to achieve together.'],
+        other: ['A tailored programme', 'Built around whatever you would like to work on. The list of services is by no means exhaustive.'],
+      };
+      const experience = {
+        nervous: 'Being scared of horses is normal, and it is something we work on together. Sessions can be completely non-ridden.',
+        some: 'Sessions can be ridden or non-ridden, so we go at the pace that suits you.',
+        rider: 'We can work ridden, non-ridden, or a mix of both.',
+      };
+      const place = {
+        own: 'I come to you and we work with your horse. Up to 35km is included, and 35km to 80km is an extra €10.',
+        hers: 'You come to me in Xermade and work with one of my calm, well-trained horses.',
+        unsure: 'I can come to you, or you can come to me in Xermade. We will work it out together.',
+      };
+
+      function show(i, focus) {
+        index = i;
+        steps.forEach((step, n) => { step.hidden = n !== i; });
+        result.hidden = i < steps.length;
+        back.hidden = i === 0;
+        const done = Math.min(i, steps.length);
+        bar.style.width = `${(done / steps.length) * 100}%`;
+        count.textContent = i < steps.length ? `Question ${i + 1} of ${steps.length}` : 'All done';
+        if (focus) (i < steps.length ? steps[i].querySelector('button') : result).focus({ preventScroll: true });
+      }
+
+      function label(q) {
+        const btn = root.querySelector(`[data-q="${q}"] button[data-v="${answers[q]}"]`);
+        return btn ? btn.textContent.trim() : '';
+      }
+
+      function finish() {
+        const [title, text] = picks[answers.goal];
+        document.getElementById('efpMatchPick').textContent = title;
+        document.getElementById('efpMatchPickText').textContent = text;
+        document.getElementById('efpMatchExperience').textContent = experience[answers.experience];
+        document.getElementById('efpMatchPlace').textContent = place[answers.place];
+
+        const note = [
+          'From the starting-point questions on the Equine page:',
+          `- I would like to: ${label('goal')}`,
+          `- Time around horses: ${label('experience')}`,
+          `- Where: ${label('place')}`,
+          `- Suggested starting point: ${title}`,
+        ].join('\n');
+        const team = answers.goal === 'team';
+        const cta = document.getElementById('efpMatchCta');
+        cta.textContent = team ? 'Ask about team building' : 'Book your half-price taster, €25';
+        cta.href = `contact.html?service=${team ? 'equine' : 'taster'}&note=${encodeURIComponent(note)}`;
+      }
+
+      steps.forEach((step, n) => {
+        step.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+          answers[step.dataset.q] = btn.dataset.v;
+          step.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+          show(n + 1, true);
+          if (n === steps.length - 1) {
+            finish();
+            // On small screens the result can open below the fold; bring its top into view.
+            const top = result.getBoundingClientRect().top;
+            if (top < 80 || top > innerHeight * 0.5) {
+              const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+              scrollTo({ top: scrollY + top - 88, behavior: calm ? 'auto' : 'smooth' });
+            }
+          }
+        }));
+        step.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      });
+
+      back.addEventListener('click', () => show(Math.max(0, index - 1), true));
+      show(0, false);
+    })();
 
   </script>
 
