@@ -35,6 +35,8 @@
     </div>
   </nav>
 
+  <div class="story-progress" aria-hidden="true"><span></span></div>
+
   <article class="story">
     <div class="container">
       <a href="wrangle-and-bloom.html#done" class="story__back reveal">
@@ -47,7 +49,7 @@
       <div class="story__journey">
         <div class="story__column">
           <header class="story__header reveal">
-            <p class="story__meta">Hanoi, Vietnam · 2014</p>
+            <p class="story__meta">Hanoi, Vietnam · 2014<span class="story__read" data-read-time></span></p>
             <h1 class="story__title">Riding School in Vietnam</h1>
           </header>
 
@@ -68,6 +70,42 @@
           <p class="reveal">When I first stepped off the plane, I wanted to get straight back on it! I was no longer somewhere where everything was organised, thought out and deliberate, or even with any resemblance of calm. The best way to describe it is that it felt like there were fires everywhere. I needed to consider the wish list of my client, what I had in front of me, and what I needed to build to ensure I was hitting the brief of [financially] sustainable and scale-able. It is therefore safe to say, that the business plan that I had prepared along with how the next 3 months would go went in the bin. I learned a lot about resilience, adaptability, humility, and compassion. It is one thing needing staff (who don’t speak my language, nor me theirs) to learn how to perform the horse care tasks, it’s another thing trying to show them ‘why’ it is so important. There were moments of frustration (from either side!) but also moments where it suddenly clicked and made sense, building that positive environment for both staff and animals is key. What an experience!</p>
         </div>
       </div>
+
+      <!-- Story close: the template's ending for every story -->
+      <section class="story-close" aria-label="After the story">
+        <div class="story-close__mark reveal" aria-hidden="true"><span></span><em>Sara</em><span></span></div>
+
+        <div class="story-close__lessons">
+          <p class="home-label reveal">What I took from it</p>
+          <ul class="story-close__words">
+            <li class="reveal">Resilience</li>
+            <li class="reveal reveal--d1">Adaptability</li>
+            <li class="reveal reveal--d2">Humility</li>
+            <li class="reveal reveal--d3">Compassion</li>
+          </ul>
+        </div>
+
+        <div class="story-close__now">
+          <div class="reveal">
+            <p class="home-label">Where it is now</p>
+            <p class="story-close__fact">Still going today, and still the first of its kind in Hanoi. It was built to be financially sustainable and scalable, and run by the staff I trained to take over.</p>
+          </div>
+          <blockquote class="story-close__quote reveal reveal--d1">
+            <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
+            <footer>Faye Ranch &middot; Hoof Care Professional</footer>
+          </blockquote>
+        </div>
+
+        <div class="story-close__cta reveal">
+          <p class="home-label">Your turn</p>
+          <h2 class="story-close__heading">Fires everywhere? That&rsquo;s where I start.</h2>
+          <p>Something to set up from scratch, a team that needs to learn the why, or a plan that has already gone in the bin. Tell me about it and I&rsquo;ll bring the calm.</p>
+          <div class="story-close__actions">
+            <a href="contact.html?service=project&amp;note=I%20found%20you%20through%20the%20Hanoi%20riding%20school%20story." class="home-btn story-close__btn">Bring me a project</a>
+            <a href="wrangle-and-bloom.html#done" class="story-close__link">More projects</a>
+          </div>
+        </div>
+      </section>
     </div>
   </article>
 
@@ -162,6 +200,8 @@
     reveals.forEach(el => revealObserver.observe(el));
 
   </script>
+
+  <script src="story.js" defer></script>
 
 </body>
 </html>
