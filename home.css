@@ -938,6 +938,48 @@ a.home-project {
   color: var(--h-green);
 }
 
+.contact-langs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-lang {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--h-ink);
+  font-size: 0.9375rem;
+}
+
+.contact-lang__flag {
+  display: block;
+  width: 22px;
+  height: 15px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(42, 37, 33, 0.16);
+}
+
+.contact-lang__flag svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.contact-lang__name {
+  flex: 1;
+}
+
+.contact-lang__level {
+  color: var(--h-muted);
+  font-size: 0.8125rem;
+}
+
 .contact-side__socials {
   display: flex;
   gap: 10px;
