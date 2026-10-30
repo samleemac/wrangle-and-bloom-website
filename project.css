@@ -1,196 +1,20 @@
-.story {
-  padding-top: calc(72px + clamp(32px, 5vw, 56px));
-  padding-bottom: var(--section-padding);
-}
-
-.story__back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-medium);
-  color: var(--gray);
-  padding: 8px 16px 8px 12px;
-  border-radius: var(--radius-pill);
-  margin-bottom: clamp(28px, 4vw, 40px);
-  margin-left: -12px;
-  transition: color var(--transition), background var(--transition), gap var(--transition);
-}
-
-.story__back:hover {
-  color: var(--black);
-  background: var(--gray-light);
-  gap: 10px;
-}
-
-.story__header {
-  max-width: 760px;
-  margin-bottom: clamp(28px, 4vw, 40px);
-}
-
-.story__meta {
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 12px;
-}
-
-.story__title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: -0.02em;
-}
-
-/* One reading column. Photos step into the side margins
-   so the paragraphs stay a continuous piece of writing. */
-.story__journey {
-  width: min(72rem, 100%);
-  margin-inline: auto;
-}
-
-.story__column {
-  width: min(40rem, 100%);
-  margin-inline: auto;
-}
-
-.story__column::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.story__journey .story__header {
-  max-width: none;
-  margin-bottom: 1.35rem;
-}
-
-.story__journey p {
-  max-width: none;
-  margin: 0 0 1.15em;
-  font-size: 1.0625rem;
-  line-height: 1.8;
-  color: var(--body-color);
-}
-
-.story__journey .story__lead {
-  margin-bottom: 1.15em;
-}
-
-.story__photo {
-  margin: 0;
-}
-
-.story__photo img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Phone photos, large enough to read the place. Widths stay
-   inside what each file can show sharply. */
-.story__photo--interview {
-  float: right;
-  clear: right;
-  width: min(300px, 48%);
-  margin: 0.15rem 0 0.8rem 1.5rem;
-  shape-margin: 18px;
-}
-
-.story__photo--arena {
-  float: none;
-  clear: both;
-  width: 100%;
-  margin: 0.35rem 0 1.35rem;
-  shape-outside: none;
-}
-
-.story__photo--stable {
-  float: right;
-  clear: right;
-  width: min(260px, 46%);
-  margin: 0.2em 0 0.75rem 1.35rem;
-  shape-margin: 16px;
-}
-
-.story__photo--arch img {
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  border-radius: 999px 999px 0 0;
-}
-
-.story__photo--interview img {
-  object-position: 48% 30%;
-}
-
-.story__photo--stable img {
-  object-position: center 42%;
-}
-
-.story__photo--arch {
-  shape-outside: polygon(
-    0% 42%,
-    14% 16%,
-    50% 0%,
-    86% 16%,
-    100% 42%,
-    100% 100%,
-    0% 100%
-  );
-}
-
-.story__photo--arena img {
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  object-position: center 42%;
-  border-radius: 999px 999px 0 0;
-}
-
-@media (min-width: 1040px) {
-  .story__photo--interview {
-    width: 340px;
-    margin: 0.1rem -5.5rem 1rem 1.5rem;
-  }
-
-  .story__photo--arena {
-    width: calc(100% + 8rem);
-    margin: 0.4rem 0 1.5rem -4rem;
-  }
-
-  .story__photo--stable {
-    width: 300px;
-    margin: 0.35em -4.5rem 0.8rem 1.35rem;
-  }
-}
-
-@media (max-width: 700px) {
-  .story__photo--interview,
-  .story__photo--arena,
-  .story__photo--stable {
-    float: none;
-    clear: none;
-    shape-outside: none;
-    display: block;
-    margin: 0.35em auto 1.15em;
-  }
-
-  .story__photo--interview {
-    width: min(100%, 300px);
-  }
-
-  .story__photo--arena {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .story__photo--stable {
-    width: min(100%, 260px);
-  }
-}
-
 /* =============================================
-   STORY TEMPLATE — progress line and the story close
+   STORY TEMPLATE
+   Used by every project story and blog post. Order on the page:
+   1. .story-hero        darkened full-bleed photo with title, facts and figures
+   2. .story-section     numbered label left, writing right (one per chapter)
+   3. .story-bigquote    one line from the story, set very large
+   4. .story-gallery     photos side by side, plain rectangles
+   5. .story-testimonial
+   6. .story-cta         "What's burning?" call to action + next project
+   Colours and type come from the .home tokens in home.css.
    ============================================= */
+
+.story-page {
+  --story-dark: #1d1a17;
+}
+
+/* Reading progress line under the fixed nav */
 .story-progress {
   position: fixed;
   top: 72px;
@@ -213,194 +37,436 @@
   white-space: nowrap;
 }
 
-.story-close {
-  width: min(72rem, 100%);
-  margin: clamp(48px, 7vw, 88px) auto 0;
-}
-
-/* A short rule with Sara's name marks the end of the writing */
-.story-close__mark {
+/* =============================================
+   1. HERO
+   ============================================= */
+.story-hero {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  margin-bottom: clamp(48px, 7vw, 88px);
-}
-
-.story-close__mark span {
-  width: min(120px, 20vw);
-  height: 1px;
-  background: var(--h-line, rgba(42, 37, 33, 0.16));
-}
-
-.story-close__mark em {
-  font-family: var(--h-serif, Georgia, serif);
-  font-size: 1.75rem;
-  color: var(--h-green, #334f40);
-}
-
-/* Lessons, set large */
-.story-close__lessons {
-  text-align: center;
-  margin-bottom: clamp(56px, 8vw, 104px);
-}
-
-.story-close__words {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.story-close__words li {
-  padding: 8px 12px;
-  font-family: var(--h-serif, Georgia, serif);
-  font-style: italic;
-  font-size: clamp(1.9rem, 3.4vw, 3rem);
-  line-height: 1.15;
-  color: var(--h-ink, #2a2521);
-}
-
-.story-close__words li + li {
-  border-left: 1px solid var(--h-line, rgba(42, 37, 33, 0.16));
-}
-
-/* Where it is now + testimonial */
-.story-close__now {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(32px, 6vw, 88px);
-  align-items: start;
-  padding-block: clamp(40px, 6vw, 64px);
-  border-block: 1px solid var(--h-line, rgba(42, 37, 33, 0.16));
-  margin-bottom: clamp(48px, 7vw, 88px);
-}
-
-.home .story-close__fact {
-  font-size: 1.0625rem;
-  line-height: 1.8;
-  color: var(--h-muted, #74695e);
-  max-width: 28em;
-}
-
-.story-close__quote {
-  margin: 0;
-}
-
-.story-close__quote p {
-  font-family: var(--h-serif, Georgia, serif);
-  font-style: italic;
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-  line-height: 1.3;
-  color: var(--h-ink, #2a2521);
-  margin-bottom: 18px;
-}
-
-.story-close__quote footer {
-  font-size: var(--fs-xs);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--h-muted, #74695e);
-}
-
-/* Call to action */
-.story-close__cta {
-  padding: clamp(36px, 6vw, 72px);
-  background: var(--h-green, #334f40);
-  color: rgba(244, 239, 231, 0.84);
-  border-radius: 999px 999px 0 0 / 160px 160px 0 0;
-  text-align: center;
-}
-
-.story-close__cta .home-label {
-  color: rgba(244, 239, 231, 0.7);
-  padding-top: clamp(12px, 3vw, 32px);
-}
-
-.home .story-close__heading {
-  font-family: var(--h-serif, Georgia, serif);
-  font-weight: 400;
-  font-size: clamp(2.25rem, 4.6vw, 3.75rem);
-  line-height: 1.08;
+  align-items: flex-end;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--story-dark);
   color: var(--h-paper, #f4efe7);
-  max-width: 14em;
-  margin: 0 auto 20px;
-  text-wrap: balance;
+  overflow: hidden;
 }
 
-.story-close__cta > p:not(.home-label) {
-  max-width: 34em;
-  margin: 0 auto 32px;
-  font-size: 1.0625rem;
-  line-height: 1.7;
+.story-hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.story-close__actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+/* Darkens the whole photo, heavier at the foot where the figures sit */
+.story-hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 17, 14, 0.62) 0%, rgba(20, 17, 14, 0.5) 38%, rgba(20, 17, 14, 0.86) 100%);
+}
+
+.story-hero__inner {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(72px + clamp(28px, 5vw, 64px));
+  padding-bottom: clamp(24px, 4vw, 40px);
+}
+
+.home .story-hero__back {
+  display: inline-flex;
   align-items: center;
-  gap: 18px 32px;
-}
-
-.home .story-close__btn {
-  background: var(--h-paper, #f4efe7);
-  color: var(--h-ink, #2a2521);
-}
-
-.home .story-close__btn:hover {
-  background: var(--h-sand, #e9e0d3);
-}
-
-.home .story-close__link {
+  gap: 8px;
   font-size: var(--fs-xs);
   font-weight: var(--fw-medium);
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: rgba(244, 239, 231, 0.82);
+  transition: color var(--transition), gap var(--transition);
+}
+
+.home .story-hero__back:hover {
+  color: var(--h-paper);
+  gap: 10px;
+}
+
+.story-hero__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: end;
+  margin-top: clamp(28px, 5vh, 72px);
+}
+
+.story-hero__kicker {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e9e0d3;
+}
+
+.home .story-hero__title {
+  margin-top: 14px;
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(3.25rem, 7.4vw, 6.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--h-paper);
+  max-width: 12ch;
+  text-wrap: balance;
+}
+
+.story-hero__summary {
+  margin-top: 24px;
+  max-width: 26em;
+  font-family: var(--h-serif);
+  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+  line-height: 1.3;
+  color: rgba(244, 239, 231, 0.94);
+}
+
+.story-facts {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.story-facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(244, 239, 231, 0.28);
+}
+
+.story-facts div:last-child {
+  border-bottom: 1px solid rgba(244, 239, 231, 0.28);
+}
+
+.story-facts dt {
+  color: #d9d2c5;
+}
+
+.story-facts dd {
+  margin: 0;
+  text-align: right;
   color: var(--h-paper, #f4efe7);
+}
+
+.home .story-hero__btn {
+  margin-top: 24px;
+  background: var(--h-paper);
+  color: var(--h-ink);
+}
+
+.home .story-hero__btn:hover {
+  background: var(--h-sand);
+}
+
+.story-figures {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: clamp(40px, 6vh, 64px) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(244, 239, 231, 0.7);
+}
+
+.story-figures li {
+  padding: 22px 24px 8px 0;
+}
+
+.story-figures__num {
+  display: block;
+  font-family: var(--h-serif, Georgia, serif);
+  font-size: clamp(2.75rem, 4.4vw, 4rem);
+  line-height: 1;
+  color: var(--h-paper, #f4efe7);
+}
+
+.story-figures__label {
+  display: block;
+  margin-top: 8px;
+  max-width: 16em;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #d9d2c5;
+}
+
+.story-hero__credit {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  color: rgba(244, 239, 231, 0.62);
+  text-align: right;
+}
+
+/* =============================================
+   2. STORY SECTIONS
+   ============================================= */
+.story-wide {
+  margin: clamp(48px, 6vw, 80px) 0 0;
+}
+
+.story-wide img {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+}
+
+.story-body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 6vw, 80px);
+  padding-top: clamp(56px, 7vw, 96px);
+}
+
+.story-section {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) minmax(0, 700px);
+  gap: 12px clamp(32px, 6vw, 96px);
+}
+
+.home .story-section__label {
+  font-family: var(--ff);
+  font-size: 0.8125rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  color: var(--h-ink);
+}
+
+.story-section__label span {
+  color: var(--h-green, #334f40);
+  margin-right: 10px;
+}
+
+.home .story-section__text p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--h-ink);
+}
+
+.story-section__text p + p {
+  margin-top: 22px;
+}
+
+.home .story-section__text .story-section__lead {
+  font-family: var(--h-serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.125rem);
+  line-height: 1.25;
+}
+
+.story-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.story-pills li {
+  padding: 6px 16px;
+  border: 1px solid rgba(42, 37, 33, 0.3);
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 0.875rem;
+  color: var(--h-ink, #2a2521);
+}
+
+/* =============================================
+   3. BIG QUOTE — one line from the story, set large
+   ============================================= */
+.story-bigquote {
+  margin: clamp(64px, 9vw, 128px) 0;
+}
+
+.home .story-bigquote p {
+  max-width: 16ch;
+  font-family: var(--h-serif);
+  font-style: italic;
+  font-size: clamp(2.5rem, 6.4vw, 5.75rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--h-green);
+  text-wrap: balance;
+}
+
+/* =============================================
+   4. GALLERY
+   ============================================= */
+.story-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.story-gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+/* =============================================
+   5. TESTIMONIAL
+   ============================================= */
+.story-testimonial {
+  margin-top: clamp(64px, 8vw, 112px);
+  background: var(--h-sand, #e9e0d3);
+}
+
+.story-testimonial blockquote {
+  margin-block: 0;
+  padding-block: clamp(56px, 7vw, 96px);
+}
+
+.home .story-testimonial p {
+  max-width: 22em;
+  font-family: var(--h-serif);
+  font-size: clamp(1.9rem, 3.8vw, 3.25rem);
+  line-height: 1.15;
+  color: var(--h-ink);
+}
+
+.story-testimonial footer {
+  margin-top: 20px;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--h-ink, #2a2521);
+}
+
+/* =============================================
+   6. CALL TO ACTION + NEXT PROJECT
+   ============================================= */
+.story-cta {
+  background: var(--h-green, #334f40);
+  color: #d9d2c5;
+}
+
+.story-cta__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+  gap: 40px clamp(40px, 6vw, 96px);
+  align-items: end;
+  padding-block: clamp(56px, 7vw, 96px);
+}
+
+.story-cta .home-label {
+  color: #d9d2c5;
+}
+
+.home .story-cta__heading {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  color: var(--h-paper);
+  max-width: 15ch;
+  margin-bottom: 28px;
+  text-wrap: balance;
+}
+
+.story-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 32px;
+  margin-top: 28px;
+}
+
+.home .story-cta__btn {
+  background: var(--h-paper);
+  color: var(--h-ink);
+}
+
+.home .story-cta__btn:hover {
+  background: var(--h-sand);
+}
+
+.home .story-cta__link {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--h-paper);
   padding-bottom: 4px;
   border-bottom: 1px solid rgba(244, 239, 231, 0.5);
 }
 
-.home .story-close__link:hover {
-  border-color: var(--h-paper, #f4efe7);
+.home .story-cta__link:hover {
+  border-color: var(--h-paper);
+}
+
+.home .story-next {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  border: 1px solid rgba(244, 239, 231, 0.35);
+  color: var(--h-paper);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.home .story-next:hover {
+  border-color: var(--h-paper);
+  background: rgba(244, 239, 231, 0.05);
+}
+
+.story-next__label {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #d9d2c5;
+}
+
+.story-next__title {
+  font-family: var(--h-serif, Georgia, serif);
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.story-next__text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #d9d2c5;
 }
 
 /* =============================================
-   FIRE TRIAGE — the story close asks what is burning
-   Embers glow along the base of the panel until the visitor picks
-   a situation; then they die down to calm. That is the story's arc
-   (chaos, then calm) played out in the call to action.
+   FIRE TRIAGE — "What's burning?"
+   Embers glow along the foot of the call to action until the visitor
+   picks a situation, then die down to calm.
    ============================================= */
-.story-close__cta[data-fire] {
+[data-fire] {
   position: relative;
   overflow: hidden;
   isolation: isolate;
 }
 
-.story-close__cta[data-fire] > * {
+[data-fire] > * {
   position: relative;
   z-index: 1;
 }
 
-.story-close__cta[data-fire]::before {
+[data-fire]::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 42% at 50% 112%, rgba(230, 175, 46, 0.38), transparent 70%),
-    radial-gradient(ellipse 34% 30% at 14% 108%, rgba(214, 112, 58, 0.32), transparent 70%),
-    radial-gradient(ellipse 34% 30% at 87% 108%, rgba(214, 112, 58, 0.28), transparent 70%);
-  opacity: 1;
+    radial-gradient(ellipse 60% 42% at 50% 112%, rgba(230, 175, 46, 0.36), transparent 70%),
+    radial-gradient(ellipse 34% 30% at 14% 108%, rgba(214, 112, 58, 0.3), transparent 70%),
+    radial-gradient(ellipse 34% 30% at 87% 108%, rgba(214, 112, 58, 0.26), transparent 70%);
   transform-origin: 50% 100%;
   transition: opacity 1.6s ease;
   animation: fire-flicker 3.4s ease-in-out infinite alternate;
 }
 
-.story-close__cta[data-fire].is-calm::before {
+[data-fire].is-calm::before {
   opacity: 0;
 }
 
@@ -411,19 +477,17 @@
 }
 
 .fire__ask {
-  margin-bottom: 18px !important;
-  font-size: 0.9375rem !important;
+  margin-bottom: 16px;
+  font-size: 0.9375rem;
   letter-spacing: 0.04em;
-  color: rgba(244, 239, 231, 0.7);
+  color: #d9d2c5;
 }
 
 .fire__choices {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  max-width: 46rem;
-  margin: 0 auto 28px;
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
 .fire__choices[hidden],
@@ -436,11 +500,11 @@
   align-items: baseline;
   gap: 8px;
   padding: 11px 20px;
-  border: 1px solid rgba(244, 239, 231, 0.38);
+  border: 1px solid rgba(244, 239, 231, 0.42);
   border-radius: var(--radius-pill, 9999px);
   background: rgba(244, 239, 231, 0.04);
   font-family: var(--h-serif, Georgia, serif);
-  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
   line-height: 1.2;
   color: var(--h-paper, #f4efe7);
   cursor: pointer;
@@ -460,7 +524,8 @@
 }
 
 .fire__choice:focus-visible,
-.story-close__cta[data-fire] .story-close__btn:focus-visible {
+.story-cta a:focus-visible,
+.story-hero a:focus-visible {
   outline: 2px solid var(--h-paper, #f4efe7);
   outline-offset: 3px;
 }
@@ -476,7 +541,10 @@
 }
 
 .fire__reply {
-  min-height: 5.2em;
+  max-width: 36em;
+  min-height: 3.6em;
+  font-size: 1.0625rem;
+  line-height: 1.7;
   transition: opacity 0.35s ease;
 }
 
@@ -484,18 +552,35 @@
   opacity: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .story-close__cta[data-fire]::before {
-    animation: none;
-    transition: none;
+/* =============================================
+   RESPONSIVE + MOTION
+   ============================================= */
+@media (max-width: 900px) {
+  .story-hero__top,
+  .story-cta__inner {
+    grid-template-columns: 1fr;
   }
-  .fire__choice,
-  .fire__reply {
-    transition: none;
+  .story-hero__facts {
+    max-width: 420px;
+  }
+  .story-figures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .story-figures li:nth-child(n + 3) {
+    border-top: 1px solid rgba(244, 239, 231, 0.28);
+  }
+  .story-section {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 600px) {
+  .story-wide img {
+    aspect-ratio: 4 / 3;
+  }
+  .story-gallery {
+    grid-template-columns: 1fr;
+  }
   .fire__choices {
     flex-direction: column;
     align-items: stretch;
@@ -505,30 +590,20 @@
     text-align: center;
   }
   .fire__reply {
-    min-height: 7.5em;
+    min-height: 6.8em;
+  }
+  .story-hero__credit {
+    text-align: left;
   }
 }
 
-@media (max-width: 1000px) and (min-width: 761px) {
-  .story-close__words li {
-    font-size: 1.75rem;
+@media (prefers-reduced-motion: reduce) {
+  [data-fire]::before {
+    animation: none;
+    transition: none;
   }
-}
-
-@media (max-width: 760px) {
-  .story-close__now {
-    grid-template-columns: 1fr;
-  }
-  .story-close__cta {
-    border-radius: 999px 999px 0 0 / 90px 90px 0 0;
-  }
-  .story-close__words {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .story-close__words li:nth-child(3) {
-    border-left: 0;
-  }
-  .story-close__words li:nth-child(n + 3) {
-    border-top: 1px solid var(--h-line, rgba(42, 37, 33, 0.16));
+  .fire__choice,
+  .fire__reply {
+    transition: none;
   }
 }

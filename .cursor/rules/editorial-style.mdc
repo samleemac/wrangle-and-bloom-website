@@ -9,7 +9,7 @@ The site style is the cream editorial homepage in `home.css` and `index.html`. R
 
 - Paper `#f4efe7`, ink `#2a2521`, muted `#74695e`, green `#334f40`
 - Cormorant Garamond for headings, Inter for body and UI
-- Arch-cropped photos, tracked uppercase labels, ink pill buttons
+- Arch-cropped photos (homepage and section pages only; stories use the story template in project.css with plain rectangular photos), tracked uppercase labels, ink pill buttons
 - New pages use `body.home` and load `home.css` after `styles.css`
 - Keep the copy. Do not invent a new layout, and do not restore the older Inter card homepage
 

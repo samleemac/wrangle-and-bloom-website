@@ -8,8 +8,8 @@ The live look is the editorial homepage. Do not replace it with the older black-
 - Display type: Cormorant Garamond. Body and UI: Inter
 - Small uppercase labels, tracked about `0.2em`
 - Pill buttons: solid ink, or a text link with an underline
-- Feature photos in a soft arch (`border-radius: 999px 999px 0 0`)
-- Project stories read as one piece. Paragraphs follow straight on, and each photo sits in the writing at the moment it belongs, sized so the file stays sharp
+- Feature photos in a soft arch (`border-radius: 999px 999px 0 0`) on the homepage and section pages, not on stories
+- Project stories and blog posts use the story template in `project.css` (`vietnam-riding-school.html` is the reference): a darkened full-bleed hero photo carrying the title, facts table and key figures; left-aligned sections with a numbered label; one big italic quote lifted from the story (`.story-bigquote`); plain rectangular photos; testimonial; the "What's burning?" call to action with a next-project card. No arches, no centred text column
 - Cream navigation and footer on every editorial page
 - Styles live in `home.css`, applied with `class="home"` on `body`
 - Nav name: Sara MacKinley-de Jong

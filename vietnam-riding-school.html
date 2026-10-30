@@ -37,71 +37,128 @@
 
   <div class="story-progress" aria-hidden="true"><span></span></div>
 
-  <article class="story">
-    <div class="container">
-      <a href="wrangle-and-bloom.html#done" class="story__back reveal">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-        Back to projects
-      </a>
+  <!-- =============================================
+       STORY TEMPLATE
+       1. Hero: darkened full-bleed photo carrying the title, facts and key figures
+       2. Story sections: numbered label on the left, writing on the right
+       3. Big quote: one line from the story, set large (.story-bigquote)
+       4. Testimonial, then the "What's burning?" call to action and next project
+       ============================================= -->
+  <article class="story-page">
 
-      <div class="story__journey">
-        <div class="story__column">
-          <header class="story__header reveal">
-            <p class="story__meta">Hanoi, Vietnam · 2014<span class="story__read" data-read-time></span></p>
-            <h1 class="story__title">Riding School in Vietnam</h1>
-          </header>
+    <header class="story-hero">
+      <img class="story-hero__img" src="projects/vietnam-hero.jpg" alt="" fetchpriority="high">
+      <div class="story-hero__shade" aria-hidden="true"></div>
+      <div class="container story-hero__inner">
+        <a href="wrangle-and-bloom.html#done" class="story-hero__back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Back to projects
+        </a>
 
-          <figure class="story__photo story__photo--arch story__photo--interview">
-            <img src="projects/vietnam-interview.png" alt="Sara MacKinley-de Jong being interviewed beside a horse at the riding school in Hanoi">
-          </figure>
-          <p class="story__lead reveal">A riding school that is still going today, the first of its kind in Hanoi, Vietnam back in 2014. I was contracted to set up the first riding school there and to ensure that the business was not only sustainable but also scale-able.</p>
-          <p class="reveal">At the age of 19 I took on the challenge because what else would you want to be doing at that age? I had worked in the industry for a few years now and around the world (from Belgium, USA, to Australia) and was ready to put my skills and knowledge to the test. The brief was simple, set up the first riding school in Hanoi, Vietnam. Remember, at this point in time (2014) Google Translate or things like that were not readily available... only a small oversight on my part that I couldn’t speak Vietnamese (my limited Chinese would not get me very far here!).</p>
-
-          <figure class="story__photo story__photo--arena">
-            <img src="projects/vietnam-arena.png" alt="Sandy riding arena in Hanoi with horses, a thatched shelter and palm trees">
-          </figure>
-          <p class="reveal">I had a 3 month time-frame to get it set up and running, my client wanted to have clients walking through the door yesterday, there were horses that had never been sat on before, others had foals at foot, some had old injuries that inhibited their ability to be sound, and finally there were some that had only ever had monkeys sat on them (yes, for real! They were bought from the circus)!</p>
-
-          <figure class="story__photo story__photo--arch story__photo--stable">
-            <img src="projects/vietnam-stable.jpg" alt="A simple stable building under construction beside dense greenery">
-          </figure>
-          <p class="reveal">When I first stepped off the plane, I wanted to get straight back on it! I was no longer somewhere where everything was organised, thought out and deliberate, or even with any resemblance of calm. The best way to describe it is that it felt like there were fires everywhere. I needed to consider the wish list of my client, what I had in front of me, and what I needed to build to ensure I was hitting the brief of [financially] sustainable and scale-able. It is therefore safe to say, that the business plan that I had prepared along with how the next 3 months would go went in the bin. I learned a lot about resilience, adaptability, humility, and compassion. It is one thing needing staff (who don’t speak my language, nor me theirs) to learn how to perform the horse care tasks, it’s another thing trying to show them ‘why’ it is so important. There were moments of frustration (from either side!) but also moments where it suddenly clicked and made sense, building that positive environment for both staff and animals is key. What an experience!</p>
+        <div class="story-hero__top">
+          <div class="story-hero__intro">
+            <p class="story-hero__kicker">Case study<span class="story__read" data-read-time></span></p>
+            <h1 class="story-hero__title">Riding School in Vietnam</h1>
+            <p class="story-hero__summary">At 19 I was contracted to set up the first riding school in Hanoi, and to make sure it was financially sustainable and scalable.</p>
+          </div>
+          <div class="story-hero__facts">
+            <dl class="story-facts">
+              <div><dt>Location</dt><dd>Hanoi, Vietnam</dd></div>
+              <div><dt>Year</dt><dd>2014</dd></div>
+              <div><dt>Role</dt><dd>Set-up and staff training</dd></div>
+              <div><dt>Status</dt><dd>Still running</dd></div>
+            </dl>
+            <a href="contact.html?service=project&amp;note=I%20found%20you%20through%20the%20Hanoi%20riding%20school%20story." class="home-btn story-hero__btn">Bring me a project</a>
+          </div>
         </div>
+
+        <ul class="story-figures" aria-label="Key facts">
+          <li><span class="story-figures__num">3</span><span class="story-figures__label">months to get it set up and running</span></li>
+          <li><span class="story-figures__num">1st</span><span class="story-figures__label">riding school of its kind in Hanoi</span></li>
+          <li><span class="story-figures__num">19</span><span class="story-figures__label">my age when I took it on</span></li>
+          <li><span class="story-figures__num">Today</span><span class="story-figures__label">still running, by the staff I trained</span></li>
+        </ul>
+
+        <p class="story-hero__credit">Moc Chau, northern Vietnam. Photo by Sara.</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <figure class="story-wide reveal">
+        <img src="projects/vietnam-arena.png" alt="Sandy riding arena in Hanoi with horses, a thatched shelter and palm trees">
+      </figure>
+
+      <div class="story-body">
+        <section class="story-section reveal">
+          <h2 class="story-section__label"><span>01</span> The brief</h2>
+          <div class="story-section__text">
+            <p>At the age of 19 I took on the challenge because what else would you want to be doing at that age? I had worked in the industry for a few years now and around the world (from Belgium, USA, to Australia) and was ready to put my skills and knowledge to the test. The brief was simple, set up the first riding school in Hanoi, Vietnam. Remember, at this point in time (2014) Google Translate or things like that were not readily available... only a small oversight on my part that I couldn’t speak Vietnamese (my limited Chinese would not get me very far here!).</p>
+          </div>
+        </section>
+
+        <section class="story-section reveal">
+          <h2 class="story-section__label"><span>02</span> What I walked into</h2>
+          <div class="story-section__text">
+            <p>I had a 3 month time-frame to get it set up and running, my client wanted to have clients walking through the door yesterday, there were horses that had never been sat on before, others had foals at foot, some had old injuries that inhibited their ability to be sound, and finally there were some that had only ever had monkeys sat on them (yes, for real! They were bought from the circus)!</p>
+            <p>When I first stepped off the plane, I wanted to get straight back on it! I was no longer somewhere where everything was organised, thought out and deliberate, or even with any resemblance of calm. The best way to describe it is that it felt like there were fires everywhere. I needed to consider the wish list of my client, what I had in front of me, and what I needed to build to ensure I was hitting the brief of [financially] sustainable and scale-able.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Big quote: one line lifted from the story above -->
+    <blockquote class="story-bigquote reveal">
+      <div class="container">
+        <p>&ldquo;&hellip;some that had only ever had monkeys sat on them.&rdquo;</p>
+      </div>
+    </blockquote>
+
+    <div class="container">
+      <div class="story-gallery reveal">
+        <img src="projects/vietnam-interview.png" alt="Sara MacKinley-de Jong being interviewed beside a horse at the riding school in Hanoi">
+        <img src="projects/vietnam-stable.jpg" alt="A simple stable building under construction beside dense greenery">
       </div>
 
-      <!-- Story close: the template's ending for every story -->
-      <section class="story-close" aria-label="After the story">
-        <div class="story-close__mark reveal" aria-hidden="true"><span></span><em>Sara</em><span></span></div>
-
-        <div class="story-close__lessons">
-          <p class="home-label reveal">What I took from it</p>
-          <ul class="story-close__words">
-            <li class="reveal">Resilience</li>
-            <li class="reveal reveal--d1">Adaptability</li>
-            <li class="reveal reveal--d2">Humility</li>
-            <li class="reveal reveal--d3">Compassion</li>
-          </ul>
-        </div>
-
-        <div class="story-close__now">
-          <div class="reveal">
-            <p class="home-label">Where it is now</p>
-            <p class="story-close__fact">Still going today, and still the first of its kind in Hanoi. It was built to be financially sustainable and scalable, and run by the staff I trained to take over.</p>
+      <div class="story-body">
+        <section class="story-section reveal">
+          <h2 class="story-section__label"><span>03</span> What I did</h2>
+          <div class="story-section__text">
+            <p>It is therefore safe to say, that the business plan that I had prepared along with how the next 3 months would go went in the bin. I learned a lot about resilience, adaptability, humility, and compassion.</p>
+            <p>It is one thing needing staff (who don’t speak my language, nor me theirs) to learn how to perform the horse care tasks, it’s another thing trying to show them ‘why’ it is so important. There were moments of frustration (from either side!) but also moments where it suddenly clicked and made sense, building that positive environment for both staff and animals is key. What an experience!</p>
           </div>
-          <blockquote class="story-close__quote reveal reveal--d1">
-            <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
-            <footer>Faye Ranch &middot; Hoof Care Professional</footer>
-          </blockquote>
-        </div>
+        </section>
 
-        <!-- Fire triage: the visitor picks what is burning, the reply, button and
-             pre-filled contact note follow. Without JavaScript the paragraph and
-             button below work as a plain call to action. -->
-        <div class="story-close__cta reveal" data-fire>
+        <section class="story-section reveal">
+          <h2 class="story-section__label"><span>04</span> The outcome</h2>
+          <div class="story-section__text">
+            <p class="story-section__lead">Still going today, and still the first of its kind in Hanoi. It was built to be financially sustainable and scalable, and run by the staff I trained to take over.</p>
+            <ul class="story-pills" aria-label="What I took from it">
+              <li>Resilience</li>
+              <li>Adaptability</li>
+              <li>Humility</li>
+              <li>Compassion</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="story-testimonial" aria-label="Testimonial">
+      <blockquote class="container reveal">
+        <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
+        <footer>Faye Ranch &middot; Hoof Care Professional</footer>
+      </blockquote>
+    </section>
+
+    <!-- Call to action: the visitor picks what is burning; story.js swaps the
+         reply and carries the choice into the contact form as a note. -->
+    <section class="story-cta" aria-label="Your turn" data-fire>
+      <div class="container story-cta__inner">
+        <div class="story-cta__main">
           <p class="home-label">Your turn</p>
-          <h2 class="story-close__heading">Fires everywhere? That&rsquo;s where I start.</h2>
+          <h2 class="story-cta__heading">Fires everywhere? That&rsquo;s where I start.</h2>
           <p class="fire__ask" id="fireAsk" hidden>What&rsquo;s burning? Pick the closest.</p>
           <div class="fire__choices" role="group" aria-labelledby="fireAsk" hidden>
             <button type="button" class="fire__choice" aria-pressed="false" aria-controls="fireReply"
@@ -121,13 +178,19 @@
             </button>
           </div>
           <p class="fire__reply" id="fireReply" aria-live="polite" data-default="Something to set up from scratch, a team that needs to learn the why, or a plan that has already gone in the bin. Tell me about it and I&rsquo;ll bring the calm.">Something to set up from scratch, a team that needs to learn the why, or a plan that has already gone in the bin. Tell me about it and I&rsquo;ll bring the calm.</p>
-          <div class="story-close__actions">
-            <a href="contact.html?service=project&amp;note=I%20found%20you%20through%20the%20Hanoi%20riding%20school%20story." class="home-btn story-close__btn" data-fire-btn data-fire-label="Tell me about it">Bring me a project</a>
-            <a href="wrangle-and-bloom.html#done" class="story-close__link">More projects</a>
+          <div class="story-cta__actions">
+            <a href="contact.html?service=project&amp;note=I%20found%20you%20through%20the%20Hanoi%20riding%20school%20story." class="home-btn story-cta__btn" data-fire-btn data-fire-label="Tell me about it">Bring me a project</a>
+            <a href="wrangle-and-bloom.html#done" class="story-cta__link">More projects</a>
           </div>
         </div>
-      </section>
-    </div>
+
+        <a href="wrangle-and-bloom.html#done" class="story-next">
+          <span class="story-next__label">Next project &rarr;</span>
+          <span class="story-next__title">Sports Horse Breeding ITA x UK</span>
+          <span class="story-next__text">Eight months in Italy as project manager, setting up a sports horse breeding business that runs across Italy and the UK.</span>
+        </a>
+      </div>
+    </section>
   </article>
 
   <!-- Footer -->

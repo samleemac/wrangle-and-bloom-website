@@ -4,23 +4,27 @@
    under the nav tracks progress through the writing, not the footer.
    ============================================= */
 (() => {
-  const column = document.querySelector('.story__column');
-  if (!column) return;
+  // A story can have several .story-body blocks (split by the big quote and gallery)
+  const bodies = [...document.querySelectorAll('.story-body')];
+  if (!bodies.length) return;
 
   const read = document.querySelector('[data-read-time]');
   if (read) {
-    const words = column.innerText.trim().split(/\s+/).length;
+    const words = bodies.reduce((n, b) => n + b.innerText.trim().split(/\s+/).length, 0);
     read.textContent = ` · ${Math.max(1, Math.round(words / 220))} min read`;
   }
 
   const bar = document.querySelector('.story-progress span');
   if (!bar) return;
+  const first = bodies[0];
+  const last = bodies[bodies.length - 1];
   let ticking = false;
   function update() {
     ticking = false;
-    const rect = column.getBoundingClientRect();
-    const total = rect.height - innerHeight * 0.6;
-    const done = Math.min(1, Math.max(0, (innerHeight * 0.4 - rect.top) / Math.max(1, total)));
+    const top = first.getBoundingClientRect().top;
+    const height = last.getBoundingClientRect().bottom - top;
+    const total = height - innerHeight * 0.6;
+    const done = Math.min(1, Math.max(0, (innerHeight * 0.4 - top) / Math.max(1, total)));
     bar.style.transform = `scaleX(${done})`;
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
