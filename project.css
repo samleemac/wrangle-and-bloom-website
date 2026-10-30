@@ -367,6 +367,148 @@
   border-color: var(--h-paper, #f4efe7);
 }
 
+/* =============================================
+   FIRE TRIAGE — the story close asks what is burning
+   Embers glow along the base of the panel until the visitor picks
+   a situation; then they die down to calm. That is the story's arc
+   (chaos, then calm) played out in the call to action.
+   ============================================= */
+.story-close__cta[data-fire] {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.story-close__cta[data-fire] > * {
+  position: relative;
+  z-index: 1;
+}
+
+.story-close__cta[data-fire]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 42% at 50% 112%, rgba(230, 175, 46, 0.38), transparent 70%),
+    radial-gradient(ellipse 34% 30% at 14% 108%, rgba(214, 112, 58, 0.32), transparent 70%),
+    radial-gradient(ellipse 34% 30% at 87% 108%, rgba(214, 112, 58, 0.28), transparent 70%);
+  opacity: 1;
+  transform-origin: 50% 100%;
+  transition: opacity 1.6s ease;
+  animation: fire-flicker 3.4s ease-in-out infinite alternate;
+}
+
+.story-close__cta[data-fire].is-calm::before {
+  opacity: 0;
+}
+
+@keyframes fire-flicker {
+  0%   { transform: scale(1, 1); }
+  45%  { transform: scale(1.03, 1.12); }
+  100% { transform: scale(0.98, 1.05); }
+}
+
+.fire__ask {
+  margin-bottom: 18px !important;
+  font-size: 0.9375rem !important;
+  letter-spacing: 0.04em;
+  color: rgba(244, 239, 231, 0.7);
+}
+
+.fire__choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 46rem;
+  margin: 0 auto 28px;
+}
+
+.fire__choices[hidden],
+.fire__ask[hidden] {
+  display: none;
+}
+
+.fire__choice {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid rgba(244, 239, 231, 0.38);
+  border-radius: var(--radius-pill, 9999px);
+  background: rgba(244, 239, 231, 0.04);
+  font-family: var(--h-serif, Georgia, serif);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.2;
+  color: var(--h-paper, #f4efe7);
+  cursor: pointer;
+  transition: background var(--transition, 0.3s), color var(--transition, 0.3s), border-color var(--transition, 0.3s), transform var(--transition, 0.3s);
+}
+
+.fire__num {
+  font-style: italic;
+  font-size: 0.85em;
+  color: #e6af2e;
+  transition: color var(--transition, 0.3s);
+}
+
+.fire__choice:hover {
+  border-color: var(--h-paper, #f4efe7);
+  transform: translateY(-1px);
+}
+
+.fire__choice:focus-visible,
+.story-close__cta[data-fire] .story-close__btn:focus-visible {
+  outline: 2px solid var(--h-paper, #f4efe7);
+  outline-offset: 3px;
+}
+
+.fire__choice[aria-pressed="true"] {
+  background: var(--h-paper, #f4efe7);
+  border-color: var(--h-paper, #f4efe7);
+  color: var(--h-ink, #2a2521);
+}
+
+.fire__choice[aria-pressed="true"] .fire__num {
+  color: var(--h-green, #334f40);
+}
+
+.fire__reply {
+  min-height: 5.2em;
+  transition: opacity 0.35s ease;
+}
+
+.fire__reply.is-swapping {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-close__cta[data-fire]::before {
+    animation: none;
+    transition: none;
+  }
+  .fire__choice,
+  .fire__reply {
+    transition: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .fire__choices {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .fire__choice {
+    justify-content: center;
+    text-align: center;
+  }
+  .fire__reply {
+    min-height: 7.5em;
+  }
+}
+
 @media (max-width: 1000px) and (min-width: 761px) {
   .story-close__words li {
     font-size: 1.75rem;

@@ -96,12 +96,33 @@
           </blockquote>
         </div>
 
-        <div class="story-close__cta reveal">
+        <!-- Fire triage: the visitor picks what is burning, the reply, button and
+             pre-filled contact note follow. Without JavaScript the paragraph and
+             button below work as a plain call to action. -->
+        <div class="story-close__cta reveal" data-fire>
           <p class="home-label">Your turn</p>
           <h2 class="story-close__heading">Fires everywhere? That&rsquo;s where I start.</h2>
-          <p>Something to set up from scratch, a team that needs to learn the why, or a plan that has already gone in the bin. Tell me about it and I&rsquo;ll bring the calm.</p>
+          <p class="fire__ask" id="fireAsk" hidden>What&rsquo;s burning? Pick the closest.</p>
+          <div class="fire__choices" role="group" aria-labelledby="fireAsk" hidden>
+            <button type="button" class="fire__choice" aria-pressed="false" aria-controls="fireReply"
+              data-reply="That was Hanoi: three months, no shared language, and a team to build. Tell me what you&rsquo;re setting up and what has to be true on opening day."
+              data-note="I found you through the Hanoi riding school story. I have something to set up from scratch.">
+              <span class="fire__num" aria-hidden="true">01</span> Something to set up from scratch
+            </button>
+            <button type="button" class="fire__choice" aria-pressed="false" aria-controls="fireReply"
+              data-reply="Anyone can be shown the how. The why is what lets a team run it without you, and it&rsquo;s how I handed Hanoi over."
+              data-note="I found you through the Hanoi riding school story. I have a team that needs to learn the why.">
+              <span class="fire__num" aria-hidden="true">02</span> A team that needs to learn the why
+            </button>
+            <button type="button" class="fire__choice" aria-pressed="false" aria-controls="fireReply"
+              data-reply="Mine went in the bin too. We start from what is actually in front of us, and rebuild from there."
+              data-note="I found you through the Hanoi riding school story. My plan has already gone in the bin.">
+              <span class="fire__num" aria-hidden="true">03</span> A plan that&rsquo;s gone in the bin
+            </button>
+          </div>
+          <p class="fire__reply" id="fireReply" aria-live="polite" data-default="Something to set up from scratch, a team that needs to learn the why, or a plan that has already gone in the bin. Tell me about it and I&rsquo;ll bring the calm.">Something to set up from scratch, a team that needs to learn the why, or a plan that has already gone in the bin. Tell me about it and I&rsquo;ll bring the calm.</p>
           <div class="story-close__actions">
-            <a href="contact.html?service=project&amp;note=I%20found%20you%20through%20the%20Hanoi%20riding%20school%20story." class="home-btn story-close__btn">Bring me a project</a>
+            <a href="contact.html?service=project&amp;note=I%20found%20you%20through%20the%20Hanoi%20riding%20school%20story." class="home-btn story-close__btn" data-fire-btn data-fire-label="Tell me about it">Bring me a project</a>
             <a href="wrangle-and-bloom.html#done" class="story-close__link">More projects</a>
           </div>
         </div>
