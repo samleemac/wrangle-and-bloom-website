@@ -41,13 +41,56 @@
       <div class="home-hero__text">
         <h1 class="home-hero__title reveal reveal--d1">Where the ideas can <em>flow</em> and I make them a reality.</h1>
         <p class="home-hero__sub reveal reveal--d2">Equine coaching, photography, and hands-on projects by Sara MacKinley-de Jong.</p>
-        <div class="home-hero__actions reveal reveal--d3">
-          <a href="about.html" class="home-btn home-btn--solid">Get to know me</a>
-          <a href="mailto:wrangleandbloom@gmail.com" class="home-link">Email me</a>
+        <div class="home-path reveal reveal--d3" id="homePath">
+          <p class="home-path__q" id="homePathQ">What brings you here?</p>
+          <div class="home-path__choices" role="group" aria-labelledby="homePathQ">
+            <button type="button" class="home-path__choice" data-path="coaching" aria-pressed="false" aria-controls="homePathPanel">
+              <span class="home-path__num">01</span> Confidence with horses
+            </button>
+            <button type="button" class="home-path__choice" data-path="photography" aria-pressed="false" aria-controls="homePathPanel">
+              <span class="home-path__num">02</span> Prints &amp; commissions
+            </button>
+            <button type="button" class="home-path__choice" data-path="project" aria-pressed="false" aria-controls="homePathPanel">
+              <span class="home-path__num">03</span> A project together
+            </button>
+          </div>
+
+          <div class="home-path__panel" id="homePathPanel" aria-live="polite">
+            <div class="home-path__answer" data-answer="coaching" hidden>
+              <p class="home-path__offer"><span class="home-path__tag">Half price</span> Start with a taster: <span class="home-path__price"><strong>€25</strong> <s>€50</s></span></p>
+              <p>Get to know me and the horses, talk through your goals, and see if Equine Freedomplicity is the right fit before you commit. New clients only.</p>
+              <div class="home-path__actions">
+                <a href="contact.html?service=taster" class="home-btn home-btn--solid">Book a half-price taster</a>
+                <a href="equine.html#efp-programs" class="home-link">See the programmes</a>
+              </div>
+            </div>
+            <div class="home-path__answer" data-answer="photography" hidden>
+              <p class="home-path__offer">Moc Chau, Italian cities, and the curiosity of animals.</p>
+              <p>Prints and downloads from the portfolio, or a commission shot for you.</p>
+              <div class="home-path__actions">
+                <a href="photography.html" class="home-btn home-btn--solid">View the portfolio</a>
+                <a href="contact.html?service=photography" class="home-link">Ask about a commission</a>
+              </div>
+            </div>
+            <div class="home-path__answer" data-answer="project" hidden>
+              <p class="home-path__offer">I set up the first riding school in Hanoi.</p>
+              <p>A sports horse breeding business across Italy and the UK came next, and something new is in the making. Where could you fit in?</p>
+              <div class="home-path__actions">
+                <a href="contact.html?service=project" class="home-btn home-btn--solid">Tell me your idea</a>
+                <a href="#projects" class="home-link">See the projects</a>
+              </div>
+            </div>
+          </div>
+
+          <p class="home-path__aside">Just browsing? <a href="about.html">Get to know me</a> or <a href="mailto:wrangleandbloom@gmail.com">email me</a>.</p>
         </div>
       </div>
       <figure class="home-hero__media reveal reveal--d2">
-        <img src="Photos/sara_behind_the_lens.jpg" alt="Sara MacKinley-de Jong sitting on the edge of a fountain, checking a shot on her camera" class="home-arch" loading="eager">
+        <div class="home-hero__frame home-arch">
+          <img src="Photos/sara_behind_the_lens.jpg" alt="Sara MacKinley-de Jong sitting on the edge of a fountain, checking a shot on her camera" data-scene="photography" class="is-active" loading="eager">
+          <img src="equine/sara-horses.jpg" alt="Sara with three horses grazing under a tree in a sunlit paddock" data-scene="coaching" loading="lazy">
+          <img src="projects/vietnam-interview.png" alt="Sara MacKinley-de Jong being interviewed beside a horse at the riding school in Hanoi" data-scene="project" loading="lazy">
+        </div>
       </figure>
     </header>
 
@@ -259,6 +302,36 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
     reveals.forEach(el => revealObserver.observe(el));
+
+    // Hero path chooser: each answer swaps the arch photo and opens the matching next step.
+    // A link like index.html?for=coaching opens straight onto that path.
+    const homePath = document.getElementById('homePath');
+    const pathChoices = homePath.querySelectorAll('.home-path__choice');
+    const pathAnswers = homePath.querySelectorAll('.home-path__answer');
+    const heroScenes = document.querySelectorAll('.home-hero__frame img');
+
+    function choosePath(path) {
+      pathChoices.forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.path === path)));
+      pathAnswers.forEach(answer => { answer.hidden = answer.dataset.answer !== path; });
+      heroScenes.forEach(img => img.classList.toggle('is-active', img.dataset.scene === path));
+      homePath.classList.add('home-path--open');
+    }
+
+    const calmMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    pathChoices.forEach(btn => btn.addEventListener('click', () => {
+      choosePath(btn.dataset.path);
+      // Once the panel has opened, make sure its call to action is on screen.
+      setTimeout(() => {
+        const actions = homePath.querySelector('.home-path__answer:not([hidden]) .home-path__actions');
+        if (actions && actions.getBoundingClientRect().bottom > innerHeight - 16) {
+          actions.scrollIntoView({ behavior: calmMotion ? 'auto' : 'smooth', block: 'end' });
+        }
+      }, 450);
+    }));
+
+    const startPath = new URLSearchParams(location.search).get('for');
+    if (startPath && homePath.querySelector(`[data-path="${CSS.escape(startPath)}"]`)) choosePath(startPath);
 
     const quoteSlides = document.querySelectorAll('.home-quote__slide');
     const quoteArrows = document.querySelectorAll('.home-quote__arrow');

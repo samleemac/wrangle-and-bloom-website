@@ -134,7 +134,7 @@
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: clamp(40px, 6vw, 96px);
-  align-items: center;
+  align-items: start;
   width: min(100% - 2 * var(--container-padding), var(--container-max));
   margin-inline: auto;
   padding: calc(72px + clamp(48px, 8vw, 96px)) 0 clamp(56px, 8vw, 96px);
@@ -156,7 +156,7 @@
 .home-hero__sub {
   font-size: clamp(1rem, 1.3vw, 1.125rem);
   max-width: 32em;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 
 .home-hero__actions {
@@ -170,11 +170,200 @@
   margin: 0;
 }
 
-.home-hero__media img {
-  width: 100%;
+/* The arch holds one photo per path and crossfades between them */
+.home-hero__frame {
+  position: relative;
   aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--h-sand);
+}
+
+.home-hero__frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: 35% 30%;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.9s var(--ease), transform 1.6s var(--ease);
+}
+
+.home-hero__frame img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.home-hero__frame img[data-scene="coaching"] {
+  object-position: 30% 60%;
+}
+
+.home-hero__frame img[data-scene="project"] {
+  object-position: 50% 35%;
+}
+
+/* ---------- Hero path chooser ---------- */
+.home-path__q {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--h-muted);
+  margin-bottom: 16px;
+}
+
+.home-path__choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.home-path__choice {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--h-line);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--h-serif);
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  color: var(--h-ink);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.home-path__num {
+  font-family: inherit;
+  font-style: italic;
+  font-size: 0.85em;
+  color: var(--h-green);
+  transition: color var(--transition);
+}
+
+.home-path__choice:hover {
+  border-color: var(--h-ink);
+}
+
+.home-path__choice:focus-visible {
+  outline: 2px solid var(--h-green);
+  outline-offset: 3px;
+}
+
+.home-path__choice[aria-pressed="true"] {
+  background: var(--h-ink);
+  border-color: var(--h-ink);
+  color: var(--h-paper);
+}
+
+.home-path__choice[aria-pressed="true"] .home-path__num {
+  color: var(--h-sand);
+}
+
+/* Panel opens with a height animation once a path is picked */
+.home-path__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease);
+}
+
+.home-path__panel > * {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.home-path--open .home-path__panel {
+  grid-template-rows: 1fr;
+}
+
+.home-path__answer {
+  padding: 28px 0 4px;
+  max-width: 34em;
+  animation: homePathIn 0.6s var(--ease);
+}
+
+.home-path__offer {
+  font-family: var(--h-serif);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.15;
+  color: var(--h-ink);
+  margin-bottom: 10px;
+}
+
+.home-path__offer strong {
+  font-weight: 500;
+  color: var(--h-green);
+}
+
+.home-path__price {
+  white-space: nowrap;
+}
+
+.home-path__offer s {
+  font-size: 0.7em;
+  color: var(--h-muted);
+}
+
+.home-path__tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--h-green);
+  color: var(--h-paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.home-path__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 28px;
+  margin-top: 24px;
+}
+
+.home-path__aside {
+  margin-top: 28px;
+  font-size: var(--fs-sm, 0.9rem);
+}
+
+.home-path__aside a {
+  color: var(--h-ink);
+  border-bottom: 1px solid var(--h-line);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.home-path__aside a:hover {
+  color: var(--h-green);
+  border-color: currentColor;
+}
+
+@media (max-width: 480px) {
+  .home-path__tag {
+    display: table;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes homePathIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__frame img,
+  .home-path__panel {
+    transition: none;
+  }
+  .home-path__answer {
+    animation: none;
+  }
 }
 
 /* ---------- Session ribbon ---------- */
