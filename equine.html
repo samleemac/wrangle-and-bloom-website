@@ -65,37 +65,131 @@
       <img src="equine/sara-horses.jpg" alt="Sara MacKinley-de Jong with horses in a sunlit paddock" loading="lazy">
     </section>
 
-    <!-- Services -->
-    <section class="efp-section" id="efp-services">
+    <!-- Services: a service explorer. Pick a service to see who it is for, how
+         it runs, where it leads and a booking link that carries the choice into
+         the contact form. Without JavaScript every service shows in full. -->
+    <section class="efp-section efp-svc-section" id="efp-services">
       <div class="efp-container">
-        <div class="reveal">
+        <div class="efp-svc__head reveal">
           <h2 class="efp-heading">Our Services</h2>
-          <p>Equine Freedomplicity is now based in Galicia, Spain. Sessions can be ridden or non-ridden and are tailored to suit anyone. From people who have never been around horses to elite riders at the top of their sport. I can come to you and we can use your horse or if you don't have a horse, or would like to work with one of mine first, you can come to me.</p>
-          <p>The types of sessions we can offer are listed below, but this is by no means an exhaustive list:</p>
+          <p>Sessions can be ridden or non-ridden and are tailored to suit anyone, from people who have never been around horses to elite riders at the top of their sport. Pick what you'd like to work on.</p>
+          <ul class="efp-svc__basics" aria-label="How sessions work">
+            <li>Ridden or non-ridden</li>
+            <li>First-timers to elite riders</li>
+            <li>Your horse at your yard, or one of mine</li>
+          </ul>
         </div>
 
-        <div class="efp-blurbs">
-          <div class="efp-blurb reveal">
-            <svg class="efp-blurb__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7.5 12.5 10.5 15.5 16.5 9"/></svg>
-            <h4 class="efp-blurb__title">Elite Sports Coaching</h4>
+        <div class="efp-svc reveal" id="efpSvc">
+
+          <h3 class="efp-svc__item">
+            <button type="button" class="efp-svc__tab" id="svc-confidence" aria-expanded="true" aria-controls="svc-confidence-panel">
+              <span class="efp-svc__num" aria-hidden="true">01</span>
+              <span class="efp-svc__name">Confidence Improvement</span>
+            </button>
+          </h3>
+          <div class="efp-svc__panel" id="svc-confidence-panel" role="region" aria-labelledby="svc-confidence">
+            <p class="efp-svc__title" aria-hidden="true">Confidence Improvement</p>
+            <p class="efp-svc__for">For riders who have lost their nerve, and for anyone who would like to feel surer of themselves, in the saddle or out of it.</p>
+            <p>Horses have even been classed as mirrors of people. Working with them, ridden or on the ground, shows you how you carry yourself, and the confidence you build with them comes home with you.</p>
+            <dl class="efp-svc__facts">
+              <div><dt>Sessions</dt><dd>Ridden or non-ridden</dd></div>
+              <div><dt>Leads to</dt><dd>Self-Confidence Booster Programme, 10 sessions</dd></div>
+              <div><dt>Start with</dt><dd>A half-price taster, €25</dd></div>
+            </dl>
+            <div class="efp-svc__actions">
+              <a class="efp-svc__cta" href="contact.html?service=taster&amp;note=I%27d%20like%20to%20work%20on%20Confidence%20Improvement%20(from%20the%20services%20on%20the%20Equine%20page).">Book a half-price taster, €25</a>
+              <a class="efp-svc__link" href="#efp-prices">See prices</a>
+            </div>
           </div>
-          <div class="efp-blurb reveal reveal--d1">
-            <svg class="efp-blurb__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7.5 12.5 10.5 15.5 16.5 9"/></svg>
-            <h4 class="efp-blurb__title">Confidence Improvement</h4>
+
+          <h3 class="efp-svc__item">
+            <button type="button" class="efp-svc__tab" id="svc-anxiety" aria-expanded="false" aria-controls="svc-anxiety-panel">
+              <span class="efp-svc__num" aria-hidden="true">02</span>
+              <span class="efp-svc__name">Anxiety Management</span>
+            </button>
+          </h3>
+          <div class="efp-svc__panel" id="svc-anxiety-panel" role="region" aria-labelledby="svc-anxiety">
+            <p class="efp-svc__title" aria-hidden="true">Anxiety Management</p>
+            <p class="efp-svc__for">For anyone who would like to feel calmer, including people who feel nervous around horses.</p>
+            <p>Sessions can be completely non-ridden. Being scared of horses is normal, and it is something we work on together, at your pace. If you come to me, the horses are calm and well trained.</p>
+            <dl class="efp-svc__facts">
+              <div><dt>Sessions</dt><dd>Non-ridden, or ridden when you're ready</dd></div>
+              <div><dt>Leads to</dt><dd>Anxiety Dwindling Programme, 10 sessions</dd></div>
+              <div><dt>Start with</dt><dd>A half-price taster, €25</dd></div>
+            </dl>
+            <div class="efp-svc__actions">
+              <a class="efp-svc__cta" href="contact.html?service=taster&amp;note=I%27d%20like%20to%20work%20on%20Anxiety%20Management%20(from%20the%20services%20on%20the%20Equine%20page).">Book a half-price taster, €25</a>
+              <a class="efp-svc__link" href="#efp-prices">See prices</a>
+            </div>
           </div>
-          <div class="efp-blurb reveal reveal--d2">
-            <svg class="efp-blurb__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7.5 12.5 10.5 15.5 16.5 9"/></svg>
-            <h4 class="efp-blurb__title">Anxiety Management</h4>
+
+          <h3 class="efp-svc__item">
+            <button type="button" class="efp-svc__tab" id="svc-elite" aria-expanded="false" aria-controls="svc-elite-panel">
+              <span class="efp-svc__num" aria-hidden="true">03</span>
+              <span class="efp-svc__name">Elite Sports Coaching</span>
+            </button>
+          </h3>
+          <div class="efp-svc__panel" id="svc-elite-panel" role="region" aria-labelledby="svc-elite">
+            <p class="efp-svc__title" aria-hidden="true">Elite Sports Coaching</p>
+            <p class="efp-svc__for">For competitive riders who want to perform at their best when it counts.</p>
+            <p>A tailored programme built around you, your horse and your competition goals. I can come to your yard and we work with your own horse.</p>
+            <dl class="efp-svc__facts">
+              <div><dt>Sessions</dt><dd>Ridden, non-ridden, or a mix</dd></div>
+              <div><dt>Leads to</dt><dd>A Tailored Programme</dd></div>
+              <div><dt>Start with</dt><dd>A half-price taster, €25</dd></div>
+            </dl>
+            <div class="efp-svc__actions">
+              <a class="efp-svc__cta" href="contact.html?service=taster&amp;note=I%27d%20like%20to%20work%20on%20Elite%20Sports%20Coaching%20(from%20the%20services%20on%20the%20Equine%20page).">Book a half-price taster, €25</a>
+              <a class="efp-svc__link" href="#efp-prices">See prices</a>
+            </div>
           </div>
-          <div class="efp-blurb reveal">
-            <svg class="efp-blurb__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7.5 12.5 10.5 15.5 16.5 9"/></svg>
-            <h4 class="efp-blurb__title">Corporate Team Building</h4>
+
+          <h3 class="efp-svc__item">
+            <button type="button" class="efp-svc__tab" id="svc-resilience" aria-expanded="false" aria-controls="svc-resilience-panel">
+              <span class="efp-svc__num" aria-hidden="true">04</span>
+              <span class="efp-svc__name">Resilience Training</span>
+            </button>
+          </h3>
+          <div class="efp-svc__panel" id="svc-resilience-panel" role="region" aria-labelledby="svc-resilience">
+            <p class="efp-svc__title" aria-hidden="true">Resilience Training</p>
+            <p class="efp-svc__for">For people facing pressure, change or a setback, who want to come through it stronger.</p>
+            <p>Drawing on an MSc in Psychology and Neuroscience of Mental Health and over 20 years with horses, sessions are built around what you are facing, and adapted on the day where needed.</p>
+            <dl class="efp-svc__facts">
+              <div><dt>Sessions</dt><dd>Ridden or non-ridden</dd></div>
+              <div><dt>Leads to</dt><dd>A Tailored Programme</dd></div>
+              <div><dt>Start with</dt><dd>A half-price taster, €25</dd></div>
+            </dl>
+            <div class="efp-svc__actions">
+              <a class="efp-svc__cta" href="contact.html?service=taster&amp;note=I%27d%20like%20to%20work%20on%20Resilience%20Training%20(from%20the%20services%20on%20the%20Equine%20page).">Book a half-price taster, €25</a>
+              <a class="efp-svc__link" href="#efp-prices">See prices</a>
+            </div>
           </div>
-          <div class="efp-blurb reveal reveal--d1">
-            <svg class="efp-blurb__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7.5 12.5 10.5 15.5 16.5 9"/></svg>
-            <h4 class="efp-blurb__title">Resilience Training</h4>
+
+          <h3 class="efp-svc__item">
+            <button type="button" class="efp-svc__tab" id="svc-team" aria-expanded="false" aria-controls="svc-team-panel">
+              <span class="efp-svc__num" aria-hidden="true">05</span>
+              <span class="efp-svc__name">Corporate Team Building</span>
+            </button>
+          </h3>
+          <div class="efp-svc__panel" id="svc-team-panel" role="region" aria-labelledby="svc-team">
+            <p class="efp-svc__title" aria-hidden="true">Corporate Team Building</p>
+            <p class="efp-svc__for">For teams that want to work better together.</p>
+            <p>A tailored session or programme for your team, built around what you want to achieve together. No experience with horses needed.</p>
+            <dl class="efp-svc__facts">
+              <div><dt>Sessions</dt><dd>Tailored to your team</dd></div>
+              <div><dt>Leads to</dt><dd>A tailored session or programme</dd></div>
+              <div><dt>Start with</dt><dd>A conversation about your team</dd></div>
+            </dl>
+            <div class="efp-svc__actions">
+              <a class="efp-svc__cta" href="contact.html?service=equine&amp;note=I%27d%20like%20to%20ask%20about%20Corporate%20Team%20Building%20(from%20the%20services%20on%20the%20Equine%20page).">Ask about team building</a>
+              <a class="efp-svc__link" href="#efp-prices">See prices</a>
+            </div>
           </div>
+
+          <p class="efp-svc__more">This is by no means an exhaustive list. <span>Not sure which fits?</span> <a href="#efp-match">Answer three quick questions</a></p>
         </div>
+
       </div>
     </section>
 
@@ -386,6 +480,51 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
     reveals.forEach(el => revealObserver.observe(el));
+
+    // Service explorer. One service open at a time: a list beside a detail
+    // panel on wide screens, an accordion on phones. #svc-anxiety style links
+    // open a service directly.
+    (() => {
+      const root = document.getElementById('efpSvc');
+      if (!root) return;
+      const tabs = [...root.querySelectorAll('.efp-svc__tab')];
+      const panelOf = tab => document.getElementById(tab.getAttribute('aria-controls'));
+      root.classList.add('is-enhanced');
+
+      function open(tab, focusPanel) {
+        tabs.forEach(t => {
+          const on = t === tab;
+          t.setAttribute('aria-expanded', String(on));
+          panelOf(t).hidden = !on;
+        });
+        const panel = panelOf(tab);
+        panel.classList.remove('is-in');
+        void panel.offsetWidth;
+        panel.classList.add('is-in');
+        // On phones the panel opens under its button; keep the button in view.
+        if (focusPanel && matchMedia('(max-width: 860px)').matches) {
+          const top = tab.getBoundingClientRect().top;
+          if (top < 80) scrollTo({ top: scrollY + top - 88, behavior: 'smooth' });
+        }
+      }
+
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => open(tab, true));
+        // Arrow keys move between services on the wide layout
+        tab.addEventListener('keydown', e => {
+          const step = { ArrowDown: 1, ArrowUp: -1 }[e.key];
+          if (!step) return;
+          e.preventDefault();
+          const next = tabs[(i + step + tabs.length) % tabs.length];
+          next.focus();
+          open(next, false);
+        });
+      });
+
+      const fromHash = tabs.find(t => '#' + t.id === location.hash);
+      open(fromHash || tabs[0], false);
+      if (fromHash) root.scrollIntoView();
+    })();
 
     // Starting-point matcher. Each answer moves to the next question; the
     // result recommends a programme and carries the answers into the enquiry.
