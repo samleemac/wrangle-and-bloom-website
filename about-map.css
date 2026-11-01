@@ -1,0 +1,461 @@
+/* =============================================
+   ABOUT — "Where I've been" map
+   Dotted world map with pins, a card for the chosen place, a flight-path
+   line between stops, and a chip index underneath.
+   ============================================= */
+
+.about-map {
+  padding-block: clamp(56px, 8vw, 112px);
+  border-top: 1px solid var(--h-line);
+}
+
+.about-map__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px clamp(32px, 6vw, 96px);
+  align-items: end;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.home .about-map__title {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  max-width: 15ch;
+}
+
+.home .about-map__intro p {
+  color: var(--h-muted);
+  max-width: 34em;
+}
+
+.about-map__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
+  margin-top: 22px;
+}
+
+/* Only offer the trip and the stamp count once the script is running */
+.about-map:not(.is-ready) .about-map__controls {
+  display: none;
+}
+
+.home .about-map__tour {
+  background: var(--h-ink);
+  color: var(--h-paper);
+}
+
+.home .about-map__tour:hover {
+  background: var(--h-green);
+}
+
+.home .about-map__stamps {
+  margin: 0;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--h-muted);
+}
+
+.about-map__stamps strong {
+  font-weight: 600;
+  color: var(--h-green);
+}
+
+/* Stage: map beside the card on wide screens */
+.about-map__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: center;
+}
+
+.about-map__map {
+  position: relative;
+  aspect-ratio: 295 / 129.6;
+}
+
+.about-map__dots,
+.about-map__route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.about-map__route {
+  overflow: visible;
+  pointer-events: none;
+}
+
+.about-map__route path {
+  fill: none;
+  stroke: var(--h-green);
+  stroke-width: 0.45;
+  stroke-linecap: round;
+}
+
+.about-map__route path.is-drawing {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  animation: about-map-fly 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes about-map-fly {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Pins */
+.about-map__pin {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.about-map__dot {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: var(--h-paper);
+  border: 2px solid var(--h-green);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.about-map__pin--story .about-map__dot {
+  border-color: #b8860b;
+  box-shadow: 0 0 0 4px rgba(230, 175, 46, 0.28);
+}
+
+.about-map__pin.is-visited .about-map__dot {
+  background: var(--h-green);
+}
+
+.about-map__pin--story.is-visited .about-map__dot {
+  background: #e6af2e;
+}
+
+.about-map__pin:hover .about-map__dot,
+.about-map__pin:focus-visible .about-map__dot {
+  transform: scale(1.3);
+}
+
+.about-map__pin:focus-visible {
+  outline: none;
+}
+
+.about-map__pin:focus-visible .about-map__dot {
+  outline: 2px solid var(--h-ink);
+  outline-offset: 3px;
+}
+
+.about-map__pin.is-active {
+  z-index: 2;
+}
+
+.about-map__pin.is-active .about-map__dot {
+  background: var(--h-ink);
+  border-color: var(--h-ink);
+  transform: scale(1.35);
+}
+
+.about-map__pin.is-active::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1.5px solid var(--h-ink);
+  animation: about-map-ping 1.6s ease-out infinite;
+}
+
+@keyframes about-map-ping {
+  from { transform: scale(0.7); opacity: 0.8; }
+  to   { transform: scale(1.9); opacity: 0; }
+}
+
+.about-map__label {
+  position: absolute;
+  bottom: calc(100% - 2px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--h-ink);
+  color: var(--h-paper);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.about-map__pin[data-align="start"] .about-map__label { left: 0; transform: translate(0, 4px); }
+.about-map__pin[data-align="end"] .about-map__label { left: auto; right: 0; transform: translate(0, 4px); }
+
+.about-map__pin:hover .about-map__label,
+.about-map__pin:focus-visible .about-map__label,
+.about-map__pin.is-active .about-map__label {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.about-map__pin[data-align="start"]:is(:hover, :focus-visible, .is-active) .about-map__label,
+.about-map__pin[data-align="end"]:is(:hover, :focus-visible, .is-active) .about-map__label {
+  transform: translate(0, 0);
+}
+
+/* Card */
+.about-map__card {
+  background: #fff;
+  border: 1px solid var(--h-line);
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.about-map__card.is-in {
+  animation: about-map-card 0.4s ease both;
+}
+
+@keyframes about-map-card {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.about-map__photo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.about-map__card-body {
+  padding: 26px 26px 24px;
+}
+
+.home .about-map__stop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--h-muted);
+}
+
+.about-map__tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--h-sand);
+  color: var(--h-ink);
+  letter-spacing: 0.12em;
+}
+
+.home .about-map__place {
+  font-family: var(--h-serif);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 2.6vw, 2.4rem);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.home .about-map__meta {
+  margin: 6px 0 0;
+  font-size: 0.875rem;
+  color: var(--h-muted);
+}
+
+.home .about-map__text {
+  margin: 14px 0 0;
+  font-size: 0.975rem;
+  line-height: 1.7;
+  color: var(--h-ink);
+}
+
+.home .about-map__text a {
+  color: var(--h-green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.home .about-map__go {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--h-green);
+  padding-bottom: 3px;
+  border-bottom: 1px solid currentColor;
+}
+
+.home .about-map__go--primary {
+  padding: 13px 24px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--h-paper);
+  color: var(--h-ink);
+}
+
+.home .about-map__soon {
+  display: inline-block;
+  margin: 18px 0 0;
+  font-family: var(--h-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--h-muted);
+}
+
+.about-map__steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--h-line);
+}
+
+.about-map__step {
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--h-muted);
+  cursor: pointer;
+}
+
+.about-map__step--next {
+  margin-left: auto;
+  color: var(--h-ink);
+}
+
+.about-map__step:hover {
+  color: var(--h-green);
+}
+
+/* The last card: a call to action on green */
+.about-map__card--finale {
+  background: var(--h-green);
+  border-color: var(--h-green);
+}
+
+.home .about-map__card--finale .about-map__place,
+.home .about-map__card--finale .about-map__text {
+  color: var(--h-paper);
+}
+
+.home .about-map__card--finale .about-map__stop,
+.home .about-map__card--finale .about-map__meta,
+.about-map__card--finale .about-map__step {
+  color: #d9d2c5;
+}
+
+.about-map__card--finale .about-map__steps {
+  border-color: rgba(244, 239, 231, 0.25);
+}
+
+/* Chip index */
+.about-map__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: clamp(24px, 3vw, 36px) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  color: var(--h-muted);
+}
+
+.about-map:not(.is-ready) .about-map__list li + li::before {
+  content: "· ";
+}
+
+.about-map__chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--h-line);
+  border-radius: 999px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--h-ink);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.about-map__chip span {
+  font-size: 0.7rem;
+  color: var(--h-muted);
+}
+
+.about-map__chip:hover {
+  border-color: var(--h-ink);
+}
+
+.about-map__chip.is-visited {
+  border-color: rgba(51, 79, 64, 0.45);
+}
+
+.about-map__chip[aria-pressed="true"] {
+  background: var(--h-ink);
+  border-color: var(--h-ink);
+  color: var(--h-paper);
+}
+
+.about-map__chip[aria-pressed="true"] span {
+  color: var(--h-sand);
+}
+
+@media (max-width: 900px) {
+  .about-map__head,
+  .about-map__stage {
+    grid-template-columns: 1fr;
+  }
+  .about-map__map {
+    scroll-margin-top: 88px;
+  }
+  .about-map__card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-map__pin {
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+  }
+  .about-map__dot {
+    inset: 7px;
+    border-width: 1.5px;
+  }
+  .about-map__label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-map__route path.is-drawing,
+  .about-map__card.is-in,
+  .about-map__pin.is-active::after {
+    animation: none;
+  }
+  .about-map__route path.is-drawing { stroke-dashoffset: 0; }
+}
