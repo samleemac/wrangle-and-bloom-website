@@ -165,37 +165,58 @@
       </div>
     </section>
 
-    <!-- Testimonial -->
-    <section class="home-section home-quote" aria-label="Testimonials">
+    <!-- In their words: each quote opens on a line lifted from it, and leads to the matching next step.
+         To add one, copy a <figure> and a tab, and bump the numbers. -->
+    <section class="home-voices" id="voices" aria-labelledby="voicesLabel">
       <div class="home-container">
-        <div class="home-quote__panel reveal">
-          <svg class="home-quote__avatar" viewBox="0 0 64 64" width="72" height="72" aria-hidden="true">
-            <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="32" cy="24" r="7" fill="currentColor"/>
-            <path fill="currentColor" d="M16 52c1.2-10 6.8-15 16-15s14.8 5 16 15H16z"/>
-          </svg>
-          <div class="home-quote__slides" aria-live="polite">
-            <blockquote class="home-quote__slide">
-              <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
-              <footer>Faye Ranch &middot; Hoof Care Professional</footer>
-            </blockquote>
-            <blockquote class="home-quote__slide home-quote__slide--long" hidden>
-              <p>&ldquo;I now understand that I was at a very low place for a variety of reasons. I knew I loved horses and riding but my confidence, as in life, had evaporated. Sara recognised this and because of her skills I am now really enjoying life and riding. I attempt and sometimes achieve that which I would never have dreamt before meeting Sara. Sara is amazing &#129392;&rdquo;</p>
-              <footer>Jane Mason</footer>
-            </blockquote>
-            <blockquote class="home-quote__slide" hidden>
-              <p>Pending</p>
-              <footer>Pending</footer>
-            </blockquote>
-          </div>
-          <div class="home-quote__nav">
-            <button type="button" class="home-quote__arrow" data-quote-dir="-1" aria-label="Previous testimonial">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <button type="button" class="home-quote__arrow" data-quote-dir="1" aria-label="Next testimonial">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
+        <div class="home-voices__top reveal">
+          <p class="home-label" id="voicesLabel">In their words</p>
+          <p class="home-voices__count" aria-hidden="true"><span data-voice-count>01</span> / 02</p>
+        </div>
+
+        <div class="home-voices__tabs reveal" role="tablist" aria-label="Choose a testimonial">
+          <button type="button" class="home-voices__tab" role="tab" id="voiceTab1" aria-controls="voice1" aria-selected="true">
+            <span class="home-voices__bar" aria-hidden="true"><i></i></span>
+            <span class="home-voices__num" aria-hidden="true">01</span>
+            <span class="home-voices__who">Faye Ranch</span>
+            <span class="home-voices__about">On the Hanoi riding school</span>
+          </button>
+          <button type="button" class="home-voices__tab" role="tab" id="voiceTab2" aria-controls="voice2" aria-selected="false" tabindex="-1">
+            <span class="home-voices__bar" aria-hidden="true"><i></i></span>
+            <span class="home-voices__num" aria-hidden="true">02</span>
+            <span class="home-voices__who">Jane Mason</span>
+            <span class="home-voices__about">On confidence in the saddle</span>
+          </button>
+        </div>
+
+        <div class="home-voices__stage reveal reveal--d1">
+          <figure class="home-voices__slide is-active" id="voice1" role="tabpanel" aria-labelledby="voiceTab1" data-duration="10000">
+            <p class="home-voices__pull" aria-hidden="true">A breath of <em>fresh air.</em></p>
+            <div class="home-voices__body">
+              <blockquote>
+                <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
+              </blockquote>
+              <figcaption class="home-voices__by">
+                <span class="home-voices__mono" aria-hidden="true">FR</span>
+                <span><strong>Faye Ranch</strong>Hoof Care Professional</span>
+              </figcaption>
+              <a class="home-voices__cta" href="vietnam-riding-school.html">Read the Hanoi story <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </figure>
+
+          <figure class="home-voices__slide" id="voice2" role="tabpanel" aria-labelledby="voiceTab2" data-duration="18000">
+            <p class="home-voices__pull" aria-hidden="true">I am now really <em>enjoying life</em> and riding.</p>
+            <div class="home-voices__body">
+              <blockquote>
+                <p>&ldquo;I now understand that I was at a very low place for a variety of reasons. I knew I loved horses and riding but my confidence, as in life, had evaporated. Sara recognised this and because of her skills I am now really enjoying life and riding. I attempt and sometimes achieve that which I would never have dreamt before meeting Sara. Sara is amazing &#129392;&rdquo;</p>
+              </blockquote>
+              <figcaption class="home-voices__by">
+                <span class="home-voices__mono" aria-hidden="true">JM</span>
+                <span><strong>Jane Mason</strong></span>
+              </figcaption>
+              <a class="home-voices__cta" href="contact.html?service=taster">Book a half-price taster <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </figure>
         </div>
       </div>
     </section>
@@ -333,33 +354,75 @@
     const startPath = new URLSearchParams(location.search).get('for');
     if (startPath && homePath.querySelector(`[data-path="${CSS.escape(startPath)}"]`)) choosePath(startPath);
 
-    const quoteSlides = document.querySelectorAll('.home-quote__slide');
-    const quoteArrows = document.querySelectorAll('.home-quote__arrow');
-    const quoteSlidesWrap = document.querySelector('.home-quote__slides');
-    let quoteIndex = 0;
+    // In their words: tabs, a gentle auto-advance while the section is on screen, and swipe.
+    const voices = document.getElementById('voices');
+    if (voices) {
+      const voiceTabs = [...voices.querySelectorAll('.home-voices__tab')];
+      const voiceSlides = [...voices.querySelectorAll('.home-voices__slide')];
+      const voiceCount = voices.querySelector('[data-voice-count]');
+      const voiceStage = voices.querySelector('.home-voices__stage');
+      let voiceIndex = 0, voiceTimer = null, voiceAuto = !calmMotion, voiceSeen = false, voiceHeld = false;
 
-    function showQuote(next) {
-      quoteSlides[quoteIndex].hidden = true;
-      quoteIndex = (next + quoteSlides.length) % quoteSlides.length;
-      quoteSlides[quoteIndex].hidden = false;
-    }
+      function playVoice() {
+        clearTimeout(voiceTimer);
+        voices.classList.remove('is-playing');
+        if (!voiceAuto || !voiceSeen || voiceHeld) return;
+        const wait = Number(voiceSlides[voiceIndex].dataset.duration) || 10000;
+        voices.style.setProperty('--voice-time', `${wait}ms`);
+        void voices.offsetWidth;
+        voices.classList.add('is-playing');
+        voiceTimer = setTimeout(() => showVoice(voiceIndex + 1), wait);
+      }
 
-    quoteArrows.forEach(arrow => {
-      arrow.addEventListener('click', () => showQuote(quoteIndex + Number(arrow.dataset.quoteDir)));
-    });
+      function showVoice(next, byHand) {
+        voiceIndex = (next + voiceSlides.length) % voiceSlides.length;
+        voiceSlides.forEach((slide, n) => slide.classList.toggle('is-active', n === voiceIndex));
+        voiceTabs.forEach((tab, n) => {
+          tab.setAttribute('aria-selected', String(n === voiceIndex));
+          tab.tabIndex = n === voiceIndex ? 0 : -1;
+        });
+        voiceCount.textContent = String(voiceIndex + 1).padStart(2, '0');
+        if (byHand) {
+          // Once someone picks a quote themselves, stop moving it under them
+          voiceAuto = false;
+          voiceStage.setAttribute('aria-live', 'polite');
+        }
+        playVoice();
+      }
 
-    if (quoteSlidesWrap) {
-      let quoteTouchX = null;
-      quoteSlidesWrap.addEventListener('touchstart', (e) => {
-        quoteTouchX = e.changedTouches[0].clientX;
-      }, { passive: true });
-      quoteSlidesWrap.addEventListener('touchend', (e) => {
-        if (quoteTouchX === null) return;
-        const travel = e.changedTouches[0].clientX - quoteTouchX;
-        quoteTouchX = null;
+      voiceTabs.forEach((tab, n) => {
+        tab.addEventListener('click', () => showVoice(n, true));
+        tab.addEventListener('keydown', (e) => {
+          const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+          if (!step) return;
+          e.preventDefault();
+          showVoice(voiceIndex + step, true);
+          voiceTabs[voiceIndex].focus();
+        });
+      });
+
+      const holdVoice = (held) => { voiceHeld = held; playVoice(); };
+      voiceStage.addEventListener('mouseenter', () => holdVoice(true));
+      voiceStage.addEventListener('mouseleave', () => holdVoice(false));
+      voiceStage.addEventListener('focusin', () => holdVoice(true));
+      voiceStage.addEventListener('focusout', () => holdVoice(false));
+
+      let voiceTouchX = null;
+      voiceStage.addEventListener('touchstart', (e) => { voiceTouchX = e.changedTouches[0].clientX; }, { passive: true });
+      voiceStage.addEventListener('touchend', (e) => {
+        if (voiceTouchX === null) return;
+        const travel = e.changedTouches[0].clientX - voiceTouchX;
+        voiceTouchX = null;
         if (Math.abs(travel) < 40) return;
-        showQuote(quoteIndex + (travel < 0 ? 1 : -1));
+        showVoice(voiceIndex + (travel < 0 ? 1 : -1), true);
       }, { passive: true });
+
+      new IntersectionObserver(([entry]) => {
+        voiceSeen = entry.isIntersecting;
+        playVoice();
+      }, { threshold: 0.35 }).observe(voices);
+
+      voices.classList.add('is-ready');
     }
 
   </script>
