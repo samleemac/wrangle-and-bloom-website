@@ -423,6 +423,231 @@
   color: var(--h-sand);
 }
 
+/* ---------- Your pin: the visitor on the map ---------- */
+.about-map.is-ready .about-map__map {
+  cursor: crosshair;
+}
+
+.about-map__drop {
+  cursor: pointer;
+  background: transparent;
+  font-family: inherit;
+}
+
+.about-map__hint {
+  position: absolute;
+  left: 36%;
+  bottom: 0;
+  margin: 0;
+  padding: 7px 14px 7px 10px;
+  border: 1px dashed rgba(42, 37, 33, 0.35);
+  border-radius: 999px;
+  background: rgba(244, 239, 231, 0.9);
+  font-size: 0.75rem;
+  color: var(--h-muted);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.about-map__hint span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--h-ink);
+  color: var(--h-paper);
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+}
+
+.about-map:not(.is-ready) .about-map__hint,
+.about-map.has-you .about-map__hint {
+  opacity: 0;
+}
+
+/* A teardrop marker whose tip sits on the chosen spot */
+.about-map__you {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: -44px 0 0 -22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  z-index: 3;
+}
+
+.about-map__you[hidden] {
+  display: none;
+}
+
+.about-map__you.is-dragging {
+  cursor: grabbing;
+}
+
+.about-map__you-mark {
+  position: absolute;
+  left: 12px;
+  bottom: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--h-ink);
+  box-shadow: 0 6px 14px rgba(42, 37, 33, 0.28);
+  transform: rotate(-45deg);
+  transform-origin: 50% 50%;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.about-map__you-mark::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--h-paper);
+}
+
+.about-map__you.is-active .about-map__you-mark {
+  background: var(--h-green);
+  animation: about-map-drop 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+}
+
+.about-map__you.is-dragging .about-map__you-mark {
+  animation: none;
+  transform: translateY(-5px) rotate(-45deg) scale(1.12);
+}
+
+@keyframes about-map-drop {
+  from { transform: translateY(-18px) rotate(-45deg); opacity: 0; }
+  to   { transform: rotate(-45deg); opacity: 1; }
+}
+
+.about-map__you:focus-visible {
+  outline: none;
+}
+
+.about-map__you:focus-visible .about-map__you-mark {
+  outline: 2px solid var(--h-ink);
+  outline-offset: 3px;
+}
+
+.about-map__you-label {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 8px);
+  transform: translateX(-50%);
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--h-green);
+  color: var(--h-paper);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.about-map__you[data-align="start"] .about-map__you-label { left: 8px; transform: none; }
+.about-map__you[data-align="end"] .about-map__you-label { left: auto; right: 8px; transform: none; }
+
+/* The stop of Sara's that is closest to the visitor */
+.about-map__pin.is-near {
+  z-index: 2;
+}
+
+.about-map__pin.is-near .about-map__dot {
+  background: #e6af2e;
+  border-color: #b8860b;
+  box-shadow: 0 0 0 5px rgba(230, 175, 46, 0.3);
+  transform: scale(1.25);
+}
+
+/* Its name goes underneath, so it never sits behind the "You" label */
+.about-map.is-you .about-map__pin.is-near .about-map__label {
+  top: calc(100% - 2px);
+  bottom: auto;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.about-map.is-you .about-map__pin.is-near[data-align] .about-map__label {
+  transform: translate(0, 0);
+}
+
+/* Card fields for the visitor's pin (sits on the green card) */
+.about-map__name {
+  display: block;
+  margin-top: 18px;
+}
+
+.about-map__name span {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #d9d2c5;
+}
+
+.about-map__name input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(244, 239, 231, 0.5);
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--h-serif);
+  font-size: 1.35rem;
+  color: var(--h-paper);
+}
+
+.about-map__name input::placeholder {
+  color: rgba(244, 239, 231, 0.5);
+  font-style: italic;
+}
+
+.about-map__name input:focus {
+  outline: none;
+  border-bottom-color: var(--h-paper);
+}
+
+.home .about-map__nudge {
+  margin: 14px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #d9d2c5;
+}
+
+.about-map__card--finale .about-map__tag {
+  background: rgba(244, 239, 231, 0.16);
+  color: var(--h-paper);
+}
+
+.about-map__card--finale .about-map__step:hover {
+  color: var(--h-paper);
+}
+
+.home .about-map__go--primary:hover {
+  background: #fff;
+}
+
+@media (max-width: 600px) {
+  /* The map is too small for a note on top of it: the button and intro do the inviting */
+  .about-map__hint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-map__you.is-active .about-map__you-mark { animation: none; }
+}
+
 @media (max-width: 900px) {
   .about-map__head,
   .about-map__stage {
