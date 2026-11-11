@@ -52,7 +52,7 @@
     </div>
   </section>
 
-  <!-- Where I've been: a clickable map. Places, text and story links live in about-map.js -->
+  <!-- Where I've been: a globe you can spin. Places, text and story links live in about-map.js -->
   <section class="about-map" id="aboutMap" aria-labelledby="aboutMapTitle">
     <div class="container">
       <div class="about-map__head">
@@ -61,11 +61,10 @@
           <h2 class="about-map__title" id="aboutMapTitle">Fourteen places, four continents.</h2>
         </div>
         <div class="about-map__intro reveal reveal--d1">
-          <p>Born in Curaçao, I spent my early years across the Americas, Europe, Asia and Oceania. Tap a pin to see what happened there, take the whole trip, or drop your own pin and see how close I&rsquo;ve been to you.</p>
+          <p>Born in Curaçao, I spent my early years across the Americas, Europe, Asia and Oceania. Spin the globe, tap a pin to see what happened there, or take the whole trip.</p>
           <div class="about-map__controls">
             <button type="button" class="home-btn about-map__tour">Take the trip <span aria-hidden="true">&rarr;</span></button>
-            <button type="button" class="home-btn home-btn--outline about-map__drop">Drop your pin</button>
-            <p class="about-map__stamps">Stamps collected <strong data-stamps>0 of 12</strong></p>
+            <p class="about-map__stamps"><span>Stamps collected <strong data-stamps>0 of 12</strong></span><span>Flown together <strong data-km>0 km</strong></span></p>
           </div>
         </div>
       </div>
@@ -73,7 +72,7 @@
       <div class="about-map__stage reveal">
         <div class="about-map__map">
           <img class="about-map__dots" src="about/world-dots.svg" alt="" width="1180" height="518">
-          <svg class="about-map__route" viewBox="0 0 295 129.6" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d=""/></svg>
+          <canvas class="about-map__globe" aria-hidden="true"></canvas>
         </div>
 
         <article class="about-map__card" aria-live="polite">
@@ -183,6 +182,7 @@
 
   </script>
 
+  <script src="about/globe-dots.js" defer></script>
   <script src="about-map.js" defer></script>
 </body>
 </html>

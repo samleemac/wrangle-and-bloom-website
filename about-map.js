@@ -1,75 +1,241 @@
 /* =============================================
-   ABOUT — "Where I've been" map
-   Pins sit on a dotted world map (about/world-dots.svg, equirectangular,
-   viewBox 0 0 295 129.6). x/y below are in those viewBox units:
-   x = longitude + 130, y = (62 - latitude) * 1.2.
-   To add a place or a story link, edit PLACES. Stops play in this order.
-
-   "Your pin": visitors can tap the map (or use the Drop your pin button)
-   to put themselves on it. The card then tells them how close Sara has
-   been and hands the spot over to the contact form as a ?note=.
+   ABOUT — "Where I've been" globe
+   A dotted globe drawn on a canvas (land dots come from about/globe-dots.js).
+   Picking a stop turns the globe to face it, flies a line there from the
+   last stop, and keeps every leg flown so far as a trail. Visitors can also
+   drag the globe round, or zoom with the + and − buttons.
+   Without the script (or the dots) the flat map image and the plain list
+   of places in about.html are shown instead.
+   To add a place or a story link, edit PLACES (lat/lon in degrees).
+   Stops play in this order.
    ============================================= */
 (() => {
-  const VB_W = 295, VB_H = 129.6;
-
   const PLACES = [
     { id: 'curacao', name: 'Curaçao & Aruba', region: 'The Caribbean', tag: 'Born here',
-      x: 60.5, y: 59.6,
+      lat: 12.3, lon: -69.5,
       text: 'Where it all began. I was born in Curaçao, in the Caribbean.' },
     { id: 'miami', name: 'Miami', region: 'Florida, USA',
-      x: 49.8, y: 43.5,
+      lat: 25.8, lon: -80.2,
       text: 'Part of the years I spent across the Americas, Europe, Asia and Oceania.' },
     { id: 'guatemala', name: 'Ciudad Vieja', region: 'Guatemala',
-      x: 39.3, y: 57.0,
+      lat: 14.5, lon: -90.7,
       text: 'Part of the years I spent across the Americas, Europe, Asia and Oceania.' },
     { id: 'texas', name: 'Texas', region: 'USA',
-      x: 31.0, y: 37.2,
+      lat: 31.0, lon: -99.0,
       text: 'Part of the years I spent across the Americas, Europe, Asia and Oceania.' },
     { id: 'arizona', name: 'Arizona', region: 'USA',
-      x: 18.4, y: 33.4,
+      lat: 34.2, lon: -111.6,
       text: 'Part of the years I spent across the Americas, Europe, Asia and Oceania.' },
     { id: 'sequim', name: 'Sequim', region: 'Washington State, USA',
-      x: 6.9, y: 16.7,
+      lat: 48.1, lon: -123.1,
       text: 'Part of the years I spent across the Americas, Europe, Asia and Oceania.' },
     { id: 'lanaken', name: 'Lanaken & Valkenburg', region: 'Belgium & the Netherlands',
-      x: 135.7, y: 13.3,
+      lat: 50.9, lon: 5.7,
       text: 'Either side of the Belgian–Dutch border. Before Hanoi I worked with horses around the world, from Belgium to the USA to Australia.' },
     { id: 'australia', name: 'Yarramalong & Amby', region: 'Australia',
-      x: 279.7, y: 110.3,
+      lat: -29.9, lon: 149.7,
       text: 'Before Hanoi I worked with horses around the world, from Belgium to the USA to Australia.' },
     { id: 'hanoi', name: 'Hanoi', region: 'Vietnam', when: '2014', tag: 'Story',
-      x: 235.9, y: 49.2, img: 'projects/vietnam-arena.png',
+      lat: 21.0, lon: 105.9, img: 'projects/vietnam-arena.png',
       text: 'At 19 I set up the first riding school in Hanoi: three months, no Vietnamese, and a few horses bought from the circus. It is still going today.',
       link: { href: 'vietnam-riding-school.html', label: 'Read the story' } },
     { id: 'gloucestershire', name: 'Gloucestershire', region: 'United Kingdom', when: '2017 to now',
-      x: 127.8, y: 12.2,
+      lat: 51.8, lon: -2.2,
       text: 'Yard manager at Barton End Equestrian Centre, with 60+ horses and 20+ staff a day, then Programme Manager and Lecturer at Hartpury University. I also manage horses and staff for competitors up to Olympic standard.',
       link: { href: 'sara-de-jong-cv-2026.pdf', label: 'Download my CV', download: 'Sara MacKinley-de Jong CV 2026.pdf' } },
     { id: 'rome', name: 'Rome', region: 'Italy', when: '8 months', tag: 'Project',
-      x: 142.5, y: 24.1, img: 'projects/sports-horse-foal.jpg',
+      lat: 41.9, lon: 12.5, img: 'projects/sports-horse-foal.jpg',
       text: 'Eight months in Italy as project manager, setting up a sports horse breeding business that runs across Italy and the UK: moving horses between countries and keeping every rule and regulation in order.',
       link: { href: 'wrangle-and-bloom.html#italy', label: 'See the project' } },
     { id: 'galicia', name: 'Galicia', region: 'Spain', when: 'Now', tag: 'Home turf',
-      x: 122.1, y: 23.1,
+      lat: 42.8, lon: -7.9,
       text: 'Home turf, for now. Equine Freedomplicity is based here, with sessions ridden or non-ridden, for first-timers through to elite riders.',
       link: { href: 'equine.html', label: 'Meet Equine Freedomplicity' } },
   ];
 
+  // The last card brings the trip back to what is on offer today
   const FINALE = {
-    id: 'next', name: 'Where next?', region: 'Your yard, your team, your idea', tag: 'Your turn',
-    text: 'Everywhere is a possibility. A business to set up, a team to train, or a crazy idea that needs wrangling: tell me where, and I’ll bring the calm.',
-    link: { href: 'contact.html?service=project&note=I%20found%20you%20through%20the%20map%20on%20your%20About%20page.', label: 'Bring me a project', primary: true },
+    id: 'next', name: 'You’ve caught up with me', region: 'Galicia, Spain', tag: 'Now',
+    text: 'That’s the trip so far. These days you’ll find me in Galicia with the horses, running Equine Freedomplicity sessions for first-timers through to elite riders. New clients can start with a half-price taster.',
+    link: { href: 'contact.html?service=taster', label: 'Book a half-price taster', primary: true },
   };
 
   const root = document.getElementById('aboutMap');
-  if (!root) return;
+  const DOTS = window.ABOUT_GLOBE_DOTS;
+  if (!root || !DOTS) return;
   const map = root.querySelector('.about-map__map');
-  const route = root.querySelector('.about-map__route path');
+  const canvas = root.querySelector('.about-map__globe');
+  const ctx = canvas.getContext('2d');
   const card = root.querySelector('.about-map__card');
   const list = root.querySelector('.about-map__list');
   const stampsEl = root.querySelector('[data-stamps]');
+  const kmEl = root.querySelector('[data-km]');
   const tourBtn = root.querySelector('.about-map__tour');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Sphere maths ---------- */
+  const RAD = Math.PI / 180;
+  const vec = (lat, lon) => {
+    const c = Math.cos(lat * RAD);
+    return [c * Math.sin(lon * RAD), Math.sin(lat * RAD), c * Math.cos(lon * RAD)];
+  };
+  const angle = (a, b) => Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])));
+
+  const dots = new Float32Array((DOTS.length / 2) * 3);
+  for (let i = 0; i < DOTS.length / 2; i++) dots.set(vec(DOTS[i * 2] / 10, DOTS[i * 2 + 1] / 10), i * 3);
+  PLACES.forEach(p => { p.v = vec(p.lat, p.lon); });
+
+  const START = { lon: -42, lat: 22, zoom: 1 };
+  const view = { ...START };       // where the globe is facing now
+  let size = 0, dpr = 1;           // canvas box in CSS pixels
+  let tween = null;                // the turn in progress
+  let spinning = !reduce;          // slow idle turn until someone touches it
+  let onScreen = false;
+  let dragging = null;
+  let frame = 0, lastTime = 0;
+
+  const legs = [];                 // every leg flown so far: { a, b, km }
+  let legT = 1;                    // how much of the newest leg is drawn
+  let flown = 0, shownKm = 0;
+
+  // Turn a point on the unit sphere into canvas pixels for the current view
+  let sinL = 0, cosL = 1, sinP = 0, cosP = 1, R = 0, C = 0;
+  function aim() {
+    sinL = Math.sin(view.lon * RAD); cosL = Math.cos(view.lon * RAD);
+    sinP = Math.sin(view.lat * RAD); cosP = Math.cos(view.lat * RAD);
+    R = (size / 2) * view.zoom; C = size / 2;
+  }
+  function project(v, lift = 1) {
+    const x = (v[0] * cosL - v[2] * sinL) * lift;
+    const z1 = (v[0] * sinL + v[2] * cosL) * lift;
+    const y = v[1] * lift * cosP - z1 * sinP;
+    const z = v[1] * lift * sinP + z1 * cosP;
+    return [C + R * x, C - R * y, z, x * x + y * y];
+  }
+
+  function drawLeg(leg, upTo, color, width) {
+    const total = angle(leg.a, leg.b);
+    if (total < 0.001) return;
+    const steps = Math.max(12, Math.ceil(total / RAD / 2));
+    const height = 0.05 + 0.22 * (total / Math.PI);
+    const sin = Math.sin(total);
+    ctx.beginPath();
+    let pen = false;
+    for (let i = 0; i <= steps * upTo; i++) {
+      const t = i / steps;
+      const wa = Math.sin((1 - t) * total) / sin, wb = Math.sin(t * total) / sin;
+      const p = project([leg.a[0] * wa + leg.b[0] * wb, leg.a[1] * wa + leg.b[1] * wb, leg.a[2] * wa + leg.b[2] * wb],
+        1 + height * Math.sin(Math.PI * t));
+      // Seen when on the near side, or when it rises above the far horizon
+      if (p[2] > 0 || p[3] > 1) { pen ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); pen = true; } else pen = false;
+    }
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap = 'round'; ctx.stroke();
+  }
+
+  function draw() {
+    aim();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, size, size);
+    ctx.save();
+    ctx.beginPath(); ctx.arc(C, C, size / 2 - 0.5, 0, Math.PI * 2); ctx.clip();
+
+    const shade = ctx.createRadialGradient(C - R * 0.3, C - R * 0.35, R * 0.1, C, C, R);
+    shade.addColorStop(0, '#fdfbf7'); shade.addColorStop(0.75, '#f1eadf'); shade.addColorStop(1, '#e2d8c8');
+    ctx.fillStyle = shade;
+    ctx.beginPath(); ctx.arc(C, C, R, 0, Math.PI * 2); ctx.fill();
+
+    // Land
+    const dot = Math.max(0.9, R * 0.0105);
+    ctx.fillStyle = '#b9a88c';
+    ctx.beginPath();
+    for (let i = 0; i < dots.length; i += 3) {
+      const x = dots[i] * cosL - dots[i + 2] * sinL;
+      const z1 = dots[i] * sinL + dots[i + 2] * cosL;
+      const z = dots[i + 1] * sinP + z1 * cosP;
+      if (z <= 0.02) continue;
+      const px = C + R * x, py = C - R * (dots[i + 1] * cosP - z1 * sinP);
+      if (px < -4 || py < -4 || px > size + 4 || py > size + 4) continue;
+      const r = dot * (0.45 + 0.55 * z);
+      ctx.moveTo(px + r, py); ctx.arc(px, py, r, 0, Math.PI * 2);
+    }
+    ctx.fill();
+
+    // The trail so far, then the leg being flown
+    legs.forEach((leg, n) => {
+      const newest = n === legs.length - 1;
+      drawLeg(leg, newest ? legT : 1, newest ? '#2a2521' : 'rgba(51, 79, 64, 0.55)', newest ? 1.9 : 1.2);
+    });
+    ctx.restore();
+
+    ctx.strokeStyle = 'rgba(42, 37, 33, 0.16)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(C, C, size / 2 - 0.5, 0, Math.PI * 2); ctx.stroke();
+
+    // Pins ride on top as real buttons
+    const edge = (size / 2 - 6) ** 2;
+    PLACES.forEach((p, n) => {
+      const s = project(p.v);
+      const seen = s[2] > 0.12 && (s[0] - C) ** 2 + (s[1] - C) ** 2 < edge;
+      pins[n].classList.toggle('is-behind', !seen);
+      if (seen) { pins[n].style.left = `${s[0]}px`; pins[n].style.top = `${s[1]}px`; }
+    });
+  }
+
+  function tick(now) {
+    frame = 0;
+    const dt = Math.min(64, now - (lastTime || now));
+    lastTime = now;
+    let busy = false;
+
+    if (tween) {
+      const t = Math.min(1, (now - tween.start) / tween.time);
+      const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      view.lon = tween.from.lon + tween.dLon * e;
+      view.lat = tween.from.lat + (tween.to.lat - tween.from.lat) * e;
+      // Pull back a little mid-flight on long hops
+      view.zoom = tween.from.zoom + (tween.to.zoom - tween.from.zoom) * e - tween.dip * Math.sin(Math.PI * e);
+      if (tween.leg) legT = e;
+      if (t >= 1) tween = null; else busy = true;
+    } else if (spinning && onScreen && !dragging) {
+      view.lon += dt * 0.006;
+      busy = true;
+    }
+    if (shownKm !== flown) {
+      shownKm += (flown - shownKm) * Math.min(1, dt / 160);
+      if (Math.abs(flown - shownKm) < 6) shownKm = flown;
+      kmEl.textContent = `${(Math.round(shownKm / 10) * 10).toLocaleString('en-GB')} km`;
+      busy = true;
+    }
+    draw();
+    if (busy || dragging) request();
+    else lastTime = 0;
+  }
+  const request = () => { if (!frame) frame = requestAnimationFrame(tick); };
+
+  function turnTo(to, withLeg) {
+    spinning = false;
+    let dLon = ((to.lon - view.lon) % 360 + 540) % 360 - 180;
+    const far = Math.hypot(dLon * Math.cos(to.lat * RAD), to.lat - view.lat);
+    if (reduce) {
+      Object.assign(view, { lon: view.lon + dLon, lat: to.lat, zoom: to.zoom });
+      legT = 1; tween = null;
+    } else {
+      tween = {
+        start: performance.now(), time: 650 + Math.min(1100, far * 11),
+        from: { ...view }, to, dLon, leg: withLeg,
+        dip: far > 40 ? Math.min(0.45, Math.min(view.zoom, to.zoom) - 1) : 0,
+      };
+      if (withLeg) legT = 0;
+    }
+    request();
+  }
+
+  function fit() {
+    const box = map.clientWidth;
+    if (!box || box === size) return;
+    size = box; dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = canvas.height = Math.round(size * dpr);
+    request();
+  }
 
   const visited = new Set();
   let current = -1;
@@ -78,11 +244,7 @@
   const pins = PLACES.map((p, i) => {
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'about-map__pin' + (p.link && p.img ? ' about-map__pin--story' : '');
-    b.style.left = `${(p.x / VB_W) * 100}%`;
-    b.style.top = `${(p.y / VB_H) * 100}%`;
-    if (p.x / VB_W < 0.1) b.dataset.align = 'start';
-    if (p.x / VB_W > 0.9) b.dataset.align = 'end';
+    b.className = 'about-map__pin is-behind' + (p.link && p.img ? ' about-map__pin--story' : '');
     b.setAttribute('aria-label', `${p.name}, ${p.region}`);
     b.innerHTML = `<span class="about-map__dot" aria-hidden="true"></span><span class="about-map__label" aria-hidden="true">${p.name}</span>`;
     b.addEventListener('click', () => go(i));
@@ -90,7 +252,7 @@
     return b;
   });
 
-  // Index of places (the main control on phones)
+  // Index of places (also the way to reach stops on the far side)
   list.innerHTML = '';
   const chips = PLACES.map((p, i) => {
     const li = document.createElement('li');
@@ -104,31 +266,16 @@
     return b;
   });
 
-  function arc(a, b) {
-    // A gentle curve that bows upwards, like a flight path
-    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-    const dist = Math.hypot(b.x - a.x, b.y - a.y);
-    return `M${a.x} ${a.y} Q${mx} ${my - Math.min(40, dist * 0.35)} ${b.x} ${b.y}`;
-  }
-
-  function draw(from, to) {
-    if (!from || !to) { route.setAttribute('d', ''); return; }
-    route.setAttribute('d', arc(from, to));
-    route.classList.remove('is-drawing');
-    if (!reduce) { void route.getBoundingClientRect(); route.classList.add('is-drawing'); }
-  }
-
   function render(p, i) {
     const total = PLACES.length;
-    const stop = i < total ? `Stop ${i + 1} of ${total}` : 'Final stop';
-    const meta = [p.region, p.when].filter(Boolean).join(' · ');
+    const stop = i < total ? `Stop ${i + 1} of ${total}` : 'End of the trip';
+    const trip = flown ? `${(Math.round(flown / 10) * 10).toLocaleString('en-GB')} km flown together` : '';
+    const meta = (i < total ? [p.region, p.when] : [p.region, trip]).filter(Boolean).join(' · ');
     const link = p.link
       ? `<a class="about-map__go${p.link.primary ? ' about-map__go--primary' : ''}" href="${p.link.href}"${p.link.download ? ` download="${p.link.download}"` : ''}>${p.link.label}<span aria-hidden="true"> →</span></a>`
       : '<p class="about-map__soon">Story coming soon</p>';
     const prev = i > 0 ? '<button type="button" class="about-map__step" data-step="-1">← Back</button>' : '';
-    const next = i < total
-      ? `<button type="button" class="about-map__step about-map__step--next" data-step="1">${i === total - 1 ? 'Where next?' : 'Next stop'} →</button>`
-      : '<button type="button" class="about-map__step about-map__step--next" data-drop>Show me where →</button>';
+    const next = i < total ? `<button type="button" class="about-map__step about-map__step--next" data-step="1">${i === total - 1 ? 'End of the trip' : 'Next stop'} →</button>` : '';
     card.innerHTML = `
       ${p.img ? `<img class="about-map__photo" src="${p.img}" alt="">` : ''}
       <div class="about-map__card-body">
@@ -142,7 +289,6 @@
     card.classList.toggle('about-map__card--finale', i >= total);
     card.querySelectorAll('[data-step]').forEach(btn =>
       btn.addEventListener('click', () => go(current + Number(btn.dataset.step), true)));
-    card.querySelector('[data-drop]')?.addEventListener('click', dropFromButton);
     if (!reduce) { card.classList.remove('is-in'); void card.offsetWidth; card.classList.add('is-in'); }
   }
 
@@ -151,15 +297,19 @@
     i = Math.max(0, Math.min(total, i));
     const from = current >= 0 && current < total ? PLACES[current] : null;
     const p = i < total ? PLACES[i] : FINALE;
+    const moved = i !== current;
     current = i;
+    root.classList.add('is-touched');
 
     if (i < total) {
       visited.add(p.id);
-      draw(from, p);
+      const leg = from && moved ? { a: from.v, b: p.v, km: angle(from.v, p.v) * 6371 } : null;
+      if (leg) { legs.push(leg); flown += leg.km; }
+      turnTo({ lon: p.lon, lat: Math.max(-50, Math.min(50, p.lat - 4)), zoom: Math.max(view.zoom, 1.55) }, Boolean(leg));
     } else {
-      draw(null, null);
+      // Step back and take in the whole trail
+      turnTo({ lon: -20, lat: 24, zoom: 1 }, false);
     }
-    leaveYou();
     pins.forEach((pin, n) => {
       pin.classList.toggle('is-active', n === i);
       pin.classList.toggle('is-visited', visited.has(PLACES[n].id));
@@ -180,244 +330,51 @@
     if (matchMedia('(max-width: 900px)').matches) map.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   });
 
-  /* ---------- Your pin: the visitor puts themselves on the map ---------- */
-  const R_KM = 6371;
-  const toGeo = (x, y) => ({ lat: 62 - y / 1.2, lon: x - 130 });
-  const toXY = (lat, lon) => ({ x: lon + 130, y: (62 - lat) * 1.2 });
-  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-  const rad = d => d * Math.PI / 180;
-
-  function km(a, b) {
-    const dLat = rad(b.lat - a.lat), dLon = rad(b.lon - a.lon);
-    const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2;
-    return 2 * R_KM * Math.asin(Math.sqrt(h));
-  }
-
-  function distance(d) {
-    const round = (v, step) => Math.max(step, Math.round(v / step) * step);
-    const step = d < 100 ? 5 : d < 1000 ? 10 : 50;
-    const fmt = v => round(v, step).toLocaleString('en-GB');
-    return `${fmt(d)} km (${fmt(d * 0.6214)} miles)`;
-  }
-
-  const coords = g =>
-    `${Math.abs(Math.round(g.lat))}°${g.lat >= 0 ? 'N' : 'S'}, ${Math.abs(Math.round(g.lon))}°${g.lon >= 0 ? 'E' : 'W'}`;
-
-  const GEO = PLACES.map(p => toGeo(p.x, p.y));
-  const HOME = PLACES.findIndex(p => p.id === 'galicia');
-
-  // Land or sea? Read the dots of the map itself (best effort: without them we just skip the sea line).
-  let land = null;
-  fetch('about/world-dots.svg').then(r => r.ok ? r.text() : '').then(svg => {
-    const pts = [...svg.matchAll(/M([\d.]+) ([\d.]+)h0/g)].map(m => [Number(m[1]), Number(m[2])]);
-    if (pts.length) land = pts;
-  }).catch(() => {});
-
-  function onLand(x, y) {
-    if (!land) return true;
-    const reach = 2.4 * 2.4; // about two degrees, so coastal towns still count
-    return land.some(([px, py]) => (px - x) ** 2 + (py - y) ** 2 <= reach);
-  }
-
-  // A first guess for the Drop your pin button, from the visitor's clock. Nothing is sent anywhere.
-  const ZONES = {
-    'Europe/London': [52.5, -1.5], 'Europe/Dublin': [53.3, -7.5], 'Europe/Madrid': [40.4, -3.7], 'Europe/Lisbon': [39.5, -8.5],
-    'Europe/Paris': [47, 2.5], 'Europe/Amsterdam': [52.2, 5.3], 'Europe/Brussels': [50.7, 4.5], 'Europe/Berlin': [51, 10.5],
-    'Europe/Rome': [42.5, 12.5], 'Europe/Zurich': [47, 8.2], 'Europe/Vienna': [47.6, 14.5], 'Europe/Stockholm': [59.5, 16],
-    'Europe/Oslo': [60, 10.5], 'Europe/Copenhagen': [55.8, 10.5], 'Europe/Helsinki': [61, 25], 'Europe/Warsaw': [52, 19.5],
-    'Europe/Prague': [49.8, 15.5], 'Europe/Budapest': [47.2, 19.5], 'Europe/Athens': [38.5, 23], 'Europe/Istanbul': [39.5, 32],
-    'America/New_York': [41, -75], 'America/Toronto': [44, -79.5], 'America/Chicago': [39.5, -91], 'America/Denver': [39.5, -105.5],
-    'America/Phoenix': [33.8, -112], 'America/Los_Angeles': [37, -120], 'America/Vancouver': [50, -122], 'America/Anchorage': [61, -150],
-    'America/Mexico_City': [20, -100], 'America/Guatemala': [15, -90.5], 'America/Bogota': [4.5, -74], 'America/Lima': [-11, -76],
-    'America/Curacao': [12.2, -69], 'America/Aruba': [12.5, -70], 'America/Sao_Paulo': [-22, -48], 'America/Santiago': [-34, -71],
-    'America/Argentina/Buenos_Aires': [-35, -60], 'America/Buenos_Aires': [-35, -60],
-    'Africa/Johannesburg': [-27, 27], 'Africa/Nairobi': [0, 37.5], 'Africa/Lagos': [9, 8], 'Africa/Cairo': [28, 30.5], 'Africa/Casablanca': [32, -6.5],
-    'Asia/Dubai': [24, 54.5], 'Asia/Riyadh': [24.5, 45.5], 'Asia/Kolkata': [22, 79], 'Asia/Calcutta': [22, 79], 'Asia/Bangkok': [15, 101],
-    'Asia/Ho_Chi_Minh': [16, 107], 'Asia/Saigon': [16, 107], 'Asia/Singapore': [2.5, 103], 'Asia/Jakarta': [-7, 109],
-    'Asia/Hong_Kong': [23.5, 113.5], 'Asia/Shanghai': [33, 113], 'Asia/Tokyo': [36, 138.5], 'Asia/Seoul': [36.5, 127.8], 'Asia/Manila': [15, 121],
-    'Australia/Sydney': [-33, 149], 'Australia/Melbourne': [-37, 145], 'Australia/Brisbane': [-25, 149], 'Australia/Adelaide': [-32, 137],
-    'Australia/Perth': [-30, 118], 'Pacific/Auckland': [-39, 175.5], 'Pacific/Honolulu': [20.5, -157],
+  /* ---------- Spin it by hand ---------- */
+  map.addEventListener('pointerdown', e => {
+    if (e.target.closest('button')) return;
+    dragging = { id: e.pointerId, x: e.clientX, y: e.clientY };
+    map.setPointerCapture(e.pointerId);
+    map.classList.add('is-dragging');
+    root.classList.add('is-touched');
+    spinning = false; tween = null; legT = 1;
+    request();
+  });
+  map.addEventListener('pointermove', e => {
+    if (!dragging || e.pointerId !== dragging.id) return;
+    const perPx = 1 / (R * RAD);
+    view.lon -= (e.clientX - dragging.x) * perPx;
+    view.lat = Math.max(-60, Math.min(70, view.lat + (e.clientY - dragging.y) * perPx));
+    dragging.x = e.clientX; dragging.y = e.clientY;
+  });
+  const release = e => {
+    if (!dragging || e.pointerId !== dragging.id) return;
+    dragging = null;
+    map.classList.remove('is-dragging');
   };
-  const AREAS = { Europe: [49, 9], Africa: [6, 20], Asia: [32, 95], Australia: [-26, 134], America: [39, -98] };
+  map.addEventListener('pointerup', release);
+  map.addEventListener('pointercancel', release);
 
-  function guess() {
-    let zone = '';
-    try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { /* no guess */ }
-    const hit = ZONES[zone] || AREAS[zone.split('/')[0]];
-    return hit ? { ...toXY(hit[0], hit[1]), guessed: true } : { ...toXY(49, 9), guessed: false };
-  }
-
-  const you = { x: 0, y: 0, placed: false, active: false, guessed: false, name: '' };
-  let nearPin = null;
-
-  const youPin = document.createElement('button');
-  youPin.type = 'button';
-  youPin.className = 'about-map__you';
-  youPin.hidden = true;
-  youPin.setAttribute('aria-label', 'Your pin. Drag it, or use the arrow keys, to move it.');
-  youPin.innerHTML = '<span class="about-map__you-mark" aria-hidden="true"></span><span class="about-map__you-label" aria-hidden="true">You</span>';
-  map.appendChild(youPin);
+  // Zoom buttons and a nudge to have a go
+  const tools = document.createElement('div');
+  tools.className = 'about-map__zoom';
+  tools.innerHTML = '<button type="button" data-zoom="1.4" aria-label="Zoom in">+</button><button type="button" data-zoom="0.714" aria-label="Zoom out">−</button>';
+  tools.addEventListener('click', e => {
+    const by = Number(e.target.dataset.zoom);
+    if (!by) return;
+    root.classList.add('is-touched');
+    turnTo({ lon: view.lon, lat: view.lat, zoom: Math.max(1, Math.min(2.8, view.zoom * by)) }, false);
+  });
+  map.appendChild(tools);
 
   const hint = document.createElement('p');
   hint.className = 'about-map__hint';
-  hint.innerHTML = '<span aria-hidden="true">+</span> Tap the map to drop your own pin';
+  hint.textContent = 'Drag to spin';
   map.appendChild(hint);
 
-  function nearest(g) {
-    let best = 0, bestKm = Infinity;
-    GEO.forEach((pg, n) => { const d = km(g, pg); if (d < bestKm) { bestKm = d; best = n; } });
-    return { index: best, km: bestKm };
-  }
-
-  function leaveYou() {
-    you.active = false;
-    root.classList.remove('is-you');
-    youPin.classList.remove('is-active');
-    nearPin?.classList.remove('is-near');
-    nearPin = null;
-  }
-
-  // Move the pin and its flight path. The card only updates once the pin has settled.
-  function moveYou(x, y, animate) {
-    you.x = clamp(x, 2, VB_W - 2);
-    you.y = clamp(y, 3, VB_H - 2);
-    you.placed = true;
-    youPin.hidden = false;
-    youPin.style.left = `${(you.x / VB_W) * 100}%`;
-    youPin.style.top = `${(you.y / VB_H) * 100}%`;
-    youPin.dataset.align = you.x / VB_W > 0.9 ? 'end' : you.x / VB_W < 0.1 ? 'start' : '';
-
-    const near = nearest(toGeo(you.x, you.y));
-    if (nearPin !== pins[near.index]) {
-      nearPin?.classList.remove('is-near');
-      nearPin = pins[near.index];
-      nearPin.classList.add('is-near');
-    }
-    route.setAttribute('d', arc(PLACES[near.index], you));
-    route.classList.remove('is-drawing');
-    if (animate && !reduce) { void route.getBoundingClientRect(); route.classList.add('is-drawing'); }
-    return near;
-  }
-
-  function contactHref(g, near) {
-    const where = you.name.trim() ? `${you.name.trim()} (around ${coords(g)})` : `around ${coords(g)}`;
-    const note = `I dropped my pin on the map on your About page: ${where}, about ${distance(near.km)} from ${PLACES[near.index].name}.`;
-    return `contact.html?service=project&note=${encodeURIComponent(note)}`;
-  }
-
-  function showYou(x, y, opts = {}) {
-    const near = moveYou(x, y, true);
-    const g = toGeo(you.x, you.y);
-    const place = PLACES[near.index];
-    const dist = distance(near.km);
-    const dry = onLand(you.x, you.y);
-    you.active = true;
-    you.guessed = Boolean(opts.guessed);
-
-    pins.forEach(pin => { pin.classList.remove('is-active'); pin.setAttribute('aria-pressed', 'false'); });
-    chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
-    youPin.classList.add('is-active');
-    root.classList.add('is-you', 'has-you');
-
-    let title, text;
-    if (!dry) {
-      title = 'Off the map?';
-      text = `My map shows only sea under this pin, or an island too small for its dots. I was born on one of those, so it doesn’t put me off. The closest stop on my map is ${place.name}, about ${dist} away.`;
-    } else if (near.km < 200) {
-      title = 'Practically neighbours';
-      text = `Your pin is about ${dist} from ${place.name}, one of the stops on my map. Chances are I already know your corner of the world.`;
-    } else if (near.km < 1500) {
-      title = 'I’ve been close';
-      text = `The closest stop on my map is ${place.name}, about ${dist} from your pin. Near enough to feel familiar.`;
-    } else {
-      title = 'New ground';
-      text = `The closest I’ve been is ${place.name}, about ${dist} away. That makes your pin new ground for me, which is exactly how the riding school in Hanoi started.`;
-    }
-    const base = near.index === HOME ? '' : ` · ${distance(km(g, GEO[HOME]))} from my base in Galicia`;
-    const nudge = you.guessed
-      ? 'A rough guess from your clock. Drag the pin, or tap the map, to put it right.'
-      : 'Drag the pin, or tap the map, to move it.';
-
-    card.innerHTML = `
-      <div class="about-map__card-body">
-        <p class="about-map__stop">Your pin<span class="about-map__tag">You</span></p>
-        <h3 class="about-map__place">${title}</h3>
-        <p class="about-map__meta">${coords(g)}${base}</p>
-        <p class="about-map__text">${text} Everywhere is a possibility: tell me what needs setting up, training or wrangling here.</p>
-        <label class="about-map__name">
-          <span>What’s this place called?</span>
-          <input type="text" maxlength="60" autocomplete="off" placeholder="Town, yard or country">
-        </label>
-        <a class="about-map__go about-map__go--primary" href="${contactHref(g, near)}">Bring me here<span aria-hidden="true"> →</span></a>
-        <p class="about-map__nudge">${nudge}</p>
-        <div class="about-map__steps"><button type="button" class="about-map__step" data-back>← Back to my stops</button></div>
-      </div>`;
-    card.classList.add('about-map__card--finale');
-
-    const input = card.querySelector('.about-map__name input');
-    const cta = card.querySelector('.about-map__go');
-    input.value = you.name;
-    input.addEventListener('input', () => { you.name = input.value; cta.href = contactHref(g, near); });
-    card.querySelector('[data-back]').addEventListener('click', () => go(current >= 0 ? current : 0, true));
-    if (!reduce) { card.classList.remove('is-in'); void card.offsetWidth; card.classList.add('is-in'); }
-  }
-
-  function fromEvent(e) {
-    const r = map.getBoundingClientRect();
-    return { x: ((e.clientX - r.left) / r.width) * VB_W, y: ((e.clientY - r.top) / r.height) * VB_H };
-  }
-
-  // Tap anywhere that is not one of Sara's pins
-  map.addEventListener('click', e => {
-    if (e.target.closest('.about-map__pin, .about-map__you')) return;
-    const at = fromEvent(e);
-    showYou(at.x, at.y);
-  });
-
-  // Drag
-  let drag = null;
-  youPin.addEventListener('pointerdown', e => {
-    drag = { id: e.pointerId, moved: false, dx: fromEvent(e).x - you.x, dy: fromEvent(e).y - you.y };
-    youPin.setPointerCapture(e.pointerId);
-  });
-  youPin.addEventListener('pointermove', e => {
-    if (!drag || e.pointerId !== drag.id) return;
-    const at = fromEvent(e);
-    if (!drag.moved && Math.hypot(at.x - drag.dx - you.x, at.y - drag.dy - you.y) < 0.6) return;
-    drag.moved = true;
-    youPin.classList.add('is-dragging');
-    moveYou(at.x - drag.dx, at.y - drag.dy, false);
-  });
-  const drop = e => {
-    if (!drag || e.pointerId !== drag.id) return;
-    youPin.classList.remove('is-dragging');
-    drag = null;
-    showYou(you.x, you.y);
-  };
-  youPin.addEventListener('pointerup', drop);
-  youPin.addEventListener('pointercancel', drop);
-
-  // Arrow keys
-  youPin.addEventListener('keydown', e => {
-    const step = e.shiftKey ? 6 : 1.5;
-    const move = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
-    if (!move) return;
-    e.preventDefault();
-    showYou(you.x + move[0], you.y + move[1]);
-  });
-
-  function dropFromButton() {
-    if (you.placed) {
-      showYou(you.x, you.y, { guessed: you.guessed });
-    } else {
-      const g = guess();
-      showYou(g.x, g.y, { guessed: g.guessed });
-    }
-    if (matchMedia('(max-width: 900px)').matches) map.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    youPin.focus({ preventScroll: true });
-  }
-
-  root.querySelector('.about-map__drop')?.addEventListener('click', dropFromButton);
+  new ResizeObserver(fit).observe(map);
+  new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; if (onScreen) request(); }).observe(map);
 
   root.classList.add('is-ready');
+  fit();
 })();

@@ -1,7 +1,8 @@
 /* =============================================
-   ABOUT — "Where I've been" map
-   Dotted world map with pins, a card for the chosen place, a flight-path
-   line between stops, and a chip index underneath.
+   ABOUT — "Where I've been" globe
+   A dotted globe (canvas) with pins, a card for the chosen place, a trail
+   of the legs flown so far, and a chip index underneath.
+   Without the script it falls back to the flat dotted map image.
    ============================================= */
 
 .about-map {
@@ -66,47 +67,130 @@
   color: var(--h-green);
 }
 
-/* Stage: map beside the card on wide screens */
+.about-map__stamps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 28px;
+  flex-basis: 100%;
+}
+
+.about-map__stamps span {
+  white-space: nowrap;
+}
+
+
+/* Stage: globe beside the card on wide screens */
 .about-map__stage {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
-  gap: clamp(20px, 3vw, 40px);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
+  gap: clamp(24px, 5vw, 72px);
   align-items: center;
 }
 
+/* No script: the flat map */
 .about-map__map {
   position: relative;
   aspect-ratio: 295 / 129.6;
 }
 
-.about-map__dots,
-.about-map__route {
+.about-map__dots {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.about-map__route {
-  overflow: visible;
+.about-map__globe {
+  display: none;
+}
+
+/* Script running: the globe */
+.about-map.is-ready .about-map__map {
+  width: min(100%, 580px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  border-radius: 50%;
+  box-shadow: 0 40px 60px -42px rgba(42, 37, 33, 0.45);
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.about-map.is-ready .about-map__map.is-dragging {
+  cursor: grabbing;
+}
+
+.about-map.is-ready .about-map__dots {
+  display: none;
+}
+
+.about-map.is-ready .about-map__globe {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.about-map__zoom {
+  position: absolute;
+  right: 4%;
+  bottom: 4%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 3;
+}
+
+.about-map__zoom button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--h-line);
+  border-radius: 50%;
+  background: #fff;
+  font-family: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--h-ink);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.about-map__zoom button:hover {
+  background: var(--h-ink);
+  color: var(--h-paper);
+}
+
+.about-map__zoom button:focus-visible {
+  outline: 2px solid var(--h-green);
+  outline-offset: 2px;
+}
+
+.home .about-map__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(42, 37, 33, 0.82);
+  color: var(--h-paper);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
   pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 3;
 }
 
-.about-map__route path {
-  fill: none;
-  stroke: var(--h-green);
-  stroke-width: 0.45;
-  stroke-linecap: round;
-}
-
-.about-map__route path.is-drawing {
-  stroke-dasharray: 1 1;
-  stroke-dashoffset: 1;
-  animation: about-map-fly 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes about-map-fly {
-  to { stroke-dashoffset: 0; }
+.about-map.is-touched .about-map__hint {
+  opacity: 0;
 }
 
 /* Pins */
@@ -120,6 +204,11 @@
   background: transparent;
   cursor: pointer;
   z-index: 1;
+}
+
+/* Round the back of the globe */
+.about-map__pin.is-behind {
+  visibility: hidden;
 }
 
 .about-map__dot {
@@ -199,19 +288,11 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.about-map__pin[data-align="start"] .about-map__label { left: 0; transform: translate(0, 4px); }
-.about-map__pin[data-align="end"] .about-map__label { left: auto; right: 0; transform: translate(0, 4px); }
-
 .about-map__pin:hover .about-map__label,
 .about-map__pin:focus-visible .about-map__label,
 .about-map__pin.is-active .about-map__label {
   opacity: 1;
   transform: translate(-50%, 0);
-}
-
-.about-map__pin[data-align="start"]:is(:hover, :focus-visible, .is-active) .about-map__label,
-.about-map__pin[data-align="end"]:is(:hover, :focus-visible, .is-active) .about-map__label {
-  transform: translate(0, 0);
 }
 
 /* Card */
@@ -423,231 +504,6 @@
   color: var(--h-sand);
 }
 
-/* ---------- Your pin: the visitor on the map ---------- */
-.about-map.is-ready .about-map__map {
-  cursor: crosshair;
-}
-
-.about-map__drop {
-  cursor: pointer;
-  background: transparent;
-  font-family: inherit;
-}
-
-.about-map__hint {
-  position: absolute;
-  left: 36%;
-  bottom: 0;
-  margin: 0;
-  padding: 7px 14px 7px 10px;
-  border: 1px dashed rgba(42, 37, 33, 0.35);
-  border-radius: 999px;
-  background: rgba(244, 239, 231, 0.9);
-  font-size: 0.75rem;
-  color: var(--h-muted);
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.about-map__hint span {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin-right: 6px;
-  border-radius: 50%;
-  background: var(--h-ink);
-  color: var(--h-paper);
-  font-weight: 600;
-  line-height: 16px;
-  text-align: center;
-}
-
-.about-map:not(.is-ready) .about-map__hint,
-.about-map.has-you .about-map__hint {
-  opacity: 0;
-}
-
-/* A teardrop marker whose tip sits on the chosen spot */
-.about-map__you {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  margin: -44px 0 0 -22px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: grab;
-  touch-action: none;
-  z-index: 3;
-}
-
-.about-map__you[hidden] {
-  display: none;
-}
-
-.about-map__you.is-dragging {
-  cursor: grabbing;
-}
-
-.about-map__you-mark {
-  position: absolute;
-  left: 12px;
-  bottom: 4px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50% 50% 50% 0;
-  background: var(--h-ink);
-  box-shadow: 0 6px 14px rgba(42, 37, 33, 0.28);
-  transform: rotate(-45deg);
-  transform-origin: 50% 50%;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.about-map__you-mark::after {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  background: var(--h-paper);
-}
-
-.about-map__you.is-active .about-map__you-mark {
-  background: var(--h-green);
-  animation: about-map-drop 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) both;
-}
-
-.about-map__you.is-dragging .about-map__you-mark {
-  animation: none;
-  transform: translateY(-5px) rotate(-45deg) scale(1.12);
-}
-
-@keyframes about-map-drop {
-  from { transform: translateY(-18px) rotate(-45deg); opacity: 0; }
-  to   { transform: rotate(-45deg); opacity: 1; }
-}
-
-.about-map__you:focus-visible {
-  outline: none;
-}
-
-.about-map__you:focus-visible .about-map__you-mark {
-  outline: 2px solid var(--h-ink);
-  outline-offset: 3px;
-}
-
-.about-map__you-label {
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% - 8px);
-  transform: translateX(-50%);
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--h-green);
-  color: var(--h-paper);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-.about-map__you[data-align="start"] .about-map__you-label { left: 8px; transform: none; }
-.about-map__you[data-align="end"] .about-map__you-label { left: auto; right: 8px; transform: none; }
-
-/* The stop of Sara's that is closest to the visitor */
-.about-map__pin.is-near {
-  z-index: 2;
-}
-
-.about-map__pin.is-near .about-map__dot {
-  background: #e6af2e;
-  border-color: #b8860b;
-  box-shadow: 0 0 0 5px rgba(230, 175, 46, 0.3);
-  transform: scale(1.25);
-}
-
-/* Its name goes underneath, so it never sits behind the "You" label */
-.about-map.is-you .about-map__pin.is-near .about-map__label {
-  top: calc(100% - 2px);
-  bottom: auto;
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-.about-map.is-you .about-map__pin.is-near[data-align] .about-map__label {
-  transform: translate(0, 0);
-}
-
-/* Card fields for the visitor's pin (sits on the green card) */
-.about-map__name {
-  display: block;
-  margin-top: 18px;
-}
-
-.about-map__name span {
-  display: block;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #d9d2c5;
-}
-
-.about-map__name input {
-  width: 100%;
-  margin-top: 6px;
-  padding: 8px 0;
-  border: 0;
-  border-bottom: 1px solid rgba(244, 239, 231, 0.5);
-  border-radius: 0;
-  background: transparent;
-  font-family: var(--h-serif);
-  font-size: 1.35rem;
-  color: var(--h-paper);
-}
-
-.about-map__name input::placeholder {
-  color: rgba(244, 239, 231, 0.5);
-  font-style: italic;
-}
-
-.about-map__name input:focus {
-  outline: none;
-  border-bottom-color: var(--h-paper);
-}
-
-.home .about-map__nudge {
-  margin: 14px 0 0;
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: #d9d2c5;
-}
-
-.about-map__card--finale .about-map__tag {
-  background: rgba(244, 239, 231, 0.16);
-  color: var(--h-paper);
-}
-
-.about-map__card--finale .about-map__step:hover {
-  color: var(--h-paper);
-}
-
-.home .about-map__go--primary:hover {
-  background: #fff;
-}
-
-@media (max-width: 600px) {
-  /* The map is too small for a note on top of it: the button and intro do the inviting */
-  .about-map__hint {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-map__you.is-active .about-map__you-mark { animation: none; }
-}
-
 @media (max-width: 900px) {
   .about-map__head,
   .about-map__stage {
@@ -658,6 +514,36 @@
   }
   .about-map__card {
     min-height: 0;
+  }
+  /* Small screens: keep Back and Next right under the globe, and let the photo follow the words */
+  .about-map.is-ready .about-map__map {
+    width: min(100%, 320px);
+  }
+  .about-map.is-ready .about-map__card,
+  .about-map.is-ready .about-map__card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .about-map.is-ready .about-map__card-body {
+    align-self: stretch;
+  }
+  .about-map.is-ready .about-map__photo {
+    order: 2;
+  }
+  .about-map.is-ready .about-map__stop {
+    align-self: stretch;
+  }
+  .about-map.is-ready .about-map__steps {
+    order: -1;
+    align-self: stretch;
+    margin: 0 0 18px;
+    padding: 0 0 12px;
+    border-top: 0;
+    border-bottom: 1px solid var(--h-line);
+  }
+  .about-map.is-ready .about-map__card--finale .about-map__steps {
+    border-color: rgba(244, 239, 231, 0.25);
   }
 }
 
@@ -674,13 +560,14 @@
   .about-map__label {
     display: none;
   }
+  .about-map__pin.is-active .about-map__label {
+    display: block;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-map__route path.is-drawing,
   .about-map__card.is-in,
   .about-map__pin.is-active::after {
     animation: none;
   }
-  .about-map__route path.is-drawing { stroke-dashoffset: 0; }
 }
