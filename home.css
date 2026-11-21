@@ -2558,6 +2558,251 @@ a.home-project {
   }
 }
 
+/* ---------- Wrangle & Bloom: layered parallax (parallax.js) ---------- */
+.wb {
+  overflow-x: clip;
+}
+
+[data-parallax],
+[data-parallax-range] {
+  will-change: transform;
+}
+
+.wb-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.wb-hero__word {
+  position: absolute;
+  z-index: -1;
+  right: -3%;
+  bottom: -0.18em;
+  font-family: var(--h-serif);
+  font-style: italic;
+  font-size: clamp(9rem, 26vw, 24rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(51, 79, 64, 0.22);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.wb-hero__text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sections after the hero sit above its drifting layers */
+.wb-facts,
+.wb-done {
+  position: relative;
+  z-index: 1;
+}
+
+.wb-hero__stack {
+  position: relative;
+}
+
+.wb-hero__backdrop {
+  position: absolute;
+  inset: 7% -7% -5% 9%;
+  background: var(--h-sand);
+}
+
+.wb-hero__photo {
+  position: relative;
+  z-index: 1;
+}
+
+.wb-hero__photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 30% center;
+}
+
+.wb-hero__chip {
+  position: absolute;
+  z-index: 2;
+  left: -16%;
+  bottom: 9%;
+  width: 46%;
+  border: 6px solid var(--h-paper);
+  box-shadow: 0 24px 48px -20px rgba(42, 37, 33, 0.45);
+}
+
+.wb-hero__chip img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.wb-hero__seal {
+  position: absolute;
+  z-index: 3;
+  top: 4%;
+  right: -7%;
+  width: clamp(96px, 10vw, 128px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--h-green);
+  color: var(--h-paper);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 16px 32px -16px rgba(42, 37, 33, 0.5);
+}
+
+.wb-hero__seal svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: wbSealSpin 22s linear infinite;
+}
+
+.wb-hero__seal text {
+  fill: currentColor;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.wb-hero__seal span {
+  font-family: var(--h-serif);
+  font-style: italic;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+@keyframes wbSealSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Photos with depth inside their arch */
+.wb-feature__media,
+.wb-next__media {
+  position: relative;
+}
+
+.wb-depth {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.wb-feature__media .wb-depth {
+  aspect-ratio: 3 / 4;
+}
+
+.wb-next__media .wb-depth {
+  aspect-ratio: 4 / 5;
+}
+
+.wb-feature__media .wb-depth img,
+.wb-next__media .wb-depth img {
+  position: absolute;
+  top: -11%;
+  left: 0;
+  width: 100%;
+  height: 122%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.wb-depth__backdrop {
+  position: absolute;
+  inset: 8% 10% -6% -10%;
+  background: var(--h-sand);
+}
+
+.wb-feature--flip .wb-depth__backdrop {
+  inset: 8% -10% -6% 10%;
+}
+
+/* Testimonial as a layered scene */
+.wb-scene {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(120px, 18vw, 220px);
+  background: var(--h-ink);
+  border-top: 0;
+}
+
+.wb-scene__sky {
+  position: absolute;
+  z-index: -2;
+  inset: -22% 0;
+}
+
+.wb-scene__sky img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wb-scene__sky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(42, 37, 33, 0.72), rgba(42, 37, 33, 0.5) 50%, rgba(42, 37, 33, 0.78));
+}
+
+.wb-scene__mark {
+  position: absolute;
+  z-index: -1;
+  left: 4%;
+  top: -0.12em;
+  font-family: var(--h-serif);
+  font-size: clamp(16rem, 34vw, 30rem);
+  line-height: 1;
+  color: rgba(244, 239, 231, 0.12);
+  pointer-events: none;
+  user-select: none;
+}
+
+.wb-scene__content {
+  position: relative;
+}
+
+.home .wb-scene blockquote p {
+  color: var(--h-paper);
+}
+
+.home .wb-scene blockquote footer {
+  color: rgba(244, 239, 231, 0.75);
+}
+
+@media (max-width: 800px) {
+  .wb-hero__media {
+    margin-inline: 8% 0;
+  }
+  .wb-hero__chip {
+    left: -10%;
+    width: 42%;
+  }
+  .wb-hero__seal {
+    right: -3%;
+  }
+  .wb-depth__backdrop,
+  .wb-feature--flip .wb-depth__backdrop {
+    inset: 6% -6% -4% 6%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-hero__seal svg {
+    animation: none;
+  }
+}
+
 /* =============================================
    PHOTO PAGES — wall preview and format picker (product.js)
    ============================================= */

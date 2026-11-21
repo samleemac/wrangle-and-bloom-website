@@ -38,8 +38,9 @@
   <main class="wb">
 
     <!-- Hero -->
-    <header class="wb-hero">
-      <div class="wb-hero__text">
+    <header class="wb-hero" data-parallax-root>
+      <span class="wb-hero__word" data-parallax="0.35" aria-hidden="true">Bloom</span>
+      <div class="wb-hero__text" data-parallax="-0.06">
         <p class="home-label reveal">Wrangle &amp; Bloom</p>
         <h1 class="wb-hero__title reveal reveal--d1">Crazy ideas, <em>wrangled</em> until they bloom.</h1>
         <p class="wb-hero__sub reveal reveal--d2">Wrangle &amp; Bloom is where I take on hands-on projects: setting up businesses, building teams that can run without me, and bringing calm to the chaos. On home turf or a remote island abroad, everywhere is a possibility.</p>
@@ -49,7 +50,22 @@
         </div>
       </div>
       <figure class="wb-hero__media reveal reveal--d2">
-        <img src="sara2.png" alt="Sara MacKinley-de Jong cheek to cheek with a horse, in black and white" class="home-arch">
+        <div class="wb-hero__stack">
+          <span class="wb-hero__backdrop home-arch" data-parallax="0.12" aria-hidden="true"></span>
+          <div class="wb-hero__photo" data-parallax="0.06">
+            <img src="sara2.png" alt="Sara MacKinley-de Jong cheek to cheek with a horse, in black and white" class="home-arch">
+          </div>
+          <div class="wb-hero__chip" data-parallax="-0.22" aria-hidden="true">
+            <img src="projects/vietnam-arena.png" alt="">
+          </div>
+          <div class="wb-hero__seal" data-parallax="-0.4" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <defs><path id="wbSealPath" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+              <text><textPath href="#wbSealPath" textLength="270" lengthAdjust="spacing">Wrangle &amp; Bloom &middot; crazy ideas, wrangled &middot;</textPath></text>
+            </svg>
+            <span>&amp;</span>
+          </div>
+        </div>
       </figure>
     </header>
 
@@ -71,7 +87,10 @@
 
         <article class="wb-feature">
           <figure class="wb-feature__media reveal">
-            <img src="projects/vietnam-interview.png" alt="Sara MacKinley-de Jong being interviewed beside a horse at the riding school in Hanoi" class="home-arch" loading="lazy">
+            <span class="wb-depth__backdrop home-arch" data-parallax="0.07" aria-hidden="true"></span>
+            <div class="wb-depth home-arch">
+              <img data-parallax-range="0.1" src="projects/vietnam-interview.png" alt="Sara MacKinley-de Jong being interviewed beside a horse at the riding school in Hanoi" loading="lazy">
+            </div>
           </figure>
           <div class="wb-feature__text reveal reveal--d1">
             <p class="wb-feature__meta">Hanoi, Vietnam &middot; 2014</p>
@@ -84,7 +103,10 @@
 
         <article class="wb-feature wb-feature--flip" id="italy">
           <figure class="wb-feature__media reveal">
-            <img src="projects/sports-horse-foal.jpg" alt="Bay foal with a white star standing in a green paddock" class="home-arch" loading="lazy">
+            <span class="wb-depth__backdrop home-arch" data-parallax="0.07" aria-hidden="true"></span>
+            <div class="wb-depth home-arch">
+              <img data-parallax-range="0.1" src="projects/sports-horse-foal.jpg" alt="Bay foal with a white star standing in a green paddock" loading="lazy">
+            </div>
           </figure>
           <div class="wb-feature__text reveal reveal--d1">
             <p class="wb-feature__meta">Italy and the UK</p>
@@ -96,8 +118,12 @@
     </section>
 
     <!-- Testimonial -->
-    <section class="home-section home-quote wb-quote" aria-label="Testimonial">
-      <div class="home-container">
+    <section class="home-quote wb-quote wb-scene" aria-label="Testimonial" data-parallax-root>
+      <div class="wb-scene__sky" data-parallax-range="0.22" aria-hidden="true">
+        <img src="projects/vietnam-hero.jpg" alt="" loading="lazy">
+      </div>
+      <span class="wb-scene__mark" data-parallax="0.2" aria-hidden="true">&ldquo;</span>
+      <div class="home-container wb-scene__content" data-parallax="-0.08">
         <blockquote class="reveal">
           <p>&ldquo;Sara is brilliant, watching her train staff to take over from her once the riding school had been set up was a breath of fresh air.&rdquo;</p>
           <footer>Faye Ranch &middot; Hoof Care Professional</footer>
@@ -109,7 +135,9 @@
     <section class="wb-next" id="next">
       <div class="home-container wb-next__grid">
         <figure class="wb-next__media reveal">
-          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80" alt="Coffee and dessert on a table" class="home-arch" loading="lazy">
+          <div class="wb-depth home-arch">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80" alt="Coffee and dessert on a table" data-parallax-range="0.1" loading="lazy">
+          </div>
         </figure>
         <div class="wb-next__text reveal reveal--d1">
           <p class="home-label">What's in the making</p>
@@ -242,6 +270,7 @@
     reveals.forEach(el => revealObserver.observe(el));
 
   </script>
+  <script src="parallax.js" defer></script>
 
 </body>
 </html>
