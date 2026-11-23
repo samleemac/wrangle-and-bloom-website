@@ -1456,3 +1456,34 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 12px;
   }
 }
+
+/* =============================================
+   PAGE TRANSITIONS ON PHONES AND TABLETS
+   Desktop uses the swup arch curtain (site.js). On touch or narrow
+   screens pages load normally and the browser fades between them
+   itself, off the main thread. Keep the media query in step with
+   `handheld` in site.js. Browsers without support just load the page.
+   ============================================= */
+@media (pointer: coarse), (max-width: 820px) {
+  @media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+
+    ::view-transition-old(root) {
+      animation: vt-fade-out 0.18s ease-in both;
+    }
+
+    ::view-transition-new(root) {
+      animation: vt-rise-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+  }
+}
+
+@keyframes vt-fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes vt-rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+}

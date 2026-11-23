@@ -1,6 +1,7 @@
 /* =============================================
    WRANGLE & BLOOM — smooth scroll and scroll choreography
-   Lenis:  smooth, eased scrolling; also drives the parallax layers
+   Lenis:  smooth, eased scrolling with a mouse or trackpad (not on touch
+           screens, which scroll natively); also drives the parallax layers
            (parallax.js) on every frame so they glide with the page.
    GSAP:   - headlines rise line by line out of a mask (SplitText)
            - the at-a-glance numbers count up when they come into view
@@ -26,19 +27,24 @@
   // Arriving through a page transition: wait for the curtain to lift first
   var arrive = window.WB && WB.arriving ? 0.55 : 0.15;
 
-  /* ---------- Lenis smooth scroll ---------- */
-  var lenis = new window.Lenis({
-    lerp: 0.09,
-    anchors: { offset: -72 },
-    autoRaf: false
-  });
-  lenis.on('scroll', function () {
-    ScrollTrigger.update();
-    if (window.WBParallax) window.WBParallax.update();
-  });
+  /* ---------- Lenis smooth scroll (mouse and trackpad only) ----------
+     Touch scrolling is already smooth and Lenis leaves it native anyway,
+     so phones skip it and save the work it does on every frame. */
+  var lenis = null;
   function raf(time) { lenis.raf(time * 1000); }
-  gsap.ticker.add(raf);
-  gsap.ticker.lagSmoothing(0);
+  if (!window.matchMedia('(pointer: coarse)').matches) {
+    lenis = new window.Lenis({
+      lerp: 0.09,
+      anchors: { offset: -72 },
+      autoRaf: false
+    });
+    lenis.on('scroll', function () {
+      ScrollTrigger.update();
+      if (window.WBParallax) window.WBParallax.update();
+    });
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+  }
 
   /* ---------- Headlines: lines rise out of a mask ---------- */
   var heads = page.querySelectorAll('.wb-hero__title, .home-heading, .wb-feature__title');
@@ -120,7 +126,9 @@
     tweens.forEach(function (t) { t.kill(); });
     ScrollTrigger.getAll().forEach(function (t) { t.kill(); });
     splits.forEach(function (s) { s.revert(); });
-    gsap.ticker.remove(raf);
-    lenis.destroy();
+    if (lenis) {
+      gsap.ticker.remove(raf);
+      lenis.destroy();
+    }
   });
 })();

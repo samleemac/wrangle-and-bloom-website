@@ -11,6 +11,9 @@
      WB.onLeave(fn); it runs just before the page is swapped out.
    - photography.html (the camera viewfinder), downloads, new-tab links and
      non-page files always load normally.
+   - Phones and tablets (touch, or narrow screens) skip swup: swapping a page
+     in JavaScript stalls slower phones mid-animation. They load pages
+     normally and the browser's own view transition (styles.css) fades them.
    ============================================= */
 (function () {
   var leaving = [];
@@ -26,6 +29,8 @@
   };
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Keep in step with the @view-transition media query in styles.css
+  var handheld = window.matchMedia('(pointer: coarse), (max-width: 820px)');
 
   /* ---------- Shared page setup ---------- */
   function setUpPage() {
@@ -192,7 +197,7 @@
   function start() {
     document.querySelectorAll('script[src][data-once]').forEach(function (s) { loadedOnce[s.src] = true; });
     setUpPage();
-    if (!window.Swup || !document.getElementById('swup')) return;
+    if (handheld.matches || !window.Swup || !document.getElementById('swup')) return;
 
     makeCurtain();
     var swup = new window.Swup({

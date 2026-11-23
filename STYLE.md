@@ -31,4 +31,5 @@ Every editorial page loads `site.js` in the head and wraps its body in `<div id=
 - Page scripts inside `#swup` run again on every visit. Wrap inline code in `(() => { ... })();`. Anything that keeps running (window listeners, timers, `requestAnimationFrame` loops) must stop in `WB.onLeave(fn)`.
 - Libraries load once: mark them `data-once`.
 - `photography.html` is left out: links to it, downloads, new-tab links and files load normally.
+- Phones and tablets (touch, or screens up to 820px) skip swup and Lenis. They load pages normally, and the browser's own view transition in `styles.css` fades them. Keep that media query in step with `handheld` in `site.js`.
 - Wrangle & Bloom only: Lenis smooth scroll and GSAP (ScrollTrigger, SplitText) in `wb-motion.js`, parallax in `parallax.js`. Libraries are kept in `vendor/`.
