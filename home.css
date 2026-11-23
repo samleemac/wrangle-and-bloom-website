@@ -3136,56 +3136,12 @@ a.home-project {
   }
 }
 
-/* =============================================
-   PAGE TRANSITIONS — green arch curtain (site.js)
-   Rises from below to cover the old page, then lifts away
-   to reveal the new one. Hidden when not in use.
-   ============================================= */
-.wb-curtain {
-  --arch: 38vw;
-  position: fixed;
-  z-index: 10000;
-  top: 0;
-  left: -12vw;
-  width: 124vw;
-  height: calc(100vh + var(--arch));
-  height: calc(100lvh + var(--arch));
-  background: #334f40;
-  border-radius: 50% 50% 0 0 / var(--arch) var(--arch) 0 0;
-  transform: translateY(100%);
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.wb-curtain.is-active {
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.wb-curtain__mark {
-  position: absolute;
-  left: 50%;
-  top: calc(var(--arch) + 50vh);
-  top: calc(var(--arch) + 50svh);
-  transform: translate(-50%, -50%);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-style: italic;
-  font-size: clamp(4rem, 9vw, 7rem);
-  line-height: 1;
-  color: #f4efe7;
-  opacity: 0.9;
-}
+/* Page transitions: the curtain styles live in site.js so a stylesheet swap can never unstyle it */
 
 /* Focus moves to the new page after a transition; no ring on the page itself */
 #swup main:focus,
 #swup:focus {
   outline: none;
-}
-
-@media (max-width: 800px) {
-  .wb-curtain {
-    --arch: 60vw;
-  }
 }
 
 /* ---------- Wrangle & Bloom motion (wb-motion.js) ---------- */

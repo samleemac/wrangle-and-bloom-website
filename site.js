@@ -77,7 +77,25 @@
   var curtain;
   var EASE = 'cubic-bezier(0.76, 0, 0.24, 1)';
 
+  // The curtain's own styles. They live here, not in home.css, so nothing
+  // that happens to the page's stylesheets mid-swap can unstyle the curtain.
+  var CURTAIN_CSS =
+    '.wb-curtain{--arch:38vw;position:fixed;z-index:10000;top:0;left:-12vw;width:124vw;' +
+    'height:calc(100vh + var(--arch));height:calc(100lvh + var(--arch));background:#334f40;' +
+    'border-radius:50% 50% 0 0/var(--arch) var(--arch) 0 0;transform:translateY(100%);' +
+    'visibility:hidden;pointer-events:none;will-change:transform;contain:strict}' +
+    '.wb-curtain.is-active{visibility:visible;pointer-events:auto}' +
+    '.wb-curtain__mark{position:absolute;left:50%;top:calc(var(--arch) + 50vh);' +
+    'top:calc(var(--arch) + 50svh);transform:translate(-50%,-50%);' +
+    'font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;' +
+    'font-size:clamp(4rem,9vw,7rem);line-height:1;color:#f4efe7;opacity:.9}' +
+    '@media (max-width:800px){.wb-curtain{--arch:60vw}}';
+
   function makeCurtain() {
+    var style = document.createElement('style');
+    style.id = 'wb-curtain-style';
+    style.textContent = CURTAIN_CSS;
+    document.head.appendChild(style);
     curtain = document.createElement('div');
     curtain.className = 'wb-curtain';
     curtain.setAttribute('aria-hidden', 'true');
@@ -85,55 +103,86 @@
     document.body.appendChild(curtain);
   }
 
-  function play(keyframes, duration) {
-    if (reduce.matches || !curtain.animate) return Promise.resolve();
-    var anim = curtain.animate(keyframes, { duration: duration, easing: EASE, fill: 'forwards' });
-    return anim.finished.catch(function () {});
+  // The curtain always moves on from wherever it is, so a second click
+  // mid-transition carries on smoothly instead of snapping back to the start.
+  var state = 'idle';   // idle | covering | covered | uncovering
+  var moving = null;
+
+  function moveTo(target, duration) {
+    var from = curtain.classList.contains('is-active')
+      ? getComputedStyle(curtain).transform
+      : 'translateY(100%)';
+    curtain.getAnimations().forEach(function (a) { a.cancel(); });
+    curtain.classList.add('is-active');
+    if (reduce.matches || !curtain.animate) {
+      curtain.style.transform = target;
+      return Promise.resolve();
+    }
+    curtain.style.transform = from === 'none' ? '' : from;
+    var anim = curtain.animate([{ transform: from === 'none' ? 'translateY(100%)' : from }, { transform: target }],
+      { duration: duration, easing: EASE, fill: 'forwards' });
+    return anim.finished.then(function () { curtain.style.transform = target; }, function () {});
   }
 
   // Off screen below -> arch rises until its flat body fills the screen
   function cover() {
-    curtain.classList.add('is-active');
-    return play([
-      { transform: 'translateY(100%)' },
-      { transform: 'translateY(calc(-1 * var(--arch)))' }
-    ], 620);
+    if (state === 'covered') return Promise.resolve();
+    if (state === 'covering') return moving;
+    state = 'covering';
+    moving = moveTo('translateY(calc(-1 * var(--arch)))', 620).then(function () {
+      if (state === 'covering') state = 'covered';
+    });
+    return moving;
   }
 
   // Lifts on up and away, revealing the new page from the bottom
   function uncover() {
-    return play([
-      { transform: 'translateY(calc(-1 * var(--arch)))' },
-      { transform: 'translateY(-100%)' }
-    ], 720).then(function () {
-      curtain.classList.remove('is-active');
+    state = 'uncovering';
+    moving = moveTo('translateY(-100%)', 720).then(function () {
+      if (state !== 'uncovering') return; // a new visit took over mid-lift
+      state = 'idle';
       curtain.getAnimations().forEach(function (a) { a.cancel(); });
+      curtain.style.transform = '';
+      curtain.classList.remove('is-active');
     });
+    return moving;
   }
 
-  /* ---------- Head: page stylesheets and description ---------- */
+  /* ---------- Head: page stylesheets and description ----------
+     Stylesheets that both pages share are never moved or re-added: a moved
+     <link> is dropped and fetched again (Vercel makes the browser re-check
+     it), which unstyles the page for a few frames. New ones go in at the
+     same place as on the next page; old ones go once the new ones load. */
   function syncHead(nextDoc) {
     var head = document.head;
     var current = {};
     head.querySelectorAll('link[rel="stylesheet"]').forEach(function (link) {
       current[link.href] = link;
     });
-    var wanted = Array.prototype.slice.call(nextDoc.head.querySelectorAll('link[rel="stylesheet"]'));
+    var wanted = Array.prototype.slice.call(nextDoc.head.querySelectorAll('link[rel="stylesheet"]'))
+      .map(function (link) { return new URL(link.getAttribute('href'), location.href).href; });
     var keep = {};
     var loads = [];
 
-    // Same order as the next page, so the cascade matches a full load
-    wanted.forEach(function (next) {
-      var href = new URL(next.getAttribute('href'), location.href).href;
+    wanted.forEach(function (href, i) {
       keep[href] = true;
-      var link = current[href];
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = href;
-        loads.push(new Promise(function (done) { link.onload = link.onerror = done; }));
+      if (current[href]) return;
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      loads.push(new Promise(function (done) { link.onload = link.onerror = done; }));
+      // Before the next stylesheet in the new page's order that is already here,
+      // otherwise straight after the last stylesheet currently in the head
+      var before = null;
+      for (var k = i + 1; k < wanted.length && !before; k++) before = current[wanted[k]] || null;
+      if (before) {
+        head.insertBefore(link, before);
+      } else {
+        var sheets = head.querySelectorAll('link[rel="stylesheet"]');
+        var last = sheets[sheets.length - 1];
+        head.insertBefore(link, last ? last.nextSibling : null);
       }
-      head.appendChild(link);
+      current[href] = link;
     });
 
     // Keep the description and canonical address in step with the page shown
@@ -148,6 +197,21 @@
         if (!keep[href]) current[href].remove();
       });
     });
+  }
+
+  /* ---------- Hold the curtain until the new page is ready to show ----------
+     Fonts and the first images on screen, capped so a slow image
+     never keeps the curtain down for long. */
+  function pageReady() {
+    var waits = [];
+    if (document.fonts && document.fonts.ready) waits.push(document.fonts.ready);
+    var fold = window.innerHeight * 1.2;
+    document.querySelectorAll('#swup img').forEach(function (img) {
+      if (img.loading === 'lazy' || img.getBoundingClientRect().top > fold) return;
+      if (img.decode) waits.push(img.decode().catch(function () {}));
+    });
+    var cap = new Promise(function (done) { setTimeout(done, 700); });
+    return Promise.race([Promise.all(waits), cap]);
   }
 
   /* ---------- Scripts inside #swup run again after each swap ---------- */
@@ -210,7 +274,7 @@
     });
 
     swup.hooks.replace('animation:out:await', cover);
-    swup.hooks.replace('animation:in:await', uncover);
+    swup.hooks.replace('animation:in:await', function () { return pageReady().then(uncover); });
 
     swup.hooks.before('content:replace', function (visit) {
       WB.leave();

@@ -30,6 +30,7 @@ Every editorial page loads `site.js` in the head and wraps its body in `<div id=
 - Shared nav, scrolled-nav and `.reveal` code lives in `site.js`. Do not copy it back into pages.
 - Page scripts inside `#swup` run again on every visit. Wrap inline code in `(() => { ... })();`. Anything that keeps running (window listeners, timers, `requestAnimationFrame` loops) must stop in `WB.onLeave(fn)`.
 - Libraries load once: mark them `data-once`.
+- The curtain's styles live in `site.js`, not `home.css`, so a stylesheet swap can never unstyle it. During a swap, stylesheets both pages share are left exactly where they are: moving a `<link>` makes the browser fetch it again and drop its styles for a few frames.
 - `photography.html` is left out: links to it, downloads, new-tab links and files load normally.
 - Phones and tablets (touch, or screens up to 820px) skip swup and Lenis. They load pages normally, and the browser's own view transition in `styles.css` fades them. Keep that media query in step with `handheld` in `site.js`.
 - Wrangle & Bloom only: Lenis smooth scroll and GSAP (ScrollTrigger, SplitText) in `wb-motion.js`, parallax in `parallax.js`. Libraries are kept in `vendor/`.
