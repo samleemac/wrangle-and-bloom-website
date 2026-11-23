@@ -6,7 +6,8 @@
                               height between entering and leaving the screen.
                               Used for photos inside a cropped frame.
    Reference box: closest [data-parallax-root], otherwise the parent element, so
-   an element's own transform never feeds back into its measurement. */
+   an element's own transform never feeds back into its measurement.
+   Runs again on each visit when page transitions (site.js) bring the page in. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var items = Array.prototype.slice.call(
@@ -85,4 +86,15 @@
   function apply() { reduce.matches ? stop() : start(); }
   if (reduce.addEventListener) reduce.addEventListener('change', apply);
   apply();
+
+  // Smooth scroll (wb-motion.js) calls this on every frame so the layers
+  // move in step with the page instead of a frame behind it.
+  window.WBParallax = { update: update };
+
+  // Page transitions keep this window alive, so let go of it when the page leaves
+  if (window.WB) WB.onLeave(function () {
+    if (reduce.removeEventListener) reduce.removeEventListener('change', apply);
+    stop();
+    window.WBParallax = null;
+  });
 })();

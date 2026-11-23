@@ -22,3 +22,13 @@ The live look is the editorial homepage. Do not replace it with the older black-
 ## Before changing anything
 
 Fetch and pull the latest `origin/main` first. Read `home.css` and `index.html` on that commit before editing layout. If someone points at a preview URL, find the commit it was built from before touching the design.
+
+## Page transitions and scripts
+
+Every editorial page loads `site.js` in the head and wraps its body in `<div id="swup">`. swup swaps that container between pages behind a green arch curtain, so the window is never reloaded.
+
+- Shared nav, scrolled-nav and `.reveal` code lives in `site.js`. Do not copy it back into pages.
+- Page scripts inside `#swup` run again on every visit. Wrap inline code in `(() => { ... })();`. Anything that keeps running (window listeners, timers, `requestAnimationFrame` loops) must stop in `WB.onLeave(fn)`.
+- Libraries load once: mark them `data-once`.
+- `photography.html` is left out: links to it, downloads, new-tab links and files load normally.
+- Wrangle & Bloom only: Lenis smooth scroll and GSAP (ScrollTrigger, SplitText) in `wb-motion.js`, parallax in `parallax.js`. Libraries are kept in `vendor/`.

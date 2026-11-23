@@ -372,8 +372,19 @@
   hint.textContent = 'Drag to spin';
   map.appendChild(hint);
 
-  new ResizeObserver(fit).observe(map);
-  new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; if (onScreen) request(); }).observe(map);
+  const resizeWatch = new ResizeObserver(fit);
+  resizeWatch.observe(map);
+  const screenWatch = new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; if (onScreen) request(); });
+  screenWatch.observe(map);
+  // Page transitions keep this window alive: stop the spin loop when the page leaves
+  if (window.WB) WB.onLeave(() => {
+    resizeWatch.disconnect();
+    screenWatch.disconnect();
+    onScreen = false;
+    spinning = false;
+    if (frame) cancelAnimationFrame(frame);
+    frame = 1; // blocks request() from starting a new loop
+  });
 
   root.classList.add('is-ready');
   fit();

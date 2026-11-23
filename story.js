@@ -27,9 +27,15 @@
     const done = Math.min(1, Math.max(0, (innerHeight * 0.4 - top) / Math.max(1, total)));
     bar.style.transform = `scaleX(${done})`;
   }
-  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', update);
   update();
+  // Page transitions keep this window alive, so let go of it when the page leaves
+  if (window.WB) WB.onLeave(() => {
+    removeEventListener('scroll', onScroll);
+    removeEventListener('resize', update);
+  });
 })();
 
 /* =============================================

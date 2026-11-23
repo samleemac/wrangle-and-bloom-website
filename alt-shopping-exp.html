@@ -11,8 +11,11 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="photo-detail.css">
   <link rel="stylesheet" href="home.css">
+  <script src="vendor/swup.umd.js" defer></script>
+  <script src="site.js"></script>
 </head>
 <body class="home">
+<div id="swup">
 
   <nav class="nav" id="nav">
     <div class="nav__inner">
@@ -171,39 +174,9 @@
     </div>
   </footer>
 
-  <script>
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    navToggle.addEventListener('click', () => {
-      const isOpen = navMenu.classList.toggle('nav__right--open');
-      navToggle.classList.toggle('nav__toggle--active', isOpen);
-      navToggle.setAttribute('aria-expanded', isOpen);
-    });
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('nav__right--open');
-        navToggle.classList.remove('nav__toggle--active');
-        navToggle.setAttribute('aria-expanded', false);
-      });
-    });
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('nav--scrolled', window.scrollY > 20);
-    });
-    const reveals = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-    reveals.forEach(el => revealObserver.observe(el));
-
-  </script>
-
   <script src="product.js" defer></script>
+
+</div>
 
 </body>
 </html>
