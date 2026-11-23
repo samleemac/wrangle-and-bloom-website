@@ -33,3 +33,11 @@ Every editorial page loads `site.js` in the head and wraps its body in `<div id=
 - `photography.html` is left out: links to it, downloads, new-tab links and files load normally.
 - Phones and tablets (touch, or screens up to 820px) skip swup and Lenis. They load pages normally, and the browser's own view transition in `styles.css` fades them. Keep that media query in step with `handheld` in `site.js`.
 - Wrangle & Bloom only: Lenis smooth scroll and GSAP (ScrollTrigger, SplitText) in `wb-motion.js`, parallax in `parallax.js`. Libraries are kept in `vendor/`.
+
+## Search and sharing
+
+- Every page has a meta description, a canonical link, Open Graph and Twitter tags. Share images are 1200x630 cards in `og/`.
+- Home carries ProfessionalService structured data, and About carries Person structured data (JSON-LD in the head).
+- `sitemap.xml` and `robots.txt` list the public pages. Add new pages to the sitemap.
+- The full site address `https://wrangle-and-bloom-website.vercel.app` is written into the canonical, Open Graph and structured-data tags, `sitemap.xml` and `robots.txt`. If a custom domain is added, find and replace it everywhere.
+- `404.html` uses root paths (`/styles.css`, `/index.html`) because it can be shown at any address. Keep it that way.

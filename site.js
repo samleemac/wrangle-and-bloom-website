@@ -136,9 +136,12 @@
       head.appendChild(link);
     });
 
-    var nextDesc = nextDoc.head.querySelector('meta[name="description"]');
-    var desc = head.querySelector('meta[name="description"]');
-    if (nextDesc && desc) desc.setAttribute('content', nextDesc.getAttribute('content'));
+    // Keep the description and canonical address in step with the page shown
+    [['meta[name="description"]', 'content'], ['link[rel="canonical"]', 'href']].forEach(function (pair) {
+      var next = nextDoc.head.querySelector(pair[0]);
+      var here = head.querySelector(pair[0]);
+      if (next && here) here.setAttribute(pair[1], next.getAttribute(pair[1]));
+    });
 
     return Promise.all(loads).then(function () {
       Object.keys(current).forEach(function (href) {

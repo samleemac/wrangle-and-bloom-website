@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wrangle-and-bloom-website.vercel.app/sitemap.xml
